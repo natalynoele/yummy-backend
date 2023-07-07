@@ -1,4 +1,4 @@
-const connectDB = require("./connectDB.");
+const connectDB = require("./connectDB");
 
 module.exports = {
   connectDB,
