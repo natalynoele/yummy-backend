@@ -1,6 +1,5 @@
 const users = require("./users");
 
-const recipes = require("./recipes");
-const categories = require("./recipes");
+const { Recipe, Category } = require("./recipes");
 
-module.exports = { users, recipes, categories };
+module.exports = { users, Recipe, Category };
