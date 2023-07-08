@@ -1,8 +1,8 @@
-const {getById,getCategoryList, mainPage}= require('./recipes/index')
+const {getById,getCategoryList, getRecipesByCategory, mainPage}= require('./recipes/index')
 
 module.exports={
     getById,
     getCategoryList,
-    // getRecipesByCategory,
+    getRecipesByCategory,
     mainPage,
 }
