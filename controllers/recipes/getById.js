@@ -1,20 +1,16 @@
-const {Recipe} = require("../../models/recipes")
+const { Recipe } = require("../../models/recipes/recipes");
 
 const getById = async (req, res) => {
-    try{
-      const {id} = req.params;
-      const result = await Recipe.findOne({_id: id});
-      if(!result){
-        return res.status(404).json({ message: "Not found1" });
-      }
-      res.json(result);
-   
+  try {
+    const { id } = req.params;
+    const result = await Recipe.findOne({ _id: id });
+    if (!result) {
+      return res.status(404).json({ message: "Not found1" });
     }
-    catch(error) {
-      return res.status(404).json({ message: "Invalid Id" });
-    }
+    res.json(result);
+  } catch (error) {
+    return res.status(404).json({ message: "Invalid Id" });
   }
+};
 
-
-
-  module.exports =  getById;
+module.exports = getById;

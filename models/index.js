@@ -1,5 +1,8 @@
-const users = require("./users");
-
+const { User } = require("./users");
 const { Recipe, Category } = require("./recipes");
 
-module.exports = { users, Recipe, Category };
+module.exports = {
+  User,
+  Recipe,
+  Category,
+};

@@ -3,7 +3,10 @@ const { recipesController } = require("../../../controllers");
 
 const recipesRouter = express.Router();
 
-recipesRouter.get("/:category", recipesController.getRecipesByCategory);
+recipesRouter.get(
+  "/categories/:category",
+  recipesController.getRecipesByCategory
+);
 
 recipesRouter.get("/category-list", recipesController.getCategoryList);
 

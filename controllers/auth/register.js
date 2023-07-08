@@ -4,7 +4,7 @@ const { nanoid } = require("nanoid");
 
 const gravatar = require("gravatar");
 
-const User = require("../../models/users");
+const User = require("../../models/users/users");
 
 const { HttpError } = require("../../helpers");
 
