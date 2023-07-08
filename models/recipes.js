@@ -47,6 +47,12 @@ const recipesSchema = new Schema({
   },
 })
 
+const categorySchema = new Schema({
+    name:{
+        type: String,
+        require: true,
+    }
+})
 const Recipe = model("recipes", recipesSchema);
-
-module.exports =  Recipe ;
+const Category = model("category", categorySchema)
+module.exports =  {Recipe, Category} ;
