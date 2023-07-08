@@ -1,7 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const recipeRouter = require("./routes/api/recipeRouter")
+const { recipesRouter } = require("./routes");
 const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -22,7 +22,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/recipes", recipeRouter)
+app.use("/recipes", recipesRouter);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

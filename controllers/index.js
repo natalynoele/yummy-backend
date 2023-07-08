@@ -1,8 +1,7 @@
-const {getById,getCategoryList, getRecipesByCategory, mainPage}= require('./recipes/index')
+const recipesController = require("./recipes");
+const authController = require("./auth");
 
-module.exports={
-    getById,
-    getCategoryList,
-    getRecipesByCategory,
-    mainPage,
-}
+module.exports = {
+  authController,
+  recipesController,
+};

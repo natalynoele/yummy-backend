@@ -5,54 +5,54 @@ const recipesSchema = new Schema({
     type: String,
     require: true,
   },
-  category:{
+  category: {
     type: String,
     require: true,
   },
-  area:{
+  area: {
     type: String,
     require: true,
   },
-  instructions:{
+  instructions: {
     type: String,
     require: true,
   },
-  description:{
+  description: {
     type: String,
     require: true,
   },
-  thumb:{
+  thumb: {
     type: String,
     require: true,
   },
-  preview:{
+  preview: {
     type: String,
     require: true,
   },
-  time:{
+  time: {
     type: String,
     require: true,
   },
-  youtube:{
+  youtube: {
     type: String,
     require: true,
   },
-  tags:{
+  tags: {
     type: Array,
     require: true,
   },
-  ingredients:{
+  ingredients: {
     type: Array,
     require: true,
   },
-})
+});
 
 const categorySchema = new Schema({
-    name:{
-        type: String,
-        require: true,
-    }
-})
+  name: {
+    type: String,
+    require: true,
+  },
+});
 const Recipe = model("recipes", recipesSchema);
-const Category = model("category", categorySchema)
-module.exports =  {Recipe, Category} ;
+const Category = model("categories", categorySchema);
+module.exports = { Recipe, Category };

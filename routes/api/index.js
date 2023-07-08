@@ -1,7 +1,3 @@
-const express = require('express')
-const router = express.Router()
-const recipeRouter = require("./recipeRouter")
+const { recipesRouter } = require("./recipes");
 
-router.use("/recipes", recipeRouter)
-
-module.exports = router
+module.exports = { recipesRouter };
