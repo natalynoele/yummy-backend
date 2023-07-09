@@ -22,7 +22,7 @@
     }
   ],
   "paths": {
-    "/auth/register": {
+    "/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
@@ -59,7 +59,7 @@
         }
       }
     },
-    "/auth/login": {
+    "/users/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "User login",
@@ -98,7 +98,7 @@
         }
       }
     },
-    "/auth/logout": {
+    "/users/logout": {
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
@@ -130,7 +130,7 @@
         }
       }
     },
-    "/auth/current": {
+    "/users/current": {
       "get": {
         "tags": ["Auth"],
         "summary": "Get current user",
