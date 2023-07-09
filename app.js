@@ -9,6 +9,7 @@ const swaggerDocument = require("./swagger.json");
 const configPath = path.join(__dirname, "config", ".env");
 
 const usersRouter = require("./routes/api/users");
+const subscribeRouter = require("./routes/api/subscribe")
 
 require("dotenv").config({ path: configPath });
 
@@ -23,6 +24,8 @@ app.use(logger(formatsLogger));
 app.use(cors());
 
 app.use(express.json());
+
+app.use("/subscribe", subscribeRouter);
 
 app.use("/recipes", recipesRouter);
 

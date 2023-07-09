@@ -8,4 +8,6 @@ const getCurrent = require("./getCurrent");
 
 const userUpdateSubscription = require("./userUpdateSubscription");
 
-module.exports = { register, login, logout, getCurrent, userUpdateSubscription, };
+const emailController = require("./emailControllers")
+
+module.exports = { register, login, logout, getCurrent, userUpdateSubscription, emailController };
