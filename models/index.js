@@ -1,4 +1,8 @@
+const { User } = require("./users");
+const { Recipe, Category } = require("./recipes");
 
-const users = require("./users");
-
-module.exports = { users, };
+module.exports = {
+  User,
+  Recipe,
+  Category,
+};

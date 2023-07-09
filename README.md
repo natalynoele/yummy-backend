@@ -4,6 +4,8 @@ A nice project with a nice description
 
 ---
 
+A server for recipes service
+
 ## Requirements
 
 For development, you will only need Node.js and a node global package, Yarn, installed in your environement.
