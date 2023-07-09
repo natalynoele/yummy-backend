@@ -26,14 +26,13 @@ const usersSchema = new Schema(
 
         subscriptionToken: {
             type: String,
-            enum: subscriptionList,
             default: "",
         },
         
         token: String,
 
     },
-    { timestamps: true }
+    { versionKey: false, timestamps: true }
 );
 
 const User = model("users", usersSchema);
