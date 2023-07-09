@@ -22,7 +22,7 @@
     }
   ],
   "paths": {
-    "/auth/register": {
+    "/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
@@ -59,10 +59,12 @@
         }
       }
     },
-    "/auth/login": {
+    "/users/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "User login",
+        "parameters": [{ "in": "path", "name": "_id" }],
+        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -96,10 +98,12 @@
         }
       }
     },
-    "/auth/logout": {
+    "/users/logout": {
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
+        "parameters": [{ "in": "headers", "name": "token" }],
+        "security": [{ "Bearer": [] }],
         "responses": {
           "204": {
             "description": "Successful logout",
@@ -126,11 +130,11 @@
         }
       }
     },
-    "/auth/current": {
+    "/users/current": {
       "get": {
         "tags": ["Auth"],
         "summary": "Get current user",
-        "parameters": [],
+        "parameters": [{ "in": "headers", "name": "token" }],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -143,12 +147,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
-          },
-          "404": {
-            "description": "User doesn't exist",
+          "401": {
+            "description": "Not authenticated",
             "content": {}
           }
         }
@@ -179,23 +179,27 @@
         }
       },
       "RegistrationResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "userId": {
-              "type": "string",
-              "description": "User's id",
-              "example": "iuyweyi76732678t"
-            }
+        "type": "object",
+        "properties": {
+          "__id": {
+            "type": "string",
+            "description": "User's id"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
           }
         },
-        "example": { "email": "1@gmail.com", "__id": "iuye78dqy9diyq" }
+        "example": {
+          "__id": "iuye78dqy9diyq",
+          "name": "Kevin",
+          "email": "1@gmail.com"
+        }
       },
       "LoginRequest": {
         "type": "object",
@@ -225,7 +229,7 @@
           }
         },
         "example": {
-          "token": "D/z=HRMy=hsbqS3qmV4Y9lnO1yX2ow899czUC/p8u1Q40dt?typJU6Ajvm?ZC?XY?BgT1qh7WeNDsiH=RTvLMuRjRImYjiWpMcx1=KhhrTyQ!rAjUtNDhzOudsPBV=TxFFtiUCgNcD?rifP-2pKmoUPahIDpCbsgFKurOciM0jQ-7A-jg2xykePsnBdXO1b5l37pvZlSvD2?zYtfSXQoRj02!6FvowLYpwSESbWg4AdFG3sb7BE7!JbQAMI?2KYB"
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGIxN2I0Y2U5NTU4MGI0MDVjMzA2ZCIsImlhdCI6MTY4NzA5MDAxMiwiZXhwIjoxNjg3MDk3MjEyfQ.UcA07u2_T9SW2qqpaZrs_Z43Q4DAO9-9uFVL7VBRmS8"
         }
       },
       "CurrentUserRequest": {}
