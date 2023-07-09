@@ -6,6 +6,8 @@ const authController = require("../../../controllers/auth");
 
 const { authenticate } = require("../../../middlewares");
 
+const { validateBody } = require("../../../decorators");
+
 const schemas = require("../../../schemas/auth");
 
 
