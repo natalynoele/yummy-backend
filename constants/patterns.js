@@ -1,3 +1,5 @@
 const emailRegexp = /^\S+@\S+\.\S+$/;
 
-module.exports = emailRegexp;
+const nameRegexp = /(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
+
+module.exports = {emailRegexp, nameRegexp};

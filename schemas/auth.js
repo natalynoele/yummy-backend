@@ -1,9 +1,9 @@
 const Joi = require("joi");
 
-const emailRegexp = require("../constants/patterns");
+const {emailRegexp, nameRegexp} = require("../constants/patterns");
 
 const userAuthSchema = Joi.object({
-  name: Joi.string().required().messages({
+  name: Joi.string().pattern(nameRegexp).required().messages({
     "any.required": `missing required name field`,
     "string.empty": `name cannot be an empty field`,
   }),
@@ -11,7 +11,7 @@ const userAuthSchema = Joi.object({
     "any.required": `missing required email field`,
     "string.empty": `email cannot be an empty field`,
   }),
-  password: Joi.string().required().length(10).messages({
+  password: Joi.string().required().length(6).messages({
     "any.required": `missing required password field`,
     "string.empty": `password cannot be an empty field`,
   }),
