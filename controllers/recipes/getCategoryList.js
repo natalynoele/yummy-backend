@@ -5,5 +5,6 @@ const getCategoryList = async(req, res)=>{
   const categoryName = result.map(item =>item.name);
   res.json(categoryName);
 }
+
 module.exports= getCategoryList;
 
