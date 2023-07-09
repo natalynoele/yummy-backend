@@ -1,42 +1,40 @@
 const { Schema, model } = require("mongoose");
 
-const subscriptionList = ["customer", "pro", "buisness"];
-
 const usersSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        
+        password: {
+            type: String,
+            required: true,
+        },
+        
+        subscription: {
+            type: Boolean,
+            required: false,
+            default: false,            
+        },
 
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+        subscriptionToken: {
+            type: String,
+            default: "",
+        },
+        
+        token: String,
 
-    password: {
-      type: String,
-      required: true,
     },
-
-    subscription: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-
-    subscriptionToken: {
-      type: String,
-      enum: subscriptionList,
-      default: "",
-    },
-
-    token: String,
-  },
-  { timestamps: true }
+    { versionKey: false, timestamps: true }
 );
 
 const User = model("users", usersSchema);
 
-module.exports = User;
+module.exports =  User ;
