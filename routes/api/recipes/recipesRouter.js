@@ -9,6 +9,7 @@ recipesRouter.get(
 );
 recipesRouter.get("/search", recipesController.searchByTitle); 
 
+recipesRouter.get("/ingredients", recipesController.searchByIngredients); 
 
 recipesRouter.get("/ingredients", recipesController.searchByIngredients); 
 
