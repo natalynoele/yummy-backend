@@ -7,7 +7,7 @@ const searchByTitle = async(req,res) =>{
         if (titleSearch === '') {
             throw new HttpError(400, `Empty search fild`);
           }
-          const regex ={title: { $regex: titleSearch, $options: 'i' } }
+          const regex ={title: { $regex: title, $options: 'i' } }
 
         const searchRecipe = await Recipe.find(regex);
 
