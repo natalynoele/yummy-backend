@@ -189,7 +189,7 @@
         },
         "example": {
           "email": "1@gmail.com"
-        }
+     }
       },
       "LoginRequest": {
         "type": "object",

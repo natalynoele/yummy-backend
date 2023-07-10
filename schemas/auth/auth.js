@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const {emailRegexp, nameRegexp} = require("../constants/patterns");
+const { emailRegexp, nameRegexp } = require("../../constants/patterns");
 
 const userAuthSchema = Joi.object({
   name: Joi.string().pattern(nameRegexp).required().messages({
