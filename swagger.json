@@ -19,6 +19,10 @@
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "Recipes",
+      "description": "Categories endpoints"
     }
   ],
   "paths": {
@@ -50,11 +54,30 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
-            "content": {}
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, something is missing. Please provide all the requested fields.."
+              }
+            }
           },
           "409": {
-            "description": "Provided email already exists",
-            "content": {}
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Oops... Provided email is already in use"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
           }
         }
       }
@@ -87,11 +110,25 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
-            "content": {}
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, something is missing. Please provide all the requested fields.."
+              }
+            }
           },
           "401": {
             "description": "Invalid email or password",
             "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
           }
         }
       }
@@ -134,7 +171,7 @@
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Get information about current user",
+            "description": "Success operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -146,6 +183,43 @@
           "401": {
             "description": "Not authenticated",
             "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipes/category-list": {
+      "get": {
+        "tags": ["Recipes"],
+        "summary": "Get list of categories",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
           }
         }
       }
@@ -221,11 +295,11 @@
         "example": {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGIxN2I0Y2U5NTU4MGI0MDVjMzA2ZCIsImlhdCI6MTY4NzA5MDAxMiwiZXhwIjoxNjg3MDk3MjEyfQ.UcA07u2_T9SW2qqpaZrs_Z43Q4DAO9-9uFVL7VBRmS8",
           "user": {
-            "email": "1@gmail.com"
+            "email": "user@example.com"
           }
         }
       },
-      "CurrentUserRequest": {
+      "CurrentUserResponse": {
         "type": "object",
         "properties": {
           "email": {
@@ -235,16 +309,39 @@
           }
         },
         "example": {
-          "email": "1@gmail.com"
+          "email": "user@example.com"
         }
+      },
+      "CategoryListResponse": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "example": [
+          "Beef",
+          "Breakfast",
+          "Chicken",
+          "Dessert",
+          "Goat",
+          "Lamb",
+          "Miscellaneous",
+          "Pasta",
+          "Pork",
+          "Seafood",
+          "Side",
+          "Soup",
+          "Starter",
+          "Vegan",
+          "Vegetarian"
+        ]
       }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
+    }
+  },
+  "securitySchemes": {
+    "Bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
     }
   }
 }
