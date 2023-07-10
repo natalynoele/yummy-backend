@@ -6,32 +6,21 @@ const authController = require("../../../controllers/auth");
 
 const { authenticate } = require("../../../middlewares");
 
-const  validateBody  = require("../../../decorators");
+const validateBody = require("../../../decorators");
 
-const schemas = require("../../../schemas/auth");
+const { registerSchema, loginSchema } = require("../../../schemas");
 
+router.post("/register", validateBody(registerSchema), authController.register);
 
-router.post("/register",
-    validateBody(schemas.registerSchema),
-    authController.register);
+router.post("/login", validateBody(loginSchema), authController.login);
 
-router.post("/login",
-    validateBody(schemas.loginSchema),
-    authController.login);
+router.get("/current", authenticate, authController.getCurrent);
 
-router.get("/current",
-    authenticate,
-    authController.getCurrent);
-
-router.post("/logout",
-    authenticate,
-    authController.logout);
+router.post("/logout", authenticate, authController.logout);
 
 // router.patch("/",
 //     authenticate,
 //     validateBody(schemas.userAuthSchema),
 //     authController.userUpdateSubscription);
-
-
 
 module.exports = router;
