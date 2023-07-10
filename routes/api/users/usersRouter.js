@@ -12,20 +12,20 @@ const schemas = require("../../../schemas/auth");
 
 
 router.post("/register",
-    validateBody(schemas.userAuthSchema),
+    validateBody(schemas.registerSchema),
     authController.register);
 
 router.post("/login",
-    validateBody(schemas.userAuthSchema),
+    validateBody(schemas.loginSchema),
     authController.login);
 
 router.get("/current",
     authenticate,
     authController.getCurrent);
 
-// router.post("/logout",
-//     authenticate,
-//     authController.logout);
+router.post("/logout",
+    authenticate,
+    authController.logout);
 
 // router.patch("/",
 //     authenticate,

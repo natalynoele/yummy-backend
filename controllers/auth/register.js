@@ -30,8 +30,14 @@ const register = async (req, res) => {
   });
 
   res.status(201).json({
-    email: newUser.email,
-    // subscription: newUser.subscription,
+    token,
+    user: {
+      name: newUser.name,
+      email: newUser.email,
+      avatar: newUser.avatar,
+      favorite: newUser.favorite,
+      shoppingList: newUser.shoppingList,
+    },
   });
 };
 
