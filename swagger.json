@@ -63,8 +63,6 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User login",
-        "parameters": [{ "in": "path", "name": "_id" }],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -102,7 +100,6 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
-        "parameters": [{ "in": "headers", "name": "token" }],
         "security": [{ "Bearer": [] }],
         "responses": {
           "204": {
@@ -134,11 +131,10 @@
       "get": {
         "tags": ["Auth"],
         "summary": "Get current user",
-        "parameters": [{ "in": "headers", "name": "token" }],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Successful operation",
+            "description": "Get information about current user",
             "content": {
               "application/json": {
                 "schema": {
@@ -189,7 +185,7 @@
         },
         "example": {
           "email": "1@gmail.com"
-     }
+        }
       },
       "LoginRequest": {
         "type": "object",
@@ -208,20 +204,17 @@
         }
       },
       "LoginResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "User's token"
+          },
+          "user": {
+            "email": {
               "type": "string",
-              "description": "User's token"
-            },
-            "user": {
-              "email": {
-                "type": "string",
-                "description": "User's email",
-                "format": "email"
-              }
+              "description": "User's email",
+              "format": "email"
             }
           }
         },
@@ -232,7 +225,19 @@
           }
         }
       },
-      "CurrentUserRequest": {}
+      "CurrentUserRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          }
+        },
+        "example": {
+          "email": "1@gmail.com"
+        }
+      }
     },
     "securitySchemes": {
       "Bearer": {
