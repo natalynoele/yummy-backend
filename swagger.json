@@ -181,14 +181,6 @@
       "RegistrationResponse": {
         "type": "object",
         "properties": {
-          "__id": {
-            "type": "string",
-            "description": "User's id"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's name"
-          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -196,8 +188,6 @@
           }
         },
         "example": {
-          "__id": "iuye78dqy9diyq",
-          "name": "Kevin",
           "email": "1@gmail.com"
         }
       },
@@ -225,6 +215,12 @@
             "token": {
               "type": "string",
               "description": "User's token"
+            },
+            "user": {
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              }
             }
           }
         },
