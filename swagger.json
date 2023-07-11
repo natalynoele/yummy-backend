@@ -229,12 +229,12 @@
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["name", "email", "password"],
+        "required": ["email", "password"],
         "properties": {
           "name": {
             "type": "string",
-            "description": "User's name",
-            "example": "Kevin"
+            "description": "User's email",
+            "example": "Kevin K"
           },
           "email": {
             "type": "string",
@@ -250,15 +250,60 @@
       },
       "RegistrationResponse": {
         "type": "object",
+        "required": ["name", "email", "password"],
         "properties": {
-          "email": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": "201"
+          },
+          "message": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "Message",
+            "example": "success"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "password": {
+                "type": "string",
+                "description": "User's password"
+              },
+              "subscription": {
+                "type": "boolean",
+                "description": "User's subscription status",
+                "example": false
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              }
+            }
           }
         },
         "example": {
-          "email": "1@gmail.com"
+          "code": "201",
+          "message": "success",
+          "user": {
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa"
+          }
         }
       },
       "LoginRequest": {
@@ -280,68 +325,72 @@
       "LoginResponse": {
         "type": "object",
         "properties": {
-          "token": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": 200
+          },
+          "message": {
             "type": "string",
-            "description": "User's token"
+            "description": "Message",
+            "example": "success"
           },
           "user": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "password": {
+                "type": "string",
+                "description": "User's password"
+              },
+              "subscription": {
+                "type": "boolean",
+                "description": "User's subscription status",
+                "example": false
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              },
+              "token": {
+                "type": "string",
+                "description": "User's token"
+              }
             }
           }
         },
         "example": {
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGIxN2I0Y2U5NTU4MGI0MDVjMzA2ZCIsImlhdCI6MTY4NzA5MDAxMiwiZXhwIjoxNjg3MDk3MjEyfQ.UcA07u2_T9SW2qqpaZrs_Z43Q4DAO9-9uFVL7VBRmS8",
+          "code": "200",
+          "message": "success",
           "user": {
-            "email": "user@example.com"
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
           }
         }
-      },
-      "CurrentUserResponse": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          }
-        },
-        "example": {
-          "email": "user@example.com"
-        }
-      },
-      "CategoryListResponse": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "example": [
-          "Beef",
-          "Breakfast",
-          "Chicken",
-          "Dessert",
-          "Goat",
-          "Lamb",
-          "Miscellaneous",
-          "Pasta",
-          "Pork",
-          "Seafood",
-          "Side",
-          "Soup",
-          "Starter",
-          "Vegan",
-          "Vegetarian"
-        ]
       }
-    }
-  },
-  "securitySchemes": {
-    "Bearer": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "JWT"
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
   }
 }
