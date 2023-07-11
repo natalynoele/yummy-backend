@@ -1,6 +1,6 @@
 const { register } = require("./register");
 
-const login = require("./login");
+const { login } = require("./login");
 
 const logout = require("./logout");
 
