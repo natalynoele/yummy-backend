@@ -28,6 +28,8 @@ class AuthService {
       ...req.body,
       password: hashPassword,
       avatarUrl,
+      favorite: [],
+      shoppingList: [],
     });
 
     return newUser;
