@@ -13,13 +13,13 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    throw HttpError(409, `User with email ${email} is already registered`);
+    throw HttpError(401, `Incorrect email or password`);
   }
 
   const passwordCompare = await bcrypt.compare(password, user.password);
 
   if (!passwordCompare) {
-    throw HttpError(401, "Password is wrong");
+    throw HttpError(401, "Incorrect email or password");
   }
 
   const { _id: id } = user;
@@ -31,11 +31,11 @@ const login = async (req, res) => {
   res.json({
     token,
     user: {
-      name: newUser.name,
-      email: newUser.email,
-      avatar: newUser.avatar,
-      favorite: newUser.favorite,
-      shoppingList: newUser.shoppingList,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      favorite: user.favorite,
+      shoppingList: user.shoppingList,
     },
   });
 };

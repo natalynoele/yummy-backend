@@ -30,7 +30,6 @@ app.use("/ingredients", ingredientsRouter);
 
 app.use("/users", usersRouter);
 
-
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {

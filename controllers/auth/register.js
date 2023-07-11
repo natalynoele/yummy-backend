@@ -1,44 +1,25 @@
-const bcrypt = require("bcrypt");
+const { HttpError, ctrlWrapper } = require("../../helpers");
 
-const { nanoid } = require("nanoid");
-
-const gravatar = require("gravatar");
-
-const User = require("../../models/users/users");
-
-const { HttpError } = require("../../helpers");
+const { AuthService } = require("../../services");
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const newUser = await AuthService.addNewUser(req);
 
-  const user = await User.findOne({ email });
-  if (user) {
-    throw HttpError(409, "Email is already in use");
+  if (!newUser) {
+    throw HttpError(500, "Well, this is embarrassing... But try again, please");
   }
 
-  const hashPassword = await bcrypt.hash(password, 10);
-
-  const avatarURL = gravatar.url(email);
-
-  const verificationToken = nanoid();
-
-  const newUser = await User.create({
-    ...req.body,
-    password: hashPassword,
-    avatarURL,
-    verificationToken,
-  });
-
-  res.status(201).json({
-    verificationToken,
+  return res.status(201).json({
+    code: 201,
+    message: "success",
     user: {
+      id: newUser._id,
       name: newUser.name,
       email: newUser.email,
-      avatar: newUser.avatar,
-      favorite: newUser.favorite,
-      shoppingList: newUser.shoppingList,
+      subscription: newUser.subscription,
+      avatarUrl: newUser.avatarUrl,
     },
   });
 };
 
-module.exports = register;
+module.exports = { register: ctrlWrapper(register) };
