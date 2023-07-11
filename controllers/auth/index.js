@@ -1,4 +1,4 @@
-const register = require("./register");
+const { register } = require("./register");
 
 const login = require("./login");
 
@@ -8,4 +8,10 @@ const getCurrent = require("./getCurrent");
 
 const userUpdateSubscription = require("./userUpdateSubscription");
 
-module.exports = { register, login, logout, getCurrent, userUpdateSubscription, };
+module.exports = {
+  register,
+  login,
+  logout,
+  getCurrent,
+  userUpdateSubscription,
+};
