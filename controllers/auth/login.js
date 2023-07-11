@@ -12,8 +12,9 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+  if (!email) return res.status(400).json({ message: "Please, enter E-mail" });
   if (!user) {
-    throw HttpError(409, `User with email ${email} is already registered`);
+    throw HttpError(401, `User with email ${email} don't registered`);
   }
 
   const passwordCompare = await bcrypt.compare(password, user.password);
@@ -24,7 +25,7 @@ const login = async (req, res) => {
 
   const { _id: id } = user;
 
-  const token = jwt.sign({ id }, SECRET_KEY, { expiresIn: "23h" });
+  const token = jwt.sign({ id }, SECRET_KEY, { expiresIn: "10d" });
 
   await User.findByIdAndUpdate(id, { token });
 
