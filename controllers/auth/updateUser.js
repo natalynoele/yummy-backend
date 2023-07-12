@@ -2,17 +2,16 @@ const User = require("../../models/users");
 
 const { HttpError } = require("../../helpers");
 
-const userUpdateSubscription = async (req, res) => {
+const updateUser = async (req, res) => {
   const { _id: id } = req.user;
-  const { subscription } = req.body;
 
-  if (!subscription) {
-    throw HttpError(400, "missing fields subscription");
+  if (!req.body) {
+    throw HttpError(400, "Please, write some data");
   }
 
   const result = await User.findByIdAndUpdate(
     id,
-    { subscription },
+    { ...req.body },
     {
       new: true,
     }
@@ -21,4 +20,4 @@ const userUpdateSubscription = async (req, res) => {
   res.json(result);
 };
 
-module.exports = userUpdateSubscription;
+module.exports = updateUser;
