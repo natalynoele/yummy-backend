@@ -7,6 +7,11 @@ recipesRouter.get(
   "/categories/:category",
   recipesController.getRecipesByCategory
 );
+recipesRouter.get("/search", recipesController.searchByTitle);
+
+recipesRouter.get("/ingredients", recipesController.searchByIngredients);
+
+// recipesRouter.get("/ingredients", recipesController.searchByIngredients);
 
 recipesRouter.get("/category-list", recipesController.getCategoryList);
 

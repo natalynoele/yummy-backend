@@ -2,10 +2,9 @@ const { Recipe } = require("../../models");
 
 const getRecipesByCategory = async (req, res, next) => {
   try {
-    const category = req.query.category;
-    const categoryByName = await Recipe.find({ category: category }).limit(8);
+    const category = req.params.category;
 
-    console.log(categoryByName);
+    const categoryByName = await Recipe.find({ category: category }).limit(8);
 
     res.status(200).json(categoryByName);
   } catch (err) {

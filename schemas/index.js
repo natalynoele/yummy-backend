@@ -1,3 +1,6 @@
-const auth = require("./auth");
+const { registerSchema, loginSchema } = require("./auth");
 
-module.exports = auth;
+module.exports = {
+  registerSchema,
+  loginSchema,
+};

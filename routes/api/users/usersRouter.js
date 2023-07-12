@@ -4,34 +4,34 @@ const router = express.Router();
 
 const authController = require("../../../controllers/auth");
 
-const { authenticate } = require("../../../middlewares");
+const {authenticate} = require("../../../middlewares");
 
-const  validateBody  = require("../../../decorators");
+const { validateBody } = require("../../../decorators");
 
-const schemas = require("../../../schemas/auth");
+const { registerSchema, loginSchema } = require("../../../schemas");
 
+router.post("/register", validateBody(registerSchema), authController.register);
 
-router.post("/register",
-    validateBody(schemas.userAuthSchema),
-    authController.register);
+router.post("/login", validateBody(loginSchema), authController.login);
 
-router.post("/login",
-    validateBody(schemas.userAuthSchema),
-    authController.login);
+router.get("/current", authenticate, authController.getCurrent);
 
-router.get("/current",
+router.post("/logout", authenticate, authController.logout);
+
+router.patch(
+    "/update",
     authenticate,
-    authController.getCurrent);
+    validateBody(schemas.userUpdateSubscription),
+    authController.userUpdateSubscription
+);
 
-// router.post("/logout",
-//     authenticate,
-//     authController.logout);
+router.get("/verity/:verificationToken",
+    authController.getVerity);
 
-// router.patch("/",
-//     authenticate,
-//     validateBody(schemas.userAuthSchema),
-//     authController.userUpdateSubscription);
-
-
+// router.patch(
+//   '/avatars',
+//   upload.single("avatarURL"),
+//   authController(updateAvatarUrl)
+// );
 
 module.exports = router;

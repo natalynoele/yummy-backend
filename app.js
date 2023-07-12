@@ -1,17 +1,17 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const { recipesRouter } = require("./routes");
-const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-
+const path = require("path");
 const configPath = path.join(__dirname, "config", ".env");
+require("dotenv").config({ path: configPath });
 
 const usersRouter = require("./routes/api/users");
+
 const subscribeRouter = require("./routes/api/subscribe")
 
-require("dotenv").config({ path: configPath });
+const { recipesRouter, ingredientsRouter } = require("./routes");
 
 const app = express();
 
@@ -28,6 +28,8 @@ app.use(express.json());
 app.use("/subscribe", subscribeRouter);
 
 app.use("/recipes", recipesRouter);
+
+app.use("/ingredients", ingredientsRouter);
 
 app.use("/users", usersRouter);
 

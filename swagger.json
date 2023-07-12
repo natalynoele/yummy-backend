@@ -19,6 +19,14 @@
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "Recipes",
+      "description": "Recipes endpoints"
+    },
+    {
+      "name": "Ingredients",
+      "description": "Ingredients endpoints"
     }
   ],
   "paths": {
@@ -50,11 +58,30 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
-            "content": {}
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, something is missing. Please provide all the requested fields.."
+              }
+            }
           },
           "409": {
-            "description": "Provided email already exists",
-            "content": {}
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Oops... Provided email is already in use"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
           }
         }
       }
@@ -63,8 +90,6 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User login",
-        "parameters": [{ "in": "path", "name": "_id" }],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -89,11 +114,25 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
-            "content": {}
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, something is missing. Please provide all the requested fields.."
+              }
+            }
           },
           "401": {
             "description": "Invalid email or password",
             "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
           }
         }
       }
@@ -102,7 +141,6 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
-        "parameters": [{ "in": "headers", "name": "token" }],
         "security": [{ "Bearer": [] }],
         "responses": {
           "204": {
@@ -134,11 +172,10 @@
       "get": {
         "tags": ["Auth"],
         "summary": "Get current user",
-        "parameters": [{ "in": "headers", "name": "token" }],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Successful operation",
+            "description": "Success operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -150,6 +187,129 @@
           "401": {
             "description": "Not authenticated",
             "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipes/category-list": {
+      "get": {
+        "tags": ["Recipes"],
+        "summary": "Get list of categories",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipes/categories/{category}": {
+      "get": {
+        "tags": ["Recipes"],
+        "summary": "Get list of recipes by category name",
+        "security": [{ "Bearer": [] }],
+        "params": { "in": "path", "name": "category" },
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryRecipesResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": ["Recipes"],
+        "summary": "Get a recipes by id",
+        "security": [{ "Bearer": [] }],
+        "params": { "in": "path", "name": "id" },
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ingredients/list": {
+      "get": {
+        "tags": ["Ingredients"],
+        "summary": "Get list of ingredients",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IngredientsListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
           }
         }
       }
@@ -159,12 +319,12 @@
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["name", "email", "password"],
+        "required": ["email", "password"],
         "properties": {
           "name": {
             "type": "string",
-            "description": "User's name",
-            "example": "Kevin"
+            "description": "User's email",
+            "example": "Kevin K"
           },
           "email": {
             "type": "string",
@@ -174,31 +334,88 @@
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "qwerty123"
+            "example": "qwerty"
           }
         }
       },
       "RegistrationResponse": {
         "type": "object",
+        "required": ["name", "email", "password"],
         "properties": {
-          "__id": {
-            "type": "string",
-            "description": "User's id"
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": "201"
           },
-          "name": {
+          "message": {
             "type": "string",
-            "description": "User's name"
+            "description": "Message",
+            "example": "success"
           },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "password": {
+                "type": "string",
+                "description": "User's password"
+              },
+              "subscription": {
+                "type": "boolean",
+                "description": "User's subscription status",
+                "example": false
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              },
+              "favorite": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "recipeId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "shoppingList": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "recipeId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "example": {
-          "__id": "iuye78dqy9diyq",
-          "name": "Kevin",
-          "email": "1@gmail.com"
+          "code": "201",
+          "message": "success",
+          "user": {
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa"
+          }
         }
       },
       "LoginRequest": {
@@ -213,26 +430,355 @@
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "qwerty123"
+            "example": "qwerty"
           }
         }
       },
       "LoginResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "token": {
-              "type": "string",
-              "description": "User's token"
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "success"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "password": {
+                "type": "string",
+                "description": "User's password"
+              },
+              "subscription": {
+                "type": "boolean",
+                "description": "User's subscription status",
+                "example": false
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              },
+              "token": {
+                "type": "string",
+                "description": "User's token"
+              }
             }
           }
         },
         "example": {
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGIxN2I0Y2U5NTU4MGI0MDVjMzA2ZCIsImlhdCI6MTY4NzA5MDAxMiwiZXhwIjoxNjg3MDk3MjEyfQ.UcA07u2_T9SW2qqpaZrs_Z43Q4DAO9-9uFVL7VBRmS8"
+          "code": "200",
+          "message": "success",
+          "user": {
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
+          }
         }
       },
-      "CurrentUserRequest": {}
+      "CategoryListResponse": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "example": [
+          "Beef",
+          "Breakfast",
+          "Chicken",
+          "Dessert",
+          "Goat",
+          "Lamb",
+          "Miscellaneous",
+          "Pasta",
+          "Pork",
+          "Seafood",
+          "Side",
+          "Soup",
+          "Starter",
+          "Vegan",
+          "Vegetarian"
+        ]
+      },
+      "CategoryRecipesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "A recipe's id"
+            },
+            "title": {
+              "type": "string",
+              "description": "A title of the recipe",
+              "example": "Battenberg Cake"
+            },
+            "category": {
+              "type": "string",
+              "description": "Category title",
+              "example": "Dessert"
+            },
+            "area": {
+              "type": "string",
+              "description": "A country or a region",
+              "example": "British"
+            },
+            "instructions": {
+              "type": "string",
+              "description": "Instruction for cooking"
+            },
+            "description": {
+              "type": "string",
+              "description": "A description for a meal",
+              "example": "A classic British cake..."
+            },
+            "thumb": {
+              "type": "string",
+              "description": "Thumb's link"
+            },
+            "preview": {
+              "type": "string",
+              "description": "Preview image link"
+            },
+            "time": {
+              "type": "string",
+              "description": "Time for cooking",
+              "example": "60"
+            },
+            "youtube": {
+              "type": "string",
+              "description": "Youtube link"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["Cake", "Sweet"]
+            },
+            "ingredients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Ingredient's id"
+                  },
+                  "measure": {
+                    "type": "string",
+                    "description": "Ingedient measure",
+                    "example": "175g"
+                  }
+                }
+              }
+            }
+          },
+          "example": [
+            {
+              "_id": "6462a8f74c3d0ddd28897fcd",
+              "title": "Battenberg Cake",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+              "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+              "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+              "tags": ["Cake", "Sweet"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "175g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3687",
+                  "measure": "175g"
+                }
+              ]
+            },
+            {
+              "_id": "6462a8f74c3d0ddd28897fcc",
+              "title": "Blackberry Fool",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
+              "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
+              "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
+              "tags": ["Desert", "Summer", "Fruity", "Dairy"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e380c",
+                  "measure": "50g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "125g"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "RecipeResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "A recipe id"
+          },
+          "title": {
+            "type": "string",
+            "description": "A title of the recipe",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category title",
+            "example": "Dessert"
+          },
+          "area": {
+            "type": "string",
+            "description": "A country or a region",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instruction for cooking"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for a meal",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Thumb link"
+          },
+          "preview": {
+            "type": "string",
+            "description": "Preview image link"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time for cooking",
+            "example": "60"
+          },
+          "youtube": {
+            "type": "string",
+            "description": "Youtube link"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Cake", "Sweet"]
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingradient id"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Ingradient measure",
+                  "example": "175g"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "_id": "6462a8f74c3d0ddd28897fcd",
+          "title": "Battenberg Cake",
+          "category": "Dessert",
+          "area": "British",
+          "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+          "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+          "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+          "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+          "time": "60",
+          "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+          "tags": ["Cake", "Sweet"],
+          "ingredients": [
+            {
+              "id": "640c2dd963a319ea671e367e",
+              "measure": "175g"
+            },
+            {
+              "id": "640c2dd963a319ea671e3687",
+              "measure": "175g"
+            }
+          ]
+        }
+      },
+      "IngredientsListResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Ingredient's id"
+            },
+            "name": {
+              "type": "string",
+              "description": "Ingredient's name"
+            },
+            "desc": {
+              "type": "string",
+              "description": "Ingredient's description"
+            },
+            "image": {
+              "type": "string",
+              "description": "Ingredient's image link"
+            }
+          },
+          "example": [
+            {
+              "_id": "640c2dd963a319ea671e366c",
+              "name": "Beef Brisket",
+              "desc": "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times. Beef is a source of high-quality protein and nutrients.\r\n\r\nMost beef skeletal muscle meat can be used as is by merely cutting into certain parts, such as roasts, short ribs or steak (filet mignon, sirloin steak, rump steak, rib steak, rib eye steak, hanger steak, etc.), while other cuts are processed (corned beef or beef jerky). Trimmings, on the other hand, are usually mixed with meat from older, leaner (therefore tougher) cattle, are ground, minced or used in sausages. The blood is used in some varieties called blood sausage. Other parts that are eaten include other muscles and offal, such as the oxtail, liver, tongue, tripe from the reticulum or rumen, glands (particularly the pancreas and thymus, referred to as sweetbread), the heart, the brain (although forbidden where there is a danger of bovine spongiform encephalopathy, BSE, commonly referred to as mad cow disease), the kidneys, and the tender testicles of the bull (known in the United States as calf fries, prairie oysters, or Rocky Mountain oysters). Some intestines are cooked and eaten as is, but are more often cleaned and used as natural sausage casings. The bones are used for making beef stock.",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+            },
+            {
+              "_id": "640c2dd963a319ea671e3667",
+              "name": "Basil",
+              "desc": "Basil, also called great basil, is a culinary herb of the family Lamiaceae (mints).\r\n\r\nBasil is native to tropical regions from central Africa to Southeast Asia. It is a tender plant, and is used in cuisines worldwide. Depending on the species and cultivar, the leaves may taste somewhat like anise, with a strong, pungent, often sweet smell.",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564215/jpmvh7yslyxzie8gihi1.png"
+            }
+          ]
+        }
+      }
     },
     "securitySchemes": {
       "Bearer": {
