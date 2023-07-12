@@ -8,6 +8,9 @@ const configPath = path.join(__dirname, "config", ".env");
 require("dotenv").config({ path: configPath });
 
 const usersRouter = require("./routes/api/users");
+
+const subscribeRouter = require("./routes/api/subscribe")
+
 const { recipesRouter, ingredientsRouter } = require("./routes");
 
 const app = express();
@@ -21,6 +24,8 @@ app.use(logger(formatsLogger));
 app.use(cors());
 
 app.use(express.json());
+
+app.use("/subscribe", subscribeRouter);
 
 app.use("/recipes", recipesRouter);
 

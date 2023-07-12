@@ -12,6 +12,7 @@ const login = async (req, res) => {
     code: 200,
     message: "Success login",
     user,
+
   });
 };
 

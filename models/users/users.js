@@ -4,37 +4,51 @@ const usersSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "Set name for user"],
     },
-
     email: {
       type: String,
-      required: true,
+      required: [true, "Email is required"],
       unique: true,
     },
-
     password: {
       type: String,
-      required: true,
+      required: [true, "Set password for user"],
     },
-
-    avatarUrl: {
-      type: String,
-      required: true,
-    },
-
     subscription: {
       type: Boolean,
       required: false,
       default: false,
     },
-
-    subscriptionToken: {
-      type: String,
-      default: "",
+    verify: {
+      type: Boolean,
+      default: false,
     },
-
-    token: String,
+    verificationToken: {
+      type: String,
+    },
+    shoppingList: {
+      type: Array,
+      of: {
+        ingredientId: {
+          // type: mongoose.Types.ObjectId,
+          // ref: 'Ingredient',
+        },
+        measure: {
+          type: String,
+        },
+        recipeId: {
+          type: String,
+          default: "",
+        },
+      },
+      require: [true, "Add at least one ingredient"],
+      default: [],
+    },
+    token: {
+      type: String,
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );

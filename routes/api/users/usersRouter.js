@@ -8,7 +8,11 @@ const { authenticate } = require("../../../middlewares");
 
 const { validateBody } = require("../../../decorators");
 
-const { registerSchema, loginSchema } = require("../../../schemas");
+const {
+  registerSchema,
+  loginSchema,
+  userUpdateSubscription,
+} = require("../../../schemas");
 
 router.post("/register", validateBody(registerSchema), authController.register);
 
@@ -18,9 +22,19 @@ router.get("/current", authenticate, authController.getCurrent);
 
 router.post("/logout", authenticate, authController.logout);
 
-// router.patch("/",
-//     authenticate,
-//     validateBody(schemas.userAuthSchema),
-//     authController.userUpdateSubscription);
+router.patch(
+  "/update",
+  authenticate,
+  validateBody(userUpdateSubscription),
+  authController.userUpdateSubscription
+);
+
+router.get("/verity/:verificationToken", authController.getVerity);
+
+// router.patch(
+//   '/avatars',
+//   upload.single("avatarURL"),
+//   authController(updateAvatarUrl)
+// );
 
 module.exports = router;
