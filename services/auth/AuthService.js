@@ -3,6 +3,7 @@ const { User } = require("../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
+const { nanoid } = require("nanoid");
 
 const { SECRET_KEY } = process.env;
 
@@ -17,12 +18,17 @@ class AuthService {
     const user = await User.findOne({ email });
 
     if (user) {
-      throw HttpError(409, `Email: ${email} is already in use`);
+      throw HttpError(409, `User with email ${email} is already registered`);
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
 
     const avatarUrl = gravatar.url(email);
+
+    const token = jwt.sign(SECRET_KEY, { expiresIn: "10d" });
+
+    const verificationToken = nanoid();
+    const subscriptionToken = nanoid();
 
     const newUser = await User.create({
       ...req.body,
@@ -30,6 +36,9 @@ class AuthService {
       avatarUrl,
       favorite: [],
       shoppingList: [],
+      token,
+      verificationToken,
+      subscriptionToken,
     });
 
     return newUser;
