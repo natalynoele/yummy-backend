@@ -286,6 +286,45 @@
         }
       }
     },
+    "/recipes/own-recipes": {
+      "post": {
+        "tags": ["Recipes"],
+        "summary": "Add a new recipe",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Recipe's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRecipeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewRecipeResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+              }
+            }
+          }
+        }
+      }
+    },
     "/ingredients/list": {
       "get": {
         "tags": ["Ingredients"],
@@ -739,6 +778,207 @@
               "measure": "175g"
             }
           ]
+        }
+      },
+      "NewRecipeRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A title of the recipe",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category title",
+            "example": "Dessert"
+          },
+          "area": {
+            "type": "string",
+            "description": "A country or a region",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instruction for cooking"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for a meal",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Thumb link"
+          },
+          "preview": {
+            "type": "string",
+            "description": "Preview image link"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time for cooking",
+            "example": "60"
+          },
+          "youtube": {
+            "type": "string",
+            "description": "Youtube link"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Cake", "Sweet"]
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingradient id"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Ingradient measure",
+                  "example": "175g"
+                }
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "description": "Recipe owner's id",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          }
+        },
+        "example": {
+          "title": "Battenberg Cake",
+          "category": "Dessert",
+          "area": "British",
+          "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+          "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+          "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+          "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+          "time": "60",
+          "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+          "tags": ["Cake", "Sweet"],
+          "ingredients": [
+            {
+              "id": "640c2dd963a319ea671e367e",
+              "measure": "175g"
+            },
+            {
+              "id": "640c2dd963a319ea671e3687",
+              "measure": "175g"
+            }
+          ],
+          "owner": "6462a8f74c3d0ddd28897fcd"
+        }
+      },
+      "NewRecipeResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "A recipe id"
+          },
+          "title": {
+            "type": "string",
+            "description": "A title of the recipe",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category title",
+            "example": "Dessert"
+          },
+          "area": {
+            "type": "string",
+            "description": "A country or a region",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instruction for cooking"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for a meal",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Thumb link"
+          },
+          "preview": {
+            "type": "string",
+            "description": "Preview image link"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time for cooking",
+            "example": "60"
+          },
+          "youtube": {
+            "type": "string",
+            "description": "Youtube link"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Cake", "Sweet"]
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingradient id"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Ingradient measure",
+                  "example": "175g"
+                }
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "description": "Recipe owner's id",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          }
+        },
+        "example": {
+          "_id": "6462a8f74c3d0ddd28897fcd",
+          "title": "Battenberg Cake",
+          "category": "Dessert",
+          "area": "British",
+          "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+          "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+          "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+          "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+          "time": "60",
+          "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+          "tags": ["Cake", "Sweet"],
+          "ingredients": [
+            {
+              "id": "640c2dd963a319ea671e367e",
+              "measure": "175g"
+            },
+            {
+              "id": "640c2dd963a319ea671e3687",
+              "measure": "175g"
+            }
+          ],
+          "owner": "6462a8f74c3d0ddd28897fcd"
         }
       },
       "IngredientsListResponse": {
