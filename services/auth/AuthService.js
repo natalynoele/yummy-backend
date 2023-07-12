@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
 const { nanoid } = require("nanoid");
-
 const { SECRET_KEY } = process.env;
 
 class AuthService {
@@ -27,7 +26,7 @@ class AuthService {
 
     const token = jwt.sign(SECRET_KEY, { expiresIn: "10d" });
 
-    const verificationToken = nanoid();
+    // const verificationToken = nanoid();
     const subscriptionToken = nanoid();
 
     const newUser = await User.create({
@@ -37,7 +36,7 @@ class AuthService {
       favorite: [],
       shoppingList: [],
       token,
-      verificationToken,
+      // verificationToken,
       subscriptionToken,
     });
 

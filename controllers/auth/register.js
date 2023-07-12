@@ -19,6 +19,8 @@ const register = async (req, res) => {
       avatarUrl: newUser.avatarUrl,
       favorite: newUser.favorite,
       shoppingList: newUser.shoppingList,
+      // verificationToken: newUser.verificationToken,
+      subscriptionToken: newUser.subscriptionToken,
     },
   });
 };
