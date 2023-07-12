@@ -21,6 +21,8 @@ const register = async (req, res) => {
       email: newUser.email,
       subscription: newUser.subscription,
       avatarUrl: newUser.avatarUrl,
+      verificationToken: newUser.verificationToken,
+    subscriptionToken: newUser.subscriptionToken
     },
   });
 
