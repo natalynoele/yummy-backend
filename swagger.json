@@ -426,7 +426,7 @@
       },
       "post": {
         "tags": ["Shopping list"],
-        "summary": "Get shopping list",
+        "summary": "Add an ingredient to the shopping list",
         "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
@@ -434,7 +434,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ShoppingListRequest"
+                "$ref": "#/components/schemas/AddIngredientToListRequest"
               }
             }
           }
@@ -445,7 +445,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ShoppingListResponse"
+                  "$ref": "#/components/schemas/AddIngredientToListResponce"
                 }
               }
             }
@@ -1128,7 +1128,35 @@
           ]
         }
       },
-      "ShoppingListRequest": {
+      "AddIngredientToListRequest": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Ingredient's id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Ingredient's name"
+          },
+          "measure": {
+            "type": "string",
+            "description": "Ingredient's name",
+            "example": "160g"
+          },
+          "img": {
+            "type": "string",
+            "description": "Ingredient's image link"
+          }
+        },
+        "example": {
+          "_id": "640c2dd963a319ea671e366c",
+          "name": "Mushroom",
+          "measure": "160g",
+          "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+        }
+      },
+      "AddIngredientToListResponce": {
         "type": "object",
         "properties": {
           "_id": {
