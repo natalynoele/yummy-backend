@@ -31,6 +31,10 @@
     {
       "name": "Ingredients",
       "description": "Ingredients endpoints"
+    },
+    {
+      "name": "Shopping list",
+      "description": "Shopping list endpoints"
     }
   ],
   "paths": {
@@ -377,6 +381,71 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/IngredientsListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shopping-list": {
+      "get": {
+        "tags": ["Shopping list"],
+        "summary": "Get shopping list",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShoppingListResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Shopping list"],
+        "summary": "Add an ingredient to the shopping list",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddIngredientToListRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddIngredientToListResponce"
                 }
               }
             }
@@ -1048,6 +1117,101 @@
               "_id": "640c2dd963a319ea671e366c",
               "name": "Beef Brisket",
               "desc": "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times. Beef is a source of high-quality protein and nutrients.\r\n\r\nMost beef skeletal muscle meat can be used as is by merely cutting into certain parts, such as roasts, short ribs or steak (filet mignon, sirloin steak, rump steak, rib steak, rib eye steak, hanger steak, etc.), while other cuts are processed (corned beef or beef jerky). Trimmings, on the other hand, are usually mixed with meat from older, leaner (therefore tougher) cattle, are ground, minced or used in sausages. The blood is used in some varieties called blood sausage. Other parts that are eaten include other muscles and offal, such as the oxtail, liver, tongue, tripe from the reticulum or rumen, glands (particularly the pancreas and thymus, referred to as sweetbread), the heart, the brain (although forbidden where there is a danger of bovine spongiform encephalopathy, BSE, commonly referred to as mad cow disease), the kidneys, and the tender testicles of the bull (known in the United States as calf fries, prairie oysters, or Rocky Mountain oysters). Some intestines are cooked and eaten as is, but are more often cleaned and used as natural sausage casings. The bones are used for making beef stock.",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+            },
+            {
+              "_id": "640c2dd963a319ea671e3667",
+              "name": "Basil",
+              "desc": "Basil, also called great basil, is a culinary herb of the family Lamiaceae (mints).\r\n\r\nBasil is native to tropical regions from central Africa to Southeast Asia. It is a tender plant, and is used in cuisines worldwide. Depending on the species and cultivar, the leaves may taste somewhat like anise, with a strong, pungent, often sweet smell.",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564215/jpmvh7yslyxzie8gihi1.png"
+            }
+          ]
+        }
+      },
+      "AddIngredientToListRequest": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Ingredient's id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Ingredient's name"
+          },
+          "measure": {
+            "type": "string",
+            "description": "Ingredient's name",
+            "example": "160g"
+          },
+          "img": {
+            "type": "string",
+            "description": "Ingredient's image link"
+          }
+        },
+        "example": {
+          "_id": "640c2dd963a319ea671e366c",
+          "name": "Mushroom",
+          "measure": "160g",
+          "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+        }
+      },
+      "AddIngredientToListResponce": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Ingredient's id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Ingredient's name"
+          },
+          "measure": {
+            "type": "string",
+            "description": "Ingredient's name",
+            "example": "160g"
+          },
+          "img": {
+            "type": "string",
+            "description": "Ingredient's image link"
+          }
+        },
+        "example": {
+          "_id": "640c2dd963a319ea671e366c",
+          "name": "Mushroom",
+          "measure": "160g",
+          "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+        }
+      },
+      "ShoppingListResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Ingredient's id"
+            },
+            "name": {
+              "type": "string",
+              "description": "Ingredient's name"
+            },
+            "measure": {
+              "type": "string",
+              "description": "Ingredient's name",
+              "example": "160g"
+            },
+            "img": {
+              "type": "string",
+              "description": "Ingredient's image link"
+            }
+          },
+          "example": [
+            {
+              "_id": "640c2dd963a319ea671e366c",
+              "name": "Mushroom",
+              "measure": "160g",
               "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
             },
             {
