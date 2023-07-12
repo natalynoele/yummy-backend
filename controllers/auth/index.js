@@ -1,6 +1,6 @@
-const register = require("./register");
+const { register } = require("./register");
 
-const login = require("./login");
+const { login } = require("./login");
 
 const logout = require("./logout");
 
@@ -11,3 +11,4 @@ const userUpdateSubscription = require("./userUpdateSubscription");
 const getVerity = require("./getVerity");
 
 module.exports = { register, login, logout, getCurrent, userUpdateSubscription, getVerity,};
+

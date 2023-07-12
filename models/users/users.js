@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const usersSchema = new Schema(
+
     {
         name: {
             type: String,
@@ -27,8 +28,7 @@ const usersSchema = new Schema(
         token: {
             type: String,
             default: null,
-        },
-        
+        },  
         verify: {
             type: Boolean,
             default: false,
@@ -56,9 +56,11 @@ const usersSchema = new Schema(
             default: [],            
         }
     },
-    { versionKey: false, timestamps: true }
+    token: String,
+  },
+  { versionKey: false, timestamps: true }
 );
 
 const User = model("users", usersSchema);
 
-module.exports =  User ;
+module.exports = User;
