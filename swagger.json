@@ -25,6 +25,10 @@
       "description": "Recipes endpoints"
     },
     {
+      "name": "Own recipes",
+      "description": "User's recipes"
+    },
+    {
       "name": "Ingredients",
       "description": "Ingredients endpoints"
     }
@@ -79,7 +83,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -130,7 +134,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -161,7 +165,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -193,7 +197,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -221,7 +225,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -233,7 +237,7 @@
         "tags": ["Recipes"],
         "summary": "Get list of recipes by category name",
         "security": [{ "Bearer": [] }],
-        "params": { "in": "path", "name": "category" },
+        "parameters": [{ "in": "path", "name": "category" }],
         "responses": {
           "200": {
             "description": "Success operation",
@@ -245,12 +249,21 @@
               }
             }
           },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Sorry, but it appears that there is no recipes associated with the category you provided"
+              }
+            }
+          },
           "500": {
             "description": "Server error",
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -262,7 +275,7 @@
         "tags": ["Recipes"],
         "summary": "Get a recipes by id",
         "security": [{ "Bearer": [] }],
-        "params": { "in": "path", "name": "id" },
+        "parameters": [{ "in": "path", "name": "id" }],
         "responses": {
           "200": {
             "description": "Success operation",
@@ -279,7 +292,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -288,7 +301,7 @@
     },
     "/recipes/own-recipes": {
       "post": {
-        "tags": ["Recipes"],
+        "tags": ["Own recipes"],
         "summary": "Add a new recipe",
         "security": [{ "Bearer": [] }],
         "requestBody": {
@@ -318,7 +331,34 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipes/own-recipes/{id}": {
+      "delete": {
+        "tags": ["Own recipes"],
+        "summary": "Delete a recipe",
+        "security": [{ "Bearer": [] }],
+        "parameters": [{ "in": "path", "name": "id" }],
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "message": "Recipe has deleted"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
@@ -346,7 +386,7 @@
             "content": {
               "application/json": {
                 "type": "string",
-                "example": "Well, this is unexpected... Sorry, this is not working properly. We now know about this mistake and are working to fix it."
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
             }
           }
