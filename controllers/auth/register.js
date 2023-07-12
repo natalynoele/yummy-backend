@@ -2,7 +2,10 @@ const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const { AuthService } = require("../../services");
 
+const { SECRET_KEY } = process.env;
+
 const register = async (req, res) => {
+
   const newUser = await AuthService.addNewUser(req);
 
   if (!newUser) {
@@ -20,6 +23,7 @@ const register = async (req, res) => {
       avatarUrl: newUser.avatarUrl,
     },
   });
+
 };
 
 module.exports = { register: ctrlWrapper(register) };
