@@ -24,8 +24,6 @@ class AuthService {
 
     const avatarUrl = gravatar.url(email);
 
-    const token = jwt.sign(SECRET_KEY, { expiresIn: "10d" });
-
     // const verificationToken = nanoid();
     const subscriptionToken = nanoid();
 
@@ -33,14 +31,21 @@ class AuthService {
       ...req.body,
       password: hashPassword,
       avatarUrl,
-      favorite: [],
-      shoppingList: [],
-      token,
       // verificationToken,
       subscriptionToken,
     });
 
-    return newUser;
+    const token = jwt.sign({ id: newUser._id }, SECRET_KEY, {
+      expiresIn: "23h",
+    });
+
+    const verifyUser = await User.findByIdAndUpdate(
+      newUser._id,
+      { token: token },
+      { new: true }
+    );
+
+    return verifyUser;
   }
 
   async login(req) {
@@ -70,7 +75,7 @@ class AuthService {
     const verifyUser = await User.findByIdAndUpdate(
       id,
       { token },
-      { next: true }
+      { new: true }
     );
 
     return verifyUser;

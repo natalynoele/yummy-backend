@@ -1,4 +1,6 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+
+const { Schema, model } = mongoose;
 
 const usersSchema = new Schema(
   {
@@ -15,6 +17,10 @@ const usersSchema = new Schema(
       type: String,
       required: [true, "Set password for user"],
     },
+    avatarUrl: {
+      type: String,
+      required: true,
+    },
     subscription: {
       type: Boolean,
       required: false,
@@ -26,6 +32,16 @@ const usersSchema = new Schema(
     },
     verificationToken: {
       type: String,
+    },
+    favorite: {
+      type: Array,
+      of: {
+        recipeId: {
+          type: mongoose.Types.ObjectId,
+          ref: "recipes",
+        },
+      },
+      default: [],
     },
     shoppingList: {
       type: Array,
