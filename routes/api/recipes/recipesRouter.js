@@ -1,7 +1,11 @@
 const express = require("express");
-const { recipesController, ownRecipesController} = require("../../../controllers");
-const {validateBody} = require("../../../decorators")
-const {recipeSchema} = require("../../../schemas/recipe")
+const {
+  recipesController,
+  ownRecipesController,
+} = require("../../../controllers");
+const { validateBody } = require("../../../decorators");
+const { authenticate } = require("../../../middlewares");
+const { recipeSchema } = require("../../../schemas/recipe");
 const recipesRouter = express.Router();
 
 recipesRouter.get(
@@ -20,8 +24,13 @@ recipesRouter.get("/main-page", recipesController.mainPage);
 
 recipesRouter.get("/:id", recipesController.getById);
 
-recipesRouter.post("/own-recipes", validateBody(recipeSchema), ownRecipesController.addRecipes);
+recipesRouter.post(
+  "/own-recipes",
+  authenticate,
+  validateBody(recipeSchema),
+  ownRecipesController.addRecipes
+);
 
-recipesRouter.delete("/own-recipes/:id", ownRecipesController.deleteRecipe)
+recipesRouter.delete("/own-recipes/:id", ownRecipesController.deleteRecipe);
 
 module.exports = recipesRouter;

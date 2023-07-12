@@ -11,8 +11,15 @@ const login = async (req, res) => {
   res.status(200).json({
     code: 200,
     message: "Success login",
-    user,
-
+    token: user.token,
+    user: {
+      name: user.name,
+      email: user.email,
+      avatarUrl: user.avatarUrl,
+      favorite: user.favorite,
+      shoppingList: user.shoppingList,
+      subscriptionToken: user.subscriptionToken,
+    },
   });
 };
 

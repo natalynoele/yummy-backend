@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const { emailRegexp, passwordRegexp } = require("../../constants/patterns");
+const { emailRegexp } = require("../../constants/patterns");
 
 const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required().messages({
@@ -8,7 +8,7 @@ const loginSchema = Joi.object({
     "string.empty": `Email can contain capital and small Latin letters (A-Z, a-z), numbers (from 0 to 9) and special symbols !#$%^&*_-=*/?+ but no more than 64 characters`,
   }),
   password: Joi.string()
-    .pattern(passwordRegexp)
+    // .pattern(passwordRegexp)
     .required()
     .min(6)
     .max(16)
