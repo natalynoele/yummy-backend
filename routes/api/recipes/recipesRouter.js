@@ -22,4 +22,6 @@ recipesRouter.get("/:id", recipesController.getById);
 
 recipesRouter.post("/own-recipes", validateBody(recipeSchema), ownRecipesController.addRecipes);
 
+recipesRouter.delete("/own-recipes/:id", ownRecipesController.deleteRecipe)
+
 module.exports = recipesRouter;
