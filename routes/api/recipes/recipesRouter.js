@@ -1,6 +1,7 @@
 const express = require("express");
-const { recipesController } = require("../../../controllers");
-
+const { recipesController, ownRecipesController} = require("../../../controllers");
+const {validateBody} = require("../../../decorators")
+const {recipeSchema} = require("../../../schemas/recipe")
 const recipesRouter = express.Router();
 
 recipesRouter.get(
@@ -18,5 +19,7 @@ recipesRouter.get("/category-list", recipesController.getCategoryList);
 recipesRouter.get("/main-page", recipesController.mainPage);
 
 recipesRouter.get("/:id", recipesController.getById);
+
+recipesRouter.post("/own-recipes", validateBody(recipeSchema), ownRecipesController.addRecipes);
 
 module.exports = recipesRouter;

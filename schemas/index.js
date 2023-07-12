@@ -4,8 +4,13 @@ const {
   userUpdateSubscription,
 } = require("./auth");
 
+const { recipeSchema} = require("./recipe")
+
+
 module.exports = {
-  registerSchema,
+   registerSchema,
   loginSchema,
   userUpdateSubscription,
+  recipeSchema,
+
 };

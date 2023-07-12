@@ -3,27 +3,22 @@ const { Schema, model } = require("mongoose");
 const recipesSchema = new Schema({
   title: {
     type: String,
-    require: true,
+    require: true, 
   },
   category: {
     type: String,
-    require: true,
+    require: true, 
   },
   area: {
-    type: String,
-    require: true,
+    type: String, 
   },
   instructions: {
     type: String,
-    require: true,
+    require: true, 
   },
   description: {
     type: String,
-    require: true,
-  },
-  thumb: {
-    type: String,
-    require: true,
+    require: true, 
   },
   preview: {
     type: String,
@@ -35,11 +30,10 @@ const recipesSchema = new Schema({
   },
   youtube: {
     type: String,
-    require: true,
   },
   tags: {
     type: Array,
-    require: true,
+   
   },
   ingredients: {
     type: Array,
