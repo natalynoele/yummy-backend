@@ -2,15 +2,15 @@ const {
   registerSchema,
   loginSchema,
   userUpdateSubscription,
+  updateSchema,
 } = require("./auth");
 
-const { recipeSchema} = require("./recipe")
-
+const { recipeSchema } = require("./recipe");
 
 module.exports = {
-   registerSchema,
+  registerSchema,
   loginSchema,
   userUpdateSubscription,
   recipeSchema,
-
+  updateSchema,
 };

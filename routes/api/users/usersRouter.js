@@ -4,7 +4,7 @@ const router = express.Router();
 
 const authController = require("../../../controllers/auth");
 
-const { authenticate } = require("../../../middlewares");
+const { authenticate, upload } = require("../../../middlewares");
 
 const { validateBody } = require("../../../decorators");
 
@@ -12,6 +12,7 @@ const {
   registerSchema,
   loginSchema,
   userUpdateSubscription,
+  updateSchema,
 } = require("../../../schemas");
 
 router.post("/register", validateBody(registerSchema), authController.register);
@@ -27,6 +28,13 @@ router.patch(
   authenticate,
   validateBody(userUpdateSubscription),
   authController.userUpdateSubscription
+);
+router.put(
+  "/update",
+  authenticate,
+  upload.single("avatar"),
+  validateBody(updateSchema),
+  authController.updateUser
 );
 
 router.get("/verity/:verificationToken", authController.getVerity);
