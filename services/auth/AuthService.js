@@ -27,25 +27,20 @@ class AuthService {
     // const verificationToken = nanoid();
     const subscriptionToken = nanoid();
 
+    const token = jwt.sign({ reg: subscriptionToken }, SECRET_KEY, {
+      expiresIn: "23h",
+    });
+
     const newUser = await User.create({
       ...req.body,
       password: hashPassword,
       avatarUrl,
       // verificationToken,
       subscriptionToken,
+      token,
     });
 
-    const token = jwt.sign({ id: newUser._id }, SECRET_KEY, {
-      expiresIn: "23h",
-    });
-
-    const verifyUser = await User.findByIdAndUpdate(
-      newUser._id,
-      { token: token },
-      { new: true }
-    );
-
-    return verifyUser;
+    return newUser;
   }
 
   async login(req) {
