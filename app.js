@@ -7,7 +7,6 @@ const path = require("path");
 const configPath = path.join(__dirname, "config", ".env");
 require("dotenv").config({ path: configPath });
 
-console.log(configPath, "app");
 const usersRouter = require("./routes/api/users");
 
 const subscribeRouter = require("./routes/api/subscribe");
