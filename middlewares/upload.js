@@ -19,7 +19,7 @@ const storage = new CloudinaryStorage({
     let folder;
     if (file.fieldname === "avatar") {
       folder = "avatars";
-    } else if (file.fieldname === "previews") {
+    } else if (file.fieldname === "preview") {
       folder = "previews";
     } else {
       folder = "misc";
@@ -28,6 +28,9 @@ const storage = new CloudinaryStorage({
       folder: folder,
       allowed_formats: ["jpg", "png"], // Adjust the allowed formats as needed
       public_id: file.originalname, // Use original filename as the public ID
+      // filename: (req, file, cb) => {
+      //   cb(null, file.originalname);
+      // },
       transformation: [
         { width: 350, height: 350 },
         { width: 700, height: 700 },

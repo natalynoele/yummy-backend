@@ -75,6 +75,29 @@ class AuthService {
 
     return verifyUser;
   }
+
+  async update(req, res) {
+    const { _id, avatarUrl } = req.user;
+
+    if (!req.body.name && !req.file) {
+      res.status(200).json({ message: "nothing change" });
+    }
+
+    let avatar = avatarUrl;
+
+    if (req.file) {
+      avatar = req.file.path;
+    }
+    const updated = await User.findByIdAndUpdate(
+      _id,
+      { ...req.body, avatarUrl: avatar },
+      { new: true }
+    );
+
+    console.log(updated, "auth");
+
+    return updated;
+  }
 }
 
 module.exports = new AuthService();

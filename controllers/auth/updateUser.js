@@ -1,27 +1,21 @@
-const User = require("../../models");
-
-const { HttpError } = require("../../helpers");
+const { HttpError, ctrlWrapper } = require("../../helpers");
+const { AuthService } = require("../../services");
 
 const updateUser = async (req, res) => {
-  const { _id: id } = req.user;
+  const updated = await AuthService.update(req, res);
 
-  console.log(req.file.path, "update");
-
-  const avatarURL = req.file.path;
-
-  if (!req.body) {
-    throw HttpError(400, "Please, write some data");
+  if (!updated) {
+    throw HttpError(404, "Not found");
   }
 
-  const result = await User.findByIdAndUpdate(
-    id,
-    { ...req.body, avatarURL },
-    {
-      new: true,
-    }
-  );
-  console.log(result, "result update");
-  res.status(200).json(result);
+  res.status(200).json({
+    code: 200,
+    message: "User profile updated successfully",
+    user: {
+      name: updated.name,
+      avatarUrl: updated.avatarUrl,
+    },
+  });
 };
 
-module.exports = updateUser;
+module.exports = { updateUser: ctrlWrapper(updateUser) };

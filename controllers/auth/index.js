@@ -6,7 +6,7 @@ const logout = require("./logout");
 
 const { getCurrent } = require("./getCurrent");
 
-const updateUser = require("./updateUser");
+const { updateUser } = require("./updateUser");
 
 const getVerity = require("./getVerity");
 
