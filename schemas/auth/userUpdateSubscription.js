@@ -1,11 +1,7 @@
 const Joi = require("joi");
 
-const subscriptionList = ["starter", "pro", "business"];
-
 const userUpdateSubscription = Joi.object({
-    subscription: Joi.string()
-        .valid(...subscriptionList)
-        .required(),
+    inputEmail: Joi.string().required(),
 });
 
 module.exports = userUpdateSubscription;
