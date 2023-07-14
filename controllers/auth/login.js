@@ -19,7 +19,7 @@ const login = async (req, res) => {
       favorite: user.favorite,
       shoppingList: user.shoppingList,
       subscriptionToken: user.subscriptionToken,
-      registeredAt: newUser.createdAt
+      registeredAt: user.createdAt,
     },
   });
 };
