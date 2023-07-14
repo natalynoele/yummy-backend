@@ -8,8 +8,8 @@ const login = async (req, res) => {
     throw HttpError(500);
   }
 
-  res.status(200).json({
-    code: 200,
+  res.status(201).json({
+    code: 201,
     message: "Success login",
     token: user.token,
     user: {
@@ -19,6 +19,7 @@ const login = async (req, res) => {
       favorite: user.favorite,
       shoppingList: user.shoppingList,
       subscriptionToken: user.subscriptionToken,
+      registeredAt: newUser.createdAt
     },
   });
 };

@@ -39,10 +39,4 @@ router.put(
 
 router.get("/verity/:verificationToken", authController.getVerity);
 
-// router.patch(
-//   '/avatars',
-//   upload.single("avatarURL"),
-//   authController(updateAvatarUrl)
-// );
-
 module.exports = router;
