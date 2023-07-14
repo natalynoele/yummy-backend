@@ -33,4 +33,6 @@ recipesRouter.post(
 
 recipesRouter.delete("/own-recipes/:id", ownRecipesController.deleteRecipe);
 
+recipesRouter.get("/own-recipes/:id", ownRecipesController.getRecipeByUserId);
+
 module.exports = recipesRouter;
