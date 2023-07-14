@@ -77,24 +77,19 @@ class AuthService {
   }
 
   async update(req, res) {
-    const { _id, avatarUrl } = req.user;
+    const { _id, avatarUrl, name } = req.user;
 
     if (!req.body.name && !req.file) {
       res.status(200).json({ message: "nothing change" });
     }
+    const avatar = req.file ? req.file.path : avatarUrl;
+    const newName = req.body.name ? req.body.name : name;
 
-    let avatar = avatarUrl;
-
-    if (req.file) {
-      avatar = req.file.path;
-    }
     const updated = await User.findByIdAndUpdate(
       _id,
-      { ...req.body, avatarUrl: avatar },
+      { name: newName, avatarUrl: avatar },
       { new: true }
     );
-
-    console.log(updated, "auth");
 
     return updated;
   }
