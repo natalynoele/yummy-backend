@@ -105,19 +105,6 @@ class AuthService {
     return user;
   }
 
-  async userSubscription(req) {
-    const { _id: id } = req.user;
-    const { subscription } = req.body;
-
-    const result = await User.findByIdAndUpdate(
-      id,
-      { subscription },
-      {
-        new: true,
-      }
-    );
-    return result;
-  }
-}
+ }
 
 module.exports = new AuthService();
