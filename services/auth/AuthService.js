@@ -95,6 +95,29 @@ class AuthService {
 
     return updated;
   }
+
+  async logout(req) { 
+    const { _id } = req.user;
+    const user = await User.findByIdAndUpdate(_id, { $unset: { token: 1 } })
+      
+    user.token = null;
+    await user.save();
+    return user;
+  }
+
+  async userSubscription(req) {
+    const { _id: id } = req.user;
+    const { subscription } = req.body;
+
+    const result = await User.findByIdAndUpdate(
+      id,
+      { subscription },
+      {
+        new: true,
+      }
+    );
+    return result;
+  }
 }
 
 module.exports = new AuthService();
