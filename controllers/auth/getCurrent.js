@@ -12,7 +12,7 @@ const getCurrent = async (req, res) => {
       avatarUrl,
       favorite,
       shoppingList,
-      createdAt
+      createdAt,
     },
   });
 };

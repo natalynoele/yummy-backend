@@ -14,6 +14,8 @@ const userUpdateSubscription = require("./userUpdateSubscription");
 
 const emailController = require("./emailControllers");
 
+const { addRecipeToFavorite } = require("./addRecipeToFavorite");
+
 module.exports = {
   register,
   login,
@@ -23,4 +25,5 @@ module.exports = {
   updateUser,
   getVerity,
   emailController,
+  addRecipeToFavorite,
 };

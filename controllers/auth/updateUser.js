@@ -8,6 +8,8 @@ const updateUser = async (req, res) => {
     throw HttpError(404, "Not found");
   }
 
+  console.log(updated);
+
   res.status(200).json({
     code: 200,
     message: "User profile updated successfully",

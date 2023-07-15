@@ -1,7 +1,6 @@
 const { Recipe } = require("../../models");
 
 const addRecipes = async (req, res) => {
-  console.log(req.user);
   const { _id: owner } = req.user;
 
   let recipePreview;

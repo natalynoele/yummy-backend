@@ -4,6 +4,8 @@ const router = express.Router();
 
 const authController = require("../../../controllers/auth");
 
+const getFavoriteRecipe = require("../../../controllers/auth/getFavorite");
+
 const { authenticate, upload } = require("../../../middlewares");
 
 const { validateBody } = require("../../../decorators");
@@ -22,6 +24,16 @@ router.post("/login", validateBody(loginSchema), authController.login);
 router.get("/current", authenticate, authController.getCurrent);
 
 router.post("/logout", authenticate, authController.logout);
+
+router.post(
+  "/favorite/:recipeId",
+  authenticate,
+  authController.addRecipeToFavorite
+);
+
+router.get("/favorite", authenticate, getFavoriteRecipe);
+
+// router.delete("/favorite", authenticate, authController.deleteFavorite);
 
 router.patch(
   "/update",

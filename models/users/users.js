@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
-
-const { Schema, model } = mongoose;
+const { Schema, model, SchemaTypes } = require("mongoose");
 
 const usersSchema = new Schema(
   {
@@ -37,7 +35,7 @@ const usersSchema = new Schema(
       type: Array,
       of: {
         recipeId: {
-          type: mongoose.Types.ObjectId,
+          type: SchemaTypes.ObjectId,
           ref: "recipes",
         },
       },
