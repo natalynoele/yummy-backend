@@ -105,6 +105,17 @@ class AuthService {
     return user;
   }
 
+  async verityToken(req) {
+    const { verificationToken } = req.params;
+    const user = await User.findOne({ verificationToken });
+    const newData = {
+        verify: true,
+        $unset: { verificationToken: 1 },
+    };
+    await User.findByIdAndUpdate(user._id, newData);
+
+  }
+
  }
 
 module.exports = new AuthService();
