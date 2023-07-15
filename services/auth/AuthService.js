@@ -27,10 +27,6 @@ class AuthService {
     // const verificationToken = nanoid();
     const subscriptionToken = nanoid();
 
-    // const token = jwt.sign({ email }, SECRET_KEY, {
-    //   expiresIn: "23h",
-    // });
-
     const newUser = await User.create({
       ...req.body,
       password: hashPassword,
