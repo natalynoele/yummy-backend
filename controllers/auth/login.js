@@ -9,6 +9,7 @@ const login = async (req, res) => {
   }
 
   res.status(200).json({
+    code: 200,
     message: "Success login",
     token: user.token,
     user: {
@@ -18,6 +19,7 @@ const login = async (req, res) => {
       favorite: user.favorite,
       shoppingList: user.shoppingList,
       subscriptionToken: user.subscriptionToken,
+      registeredAt: user.createdAt,
     },
   });
 };
