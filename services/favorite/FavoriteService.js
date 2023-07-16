@@ -59,6 +59,10 @@ class FavoriteService {
     const { _id } = req.user;
     const data = await User.findById(_id).populate("favorite");
 
+    if (!data) {
+      throw HttpError(401, "Um, it seems you are not authorized");
+    }
+
     return data.favorite;
   }
 }

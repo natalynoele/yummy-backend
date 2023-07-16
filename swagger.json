@@ -33,6 +33,10 @@
       "description": "Ingredients endpoints"
     },
     {
+      "name": "Favorite",
+      "description": "Favorite recipes endpoints"
+    },
+    {
       "name": "Shopping list",
       "description": "Shopping list endpoints"
     }
@@ -131,7 +135,12 @@
           },
           "401": {
             "description": "Invalid email or password",
-            "content": {}
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, it seems you are not authorized."
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -193,8 +202,13 @@
             }
           },
           "401": {
-            "description": "Not authenticated",
-            "content": {}
+            "description": "Invalid email or password",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, it seems you are not authorized."
+              }
+            }
           },
           "500": {
             "description": "Server error",
@@ -234,6 +248,15 @@
               }
             }
           },
+          "401": {
+            "description": "Invalid email or password",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, it seems you are not authorized."
+              }
+            }
+          },
           "404": {
             "description": "Not found",
             "content": {
@@ -250,6 +273,146 @@
                 "type": "string",
                 "example": "Well, this is unexpected... Sorry for that. Please try again"
               }
+            }
+          }
+        }
+      }
+    },
+    "/favorite": {
+      "get": {
+        "tags": ["Favorite"],
+        "summary": "User's favorite recipes",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFavoriteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, it seems you are not authorized"
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Sorry, but it appears that there are no recipes"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favorite/add/{recipeId}": {
+      "patch": {
+        "tags": ["Favorite"],
+        "summary": "Add recipe to favorite",
+        "parameters": [{ "in": "path", "name": "recipeId" }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddToFavoriteResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Um, it seems you are not authorized"
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Sorry, but there doesn't seem to be such a recipe"
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "You have already had this recipe in your favorite collection"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
+              }
+            }
+          }
+        }
+      }
+    },
+    "favorite/delete/{recipeId}": {
+      "patch": {
+        "tags": ["Favorite"],
+        "summary": "Remove recipe from favorite",
+        "parameters": [{ "in": "path", "name": "recipeId" }],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "content": {}
+          }
+        },
+        "401": {
+          "description": "Invalid token",
+          "content": {
+            "application/json": {
+              "type": "string",
+              "example": "Um, it seems you are not authorized"
+            }
+          }
+        },
+        "404": {
+          "description": "Not found",
+          "content": {
+            "application/json": {
+              "type": "string",
+              "example": "Sorry, but there doesn't seem to be such a recipe in your collection"
+            }
+          }
+        },
+        "500": {
+          "description": "Server error",
+          "content": {
+            "application/json": {
+              "type": "string",
+              "example": "Well, this is unexpected... Sorry for that. Please try again"
             }
           }
         }
@@ -1603,6 +1766,131 @@
           "name": "Mushroom",
           "measure": "160g",
           "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+        }
+      },
+      "GetFavoriteResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "A recipe's id"
+            },
+            "title": {
+              "type": "string",
+              "description": "A title of the recipe",
+              "example": "Battenberg Cake"
+            },
+            "category": {
+              "type": "string",
+              "description": "Category title",
+              "example": "Dessert"
+            },
+            "area": {
+              "type": "string",
+              "description": "A country or a region",
+              "example": "British"
+            },
+            "instructions": {
+              "type": "string",
+              "description": "Instruction for cooking"
+            },
+            "description": {
+              "type": "string",
+              "description": "A description for a meal",
+              "example": "A classic British cake..."
+            },
+            "thumb": {
+              "type": "string",
+              "description": "Thumb's link"
+            },
+            "preview": {
+              "type": "string",
+              "description": "Preview image link"
+            },
+            "time": {
+              "type": "string",
+              "description": "Time for cooking",
+              "example": "60"
+            },
+            "youtube": {
+              "type": "string",
+              "description": "Youtube link"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["Cake", "Sweet"]
+            },
+            "ingredients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Ingredient's id"
+                  },
+                  "measure": {
+                    "type": "string",
+                    "description": "Ingedient measure",
+                    "example": "175g"
+                  }
+                }
+              }
+            }
+          },
+          "example": [
+            {
+              "_id": "6462a8f74c3d0ddd28897fcd",
+              "title": "Battenberg Cake",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+              "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+              "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+              "tags": ["Cake", "Sweet"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "175g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3687",
+                  "measure": "175g"
+                }
+              ]
+            },
+            {
+              "_id": "6462a8f74c3d0ddd28897fcc",
+              "title": "Blackberry Fool",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
+              "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
+              "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
+              "tags": ["Desert", "Summer", "Fruity", "Dairy"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e380c",
+                  "measure": "50g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "125g"
+                }
+              ]
+            }
+          ]
         }
       },
       "ShoppingListResponse": {

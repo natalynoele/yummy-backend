@@ -2,7 +2,7 @@ const express = require("express");
 
 const favoriteRouter = express.Router();
 
-const favoriteRecipesController = require("../../../controllers/favorite");
+const favoriteRecipesController = require("../../../controllers");
 
 const { authenticate } = require("../../../middlewares");
 
@@ -18,7 +18,7 @@ favoriteRouter.get(
   favoriteRecipesController.getFavoriteRecipes
 );
 
-favoriteRouter.patch(
+favoriteRouter.delete(
   "/:recipeId",
   authenticate,
   favoriteRecipesController.deleteRecipeFromFavorite
