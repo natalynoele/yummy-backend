@@ -22,6 +22,10 @@ recipesRouter.get("/category-list", recipesController.getCategoryList);
 
 recipesRouter.get("/main-page", recipesController.mainPage);
 
+
+
+recipesRouter.get("/own-recipes/:id", ownRecipesController.getRecipeByUserId);
+
 recipesRouter.get("/:id", recipesController.getById);
 
 recipesRouter.post(
@@ -31,8 +35,9 @@ recipesRouter.post(
   ownRecipesController.addRecipes
 );
 
+
 recipesRouter.delete("/own-recipes/:id", ownRecipesController.deleteRecipe);
 
-recipesRouter.get("/own-recipes/:id", ownRecipesController.getRecipeByUserId);
+
 
 module.exports = recipesRouter;
