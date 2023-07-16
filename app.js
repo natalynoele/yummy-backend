@@ -40,7 +40,7 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  const statusCode = res.statusCode || 500;
+  const statusCode = err.status || 500;
   res.status(statusCode);
   res.json({ code: statusCode, stack: err.stack, message: err.message });
 });
