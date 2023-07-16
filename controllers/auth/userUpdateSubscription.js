@@ -1,6 +1,6 @@
 const User = require("../../models/users");
 
-const { HttpError } = require("../../helpers");
+const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const userUpdateSubscription = async (req, res) => {
   const { _id: id } = req.user;
@@ -21,4 +21,4 @@ const userUpdateSubscription = async (req, res) => {
   res.json(result);
 };
 
-module.exports = userUpdateSubscription;
+module.exports = { userUpdateSubscription: ctrlWrapper(userUpdateSubscription) };

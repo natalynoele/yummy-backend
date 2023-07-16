@@ -95,6 +95,34 @@ class AuthService {
 
     return updated;
   }
-}
+
+  async logout(req) { 
+    const { _id } = req.user;
+    const user = await User.findByIdAndUpdate(_id, { $unset: { token: 1 } })
+      
+    user.token = null;
+    await user.save();
+    return user;
+  }
+
+  async getCurrent(req) {
+    const { _id } = req.user;
+    // const { name, email, avatarUrl, favorite, shoppingList, createdAt } = req.user;
+    const user = await getUserById(_id);
+    return user;
+  }
+
+  async verityToken(req) {
+    const { verificationToken } = req.params;
+    const user = await User.findOne({ verificationToken });
+    const newData = {
+        verify: true,
+        $unset: { verificationToken: 1 },
+    };
+    await User.findByIdAndUpdate(user._id, newData);
+
+  }
+
+ }
 
 module.exports = new AuthService();
