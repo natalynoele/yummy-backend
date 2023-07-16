@@ -326,7 +326,7 @@
     "/favorite/add/{recipeId}": {
       "patch": {
         "tags": ["Favorite"],
-        "summary": "Add recipe to favorite",
+        "summary": "Add a recipe to favorite",
         "parameters": [{ "in": "path", "name": "recipeId" }],
         "responses": {
           "200": {
