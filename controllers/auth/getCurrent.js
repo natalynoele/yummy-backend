@@ -1,7 +1,16 @@
 const { ctrlWrapper } = require("../../helpers");
 
+const { AuthService } = require("../../services");
+
 const getCurrent = async (req, res) => {
-  const { name, email, avatarUrl, favorite, shoppingList } = req.user;
+  const getUser = await AuthService.getCurrent(req);
+  
+  // const { name, email, avatarUrl, favorite, shoppingList, createdAt } = req.user;
+  
+  if (!getUser) return res.status(401).json({
+    message: 'Not authorized'
+  });
+
 
   res.json({
     code: 200,

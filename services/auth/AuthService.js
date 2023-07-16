@@ -105,6 +105,12 @@ class AuthService {
     return user;
   }
 
+  async getCurrent(req) {
+    const { _id } = req.user;
+    const user = await getUserById(_id);
+    return user;
+  }
+
   async verityToken(req) {
     const { verificationToken } = req.params;
     const user = await User.findOne({ verificationToken });
