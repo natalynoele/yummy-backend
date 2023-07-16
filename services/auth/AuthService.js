@@ -107,6 +107,7 @@ class AuthService {
 
   async getCurrent(req) {
     const { _id } = req.user;
+    // const { name, email, avatarUrl, favorite, shoppingList, createdAt } = req.user;
     const user = await getUserById(_id);
     return user;
   }
