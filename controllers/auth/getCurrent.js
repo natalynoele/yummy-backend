@@ -3,7 +3,7 @@ const { ctrlWrapper } = require("../../helpers");
 const { AuthService } = require("../../services");
 
 const getCurrent = async (req, res) => {
-  const getUser = await AuthService.getCurrent(req);
+const getUser = await AuthService.getCurrent(req);
   
     if (!getUser) return res.status(401).json({
       message: 'Not authorized'
@@ -18,7 +18,7 @@ const getCurrent = async (req, res) => {
       avatarUrl,
       favorite,
       shoppingList,
-      createdAt
+      createdAt,
     },
   });
 };
