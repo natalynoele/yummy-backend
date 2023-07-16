@@ -13,7 +13,7 @@ const recipesSchema = new Schema(
     area: {
       type: String,
     },
-    instructions: {
+    preparation: {
       type: String,
       require: true,
     },
@@ -21,7 +21,7 @@ const recipesSchema = new Schema(
       type: String,
       require: true,
     },
-    preview: {
+    photo: {
       type: String,
       require: true,
     },

@@ -4,7 +4,7 @@ const recipeSchema = Joi.object({
   title: Joi.string().required(),
   category: Joi.string().required(),
   area: Joi.string(),
-  preparations: Joi.string().required(),
+  preparation: Joi.string().required(),
   description: Joi.string().required(),
   photo: Joi.string().required(),
   thumb: Joi.string().required(),
