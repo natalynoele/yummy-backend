@@ -1,6 +1,5 @@
-// const User = require("../../models/users/users");
+const User = require("../../models/users/users");
 const { ctrlWrapper } = require("../../helpers");
-
 const { AuthService } = require("../../services");
 
 const logout = async (req, res) => {

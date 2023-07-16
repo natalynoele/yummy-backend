@@ -4,6 +4,7 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const path = require("path");
+
 const configPath = path.join(__dirname, "config", ".env");
 require("dotenv").config({ path: configPath });
 
@@ -11,7 +12,11 @@ const usersRouter = require("./routes/api/users");
 
 const subscribeRouter = require("./routes/api/subscribe");
 
-const { recipesRouter, ingredientsRouter } = require("./routes");
+const {
+  recipesRouter,
+  ingredientsRouter,
+  favoriteRouter,
+} = require("./routes");
 
 const app = express();
 
@@ -33,6 +38,8 @@ app.use("/ingredients", ingredientsRouter);
 
 app.use("/users", usersRouter);
 
+app.use("/favorite", favoriteRouter);
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
@@ -40,7 +47,7 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  const statusCode = res.statusCode || 500;
+  const statusCode = err.status || 500;
   res.status(statusCode);
   res.json({ code: statusCode, stack: err.stack, message: err.message });
 });

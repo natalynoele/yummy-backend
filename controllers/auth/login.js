@@ -1,4 +1,4 @@
-const { HttpError, ctrlWrapper } = require("../../helpers");
+const { HttpError } = require("../../helpers");
 const { AuthService } = require("../../services");
 
 const login = async (req, res) => {
@@ -24,4 +24,4 @@ const login = async (req, res) => {
   });
 };
 
-module.exports = { login: ctrlWrapper(login) };
+module.exports = login;

@@ -1,4 +1,4 @@
-const { HttpError, ctrlWrapper } = require("../../helpers");
+const { HttpError } = require("../../helpers");
 const { AuthService } = require("../../services");
 
 const updateUser = async (req, res) => {
@@ -18,4 +18,4 @@ const updateUser = async (req, res) => {
   });
 };
 
-module.exports = { updateUser: ctrlWrapper(updateUser) };
+module.exports = updateUser;

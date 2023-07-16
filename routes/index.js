@@ -1,6 +1,13 @@
-const { recipesRouter, ingredientsRouter } = require("./api");
+const {
+  recipesRouter,
+  ingredientsRouter,
+  favoriteRouter,
+  usersRouter,
+} = require("./api");
 
 module.exports = {
   recipesRouter,
   ingredientsRouter,
+  favoriteRouter,
+  usersRouter,
 };

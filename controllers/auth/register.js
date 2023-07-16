@@ -1,4 +1,4 @@
-const { HttpError, ctrlWrapper } = require("../../helpers");
+const { HttpError } = require("../../helpers");
 
 const { AuthService } = require("../../services");
 
@@ -18,11 +18,11 @@ const register = async (req, res) => {
       email: newUser.email,
       avatarUrl: newUser.avatarUrl,
       favorite: newUser.favorite,
-      shoppingList: newUser.shoppingList,      
+      shoppingList: newUser.shoppingList,
       subscriptionToken: newUser.subscriptionToken,
-      registeredAt: newUser.createdAt
+      registeredAt: newUser.createdAt,
     },
   });
 };
 
-module.exports = { register: ctrlWrapper(register) };
+module.exports = register;
