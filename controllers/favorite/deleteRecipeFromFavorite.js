@@ -1,9 +1,17 @@
+const { HttpError } = require("../../helpers");
 const { FavoriteService } = require("../../services");
 
 const deleteRecipeFromFavorite = async (req, res) => {
-  const result = await FavoriteService.deleteRecipe(req);
+  const user = await FavoriteService.deleteRecipe(req);
 
-  res.status(200).json(result);
+  if (!user) {
+    throw HttpError(
+      404,
+      "Sorry, but it appears that there is no user with ID you provided"
+    );
+  }
+
+  res.status(204);
 };
 
 module.exports = deleteRecipeFromFavorite;

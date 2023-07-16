@@ -18,7 +18,7 @@ favoriteRouter.get(
   favoriteRecipesController.getFavoriteRecipes
 );
 
-favoriteRouter.delete(
+favoriteRouter.patch(
   "/:recipeId",
   authenticate,
   favoriteRecipesController.deleteRecipeFromFavorite

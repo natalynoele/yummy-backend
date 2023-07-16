@@ -52,13 +52,14 @@ class FavoriteService {
       { new: true }
     );
 
-    if (!user) {
-      throw HttpError(
-        404,
-        "Sorry, but it appears that there is no user with ID you provided"
-      );
-    }
-    return { message: "The recipe was deleted" };
+    return user;
+  }
+
+  async getFavorite(req) {
+    const { _id } = req.user;
+    const data = await User.findById(_id).populate("favorite");
+
+    return data.favorite;
   }
 }
 

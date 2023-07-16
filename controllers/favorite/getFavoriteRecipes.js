@@ -1,16 +1,14 @@
-const { User } = require("../../models");
 const { HttpError } = require("../../helpers");
+const { FavoriteService } = require("../../services");
 
 const getFavoriteRecipes = async (req, res) => {
-  const { _id } = req.user;
-  const data = await User.findById(_id).populate("favorite");
+  const recipes = await FavoriteService.getFavorite(req);
 
-  if (!data) {
-    throw HttpError(404, "Not found");
+  if (!recipes) {
+    throw HttpError(404, "Sorry, but it appears that there are no recipes");
   }
 
-  console.log(data, "getfavorite");
-  res.status(200).json(data.favorite);
+  res.status(200).json(recipes);
 };
 
 module.exports = getFavoriteRecipes;
