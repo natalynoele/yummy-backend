@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
-
-const { Schema, model } = mongoose;
+const { Schema, model, SchemaTypes } = require("mongoose");
 
 const usersSchema = new Schema(
   {
@@ -33,16 +31,8 @@ const usersSchema = new Schema(
     verificationToken: {
       type: String,
     },
-    favorite: {
-      type: Array,
-      of: {
-        recipeId: {
-          type: mongoose.Types.ObjectId,
-          ref: "recipes",
-        },
-      },
-      default: [],
-    },
+    favorite: [{ type: SchemaTypes.ObjectId, ref: "recipes" }],
+
     shoppingList: {
       type: Array,
       of: {
