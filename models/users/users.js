@@ -31,16 +31,8 @@ const usersSchema = new Schema(
     verificationToken: {
       type: String,
     },
-    favorite: {
-      type: Array,
-      of: {
-        recipeId: {
-          type: SchemaTypes.ObjectId,
-          ref: "recipes",
-        },
-      },
-      default: [],
-    },
+    favorite: [{ type: SchemaTypes.ObjectId, ref: "recipes" }],
+
     shoppingList: {
       type: Array,
       of: {

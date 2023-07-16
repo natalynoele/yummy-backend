@@ -1,12 +1,14 @@
-const { register } = require("./register");
+const { ctrlWrapper } = require("../../helpers");
 
-const { login } = require("./login");
+const register = require("./register");
+
+const login = require("./login");
 
 const logout = require("./logout");
 
 const { getCurrent } = require("./getCurrent");
 
-const { updateUser } = require("./updateUser");
+const updateUser = require("./updateUser");
 
 const getVerity = require("./getVerity");
 
@@ -14,16 +16,13 @@ const userUpdateSubscription = require("./userUpdateSubscription");
 
 const emailController = require("./emailControllers");
 
-const { addRecipeToFavorite } = require("./addRecipeToFavorite");
-
 module.exports = {
-  register,
-  login,
+  register: ctrlWrapper(register),
+  login: ctrlWrapper(login),
   logout,
   getCurrent,
   userUpdateSubscription,
-  updateUser,
+  updateUser: ctrlWrapper(updateUser),
   getVerity,
   emailController,
-  addRecipeToFavorite,
 };

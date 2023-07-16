@@ -1,4 +1,4 @@
-const { HttpError, ctrlWrapper } = require("../../helpers");
+const { HttpError } = require("../../helpers");
 const { AuthService } = require("../../services");
 
 const updateUser = async (req, res) => {
@@ -7,8 +7,6 @@ const updateUser = async (req, res) => {
   if (!updated) {
     throw HttpError(404, "Not found");
   }
-
-  console.log(updated);
 
   res.status(200).json({
     code: 200,
@@ -20,4 +18,4 @@ const updateUser = async (req, res) => {
   });
 };
 
-module.exports = { updateUser: ctrlWrapper(updateUser) };
+module.exports = updateUser;

@@ -1,5 +1,4 @@
 const { Recipe, User } = require("../../models");
-const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const addRecipeToFavorite = async (req, res) => {
   const { _id } = req.user;
@@ -9,7 +8,10 @@ const addRecipeToFavorite = async (req, res) => {
   const recipe = await Recipe.find({ _id: recipeId });
 
   if (!recipe) {
-    throw HttpError(404, "Not found");
+    res.status(404).json({
+      message:
+        "Sorry, but it appears that there is no recipe with ID you provided",
+    });
   }
 
   const user = await User.updateOne(
@@ -27,10 +29,10 @@ const addRecipeToFavorite = async (req, res) => {
   );
 
   if (!user) {
-    throw HttpError(
-      404,
-      "Sorry, but it appears that there is no user with ID you provided"
-    );
+    res.status(404).json({
+      message:
+        "Sorry, but it appears that there is no user with ID you provided",
+    });
   }
 
   res.status(200).json({
@@ -40,4 +42,4 @@ const addRecipeToFavorite = async (req, res) => {
   });
 };
 
-module.exports = { addRecipeToFavorite: ctrlWrapper(addRecipeToFavorite) };
+module.exports = addRecipeToFavorite;
