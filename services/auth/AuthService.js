@@ -96,19 +96,26 @@ class AuthService {
     return updated;
   }
 
-  async logout(req) { 
+  async logout(req) {
     const { _id } = req.user;
-    const user = await User.findByIdAndUpdate(_id, { $unset: { token: 1 } })
-      
+    const user = await User.findByIdAndUpdate(_id, { $unset: { token: 1 } });
+
     user.token = null;
     await user.save();
     return user;
   }
 
   async getCurrent(req) {
-    const { _id } = req.user;
-    // const { name, email, avatarUrl, favorite, shoppingList, createdAt } = req.user;
-    const user = await getUserById(_id);
+    const { name, email, avatarUrl, favorite, shoppingList, createdAt } =
+      req.user;
+    const user = {
+      name,
+      email,
+      avatarUrl,
+      favorite,
+      shoppingList,
+      createdAt,
+    };
     return user;
   }
 
@@ -116,13 +123,11 @@ class AuthService {
     const { verificationToken } = req.params;
     const user = await User.findOne({ verificationToken });
     const newData = {
-        verify: true,
-        $unset: { verificationToken: 1 },
+      verify: true,
+      $unset: { verificationToken: 1 },
     };
     await User.findByIdAndUpdate(user._id, newData);
-
   }
-
- }
+}
 
 module.exports = new AuthService();
