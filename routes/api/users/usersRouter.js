@@ -23,16 +23,6 @@ router.get("/current", authenticate, authController.getCurrent);
 
 router.post("/logout", authenticate, authController.logout);
 
-// router.post(
-//   "/favorite/:recipeId",
-//   authenticate,
-//   authController.addRecipeToFavorite
-// );
-
-// router.get("/favorite", authenticate, getFavoriteRecipe);
-
-// router.delete("/favorite", authenticate, authController.deleteFavorite);
-
 router.patch(
   "/update",
   authenticate,
