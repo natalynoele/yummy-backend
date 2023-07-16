@@ -1,7 +1,8 @@
 const { ctrlWrapper } = require("../../helpers");
 
 const getCurrent = async (req, res) => {
-  const { name, email, avatarUrl, favorite, shoppingList } = req.user;
+  const { name, email, avatarUrl, favorite, shoppingList, createdAt } =
+    req.user;
 
   res.json({
     code: 200,

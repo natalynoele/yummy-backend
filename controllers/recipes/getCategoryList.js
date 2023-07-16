@@ -1,9 +1,8 @@
-const {Category} = require("../../models")
+const {RecipeService} = require("../../services")
 
 const getCategoryList = async(req, res)=>{
-  const result = await Category.find().sort({ name: 1 });
-  const categoryName = result.map(item =>item.name);
-  res.json(categoryName);
+  const result = await RecipeService.getCategoryList()
+  res.json(result);
 }
 
 module.exports= getCategoryList;

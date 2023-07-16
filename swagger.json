@@ -209,7 +209,7 @@
       }
     },
     "/users/update": {
-      "post": {
+      "put": {
         "tags": ["Auth"],
         "summary": "User update profile",
         "requestBody": {

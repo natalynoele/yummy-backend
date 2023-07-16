@@ -1,10 +1,11 @@
-const { Recipe } = require("../../models");
+const {OwnRecipeService} = require("../../services")
 
 const addRecipes = async (req, res) => {
   const { _id: owner } = req.user;
+  console.log(req.user);
 
   let recipePreview;
-
+      
   if (req.file) {
     recipePreview = req.file.path;
   } else {
@@ -13,8 +14,7 @@ const addRecipes = async (req, res) => {
   }
 
   const recipeData = { ...req.body, imageURL: recipePreview, owner };
-
-  const newRecipe = await Recipe.create({ ...recipeData });
+  const newRecipe = await OwnRecipeService.addRecipes(recipeData);
   res.status(201).json(newRecipe);
 };
 
