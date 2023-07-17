@@ -730,8 +730,17 @@
             "description": "Success operation",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AddIngredientToListResponce"
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "The ingredient was added to the list"
+                  },
+                  "item": {
+                    "type": "string",
+                    "description": "Ingredient's id",
+                    "example": "640c2dd963a319ea671e3701"
+                  }
                 }
               }
             }
@@ -1977,40 +1986,6 @@
             "_id": "640c2dd963a319ea671e366c",
             "name": "Mushroom",
             "measure": "160g",
-            "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
-          }
-        },
-        "AddIngredientToListResponce": {
-          "type": "object",
-          "properties": {
-            "ingredientId": {
-              "type": "string",
-              "description": "Ingredient's id"
-            },
-            "name": {
-              "type": "string",
-              "description": "Ingredient's name"
-            },
-            "measure": {
-              "type": "string",
-              "description": "Ingredient's name",
-              "example": "160g"
-            },
-            "img": {
-              "type": "string",
-              "description": "Ingredient's image link"
-            },
-            "recipeId": {
-              "type": "string",
-              "description": "The recipe's id"
-            }
-          },
-          "example": {
-            "_id": "64b594944c79d3c16129f309",
-            "name": "Mushroom",
-            "ingredientId": "640c2dd963a319ea671e366c",
-            "recipeId": "6462a8f74c3d0ddd28897fd4",
-            "measure": "45",
             "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
           }
         },
