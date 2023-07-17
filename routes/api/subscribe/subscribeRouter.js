@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {resendSubscribe,subscribe} = require('../../../controllers/auth/emailControllers');
 const schemas = require("../../../schemas/auth");

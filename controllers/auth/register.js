@@ -1,39 +1,27 @@
-const bcrypt = require("bcrypt");
-
-const { nanoid } = require("nanoid");
-
-const gravatar = require("gravatar");
-
-const User = require("../../models/users/users");
-
 const { HttpError } = require("../../helpers");
 
-const register = async (req, res) => {
-  const { email, password } = req.body;
+const { AuthService } = require("../../services");
 
-  const user = await User.findOne({ email });
-  if (user) {
-    throw HttpError(409, "Email is already use");
+const register = async (req, res) => {
+  const newUser = await AuthService.addNewUser(req);
+
+  if (!newUser) {
+    throw HttpError(500);
   }
 
-  const hashPassword = await bcrypt.hash(password, 10);
-
-  const avatarURL = gravatar.url(email);
-
-  const verificationToken = nanoid();
-  const subscriptionToken = nanoid();
-
-  const newUser = await User.create({
-    ...req.body,
-    password: hashPassword,
-    avatarURL,
-    verificationToken,
-    subscriptionToken,
-  });
-
-  res.status(201).json({
-    email: newUser.email,
-    subscription: newUser.subscription,
+  return res.status(201).json({
+    code: 201,
+    message: "success",
+    token: newUser.token,
+    user: {
+      name: newUser.name,
+      email: newUser.email,
+      avatarUrl: newUser.avatarUrl,
+      favorite: newUser.favorite,
+      shoppingList: newUser.shoppingList,
+      subscriptionToken: newUser.subscriptionToken,
+      registeredAt: newUser.createdAt,
+    },
   });
 };
 

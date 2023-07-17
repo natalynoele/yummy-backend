@@ -1,14 +1,11 @@
-const { Recipe } = require("../../models");
+const {RecipeService} = require("../../services")
 
 const getRecipesByCategory = async (req, res, next) => {
-  try {
-    const category = req.query.category;
-    const categoryByName = await Recipe.find({ category: category }).limit(8);
-
-    console.log(categoryByName);
-
+  try{   
+    const categoryByName = await RecipeService.getRecipesByCategory(req);
     res.status(200).json(categoryByName);
-  } catch (err) {
+  }
+  catch (err) {
     next(err);
   }
 };

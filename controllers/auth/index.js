@@ -1,13 +1,28 @@
+const { ctrlWrapper } = require("../../helpers");
+
 const register = require("./register");
 
 const login = require("./login");
 
-const logout = require("./logout");
+const {logout} = require("./logout");
 
-const getCurrent = require("./getCurrent");
+const { getCurrent } = require("./getCurrent");
 
-const userUpdateSubscription = require("./userUpdateSubscription");
+const updateUser = require("./updateUser");
 
-const emailController = require("./emailControllers")
+const {getVerity} = require("./getVerity");
 
-module.exports = { register, login, logout, getCurrent, userUpdateSubscription, emailController };
+const {userUpdateSubscription} = require("./userUpdateSubscription");
+
+const emailController = require("./emailControllers");
+
+module.exports = {
+  register: ctrlWrapper(register),
+  login: ctrlWrapper(login),
+  logout,
+  getCurrent,
+  userUpdateSubscription,
+  updateUser: ctrlWrapper(updateUser),
+  getVerity,
+  emailController,
+};
