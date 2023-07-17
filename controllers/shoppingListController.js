@@ -1,24 +1,31 @@
 const ShoppingList = require("../models/ShoppingList");
-const User = require("../models/users");
-const ctrlWrapper = require("../helpers/ctrlWrapper")
+const { User } = require("../models/users");
+const ctrlWrapper = require("../helpers/ctrlWrapper");
 
 // Отримати список покупок користувача
 const getShoppingList = async (req, res) => {
-  const userId = req.user._id; 
+  const userId = req.user._id;
+  // console.log(userId, "shopping");
   try {
     const user = await User.findById(userId).populate("shoppingList");
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.json(user.shoppingList);
+
+    const shoppingList = user.shoppingList;
+
+    if (!shoppingList) {
+      return res.status(404).json({ error: "Shopping list not found" });
+    }
+    res.json(shoppingList);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.json(error);
   }
 };
 
 // Додати товар до списку покупок користувача
 const addItemToShoppingList = async (req, res) => {
-  const userId = req.user._id; 
+  const userId = req.user._id;
   const { item } = req.body;
 
   try {
@@ -46,7 +53,7 @@ const addItemToShoppingList = async (req, res) => {
 
 // Видалити товар зі списку покупок користувача
 const deleteItemFromShoppingList = async (req, res) => {
-  const userId = req.user._id; 
+  const userId = req.user._id;
   const { id } = req.params;
 
   try {
@@ -54,13 +61,16 @@ const deleteItemFromShoppingList = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
+
     const shoppingList = user.shoppingList;
 
     if (!shoppingList) {
       return res.status(404).json({ error: "Shopping list not found" });
     }
 
-    const itemIndex = shoppingList.items.findIndex((item) => item._id.toString() === id);
+    const itemIndex = shoppingList.items.findIndex(
+      (item) => item._id.toString() === id
+    );
     if (itemIndex === -1) {
       return res.status(404).json({ error: "Item not found" });
     }
