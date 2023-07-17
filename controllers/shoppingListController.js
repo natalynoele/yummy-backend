@@ -26,7 +26,8 @@ const getShoppingList = async (req, res) => {
 // Додати товар до списку покупок користувача
 const addItemToShoppingList = async (req, res) => {
   const userId = req.user._id;
-  const { item } = req.body;
+  const item = req.body;
+  console.log(item, "shopping");
 
   try {
     const user = await User.findById(userId).populate("shoppingList");
