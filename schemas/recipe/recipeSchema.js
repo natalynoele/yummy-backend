@@ -19,11 +19,10 @@ const addRecipeSchema = Joi.object({
     category: Joi.string().required(),
     instructions: Joi.string().required(),
     description: Joi.string().required(),
-    preview: Joi.string().required(),
-    thumb: Joi.string().required(),
     time: Joi.string().required(),
     tags: Joi.array().required(),
     ingredients: Joi.array().required(),
+    thumb: Joi.object().required(),
 });
 
 module.exports = {
