@@ -541,7 +541,43 @@
         }
       }
     },
+
     "/recipes/own-recipes": {
+      "get": {
+        "tags": ["Own recipes"],
+        "summary": "Get all the own recipe",
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryRecipesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Sorry, but it appears that there are no own recipes yet"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "type": "string",
+                "example": "Well, this is unexpected... Sorry for that. Please try again"
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": ["Own recipes"],
         "summary": "Add a new recipe",
@@ -1927,6 +1963,10 @@
             "img": {
               "type": "string",
               "description": "Ingredient's image link"
+            },
+            "recipeId": {
+              "type": "string",
+              "description": "The recipe's id"
             }
           },
           "example": [
@@ -1934,7 +1974,8 @@
               "_id": "640c2dd963a319ea671e366c",
               "name": "Mushroom",
               "measure": "160g",
-              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png",
+              "recipeId": "6462a8f74c3d0ddd28897fbd"
             },
             {
               "_id": "640c2dd963a319ea671e3667",
