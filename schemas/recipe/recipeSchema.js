@@ -22,7 +22,7 @@ const addRecipeSchema = Joi.object({
     time: Joi.string().required(),
     tags: Joi.array().required(),
     ingredients: Joi.array().required(),
-    thumb: Joi.object().required(),
+    thumb: Joi.object(),
 });
 
 module.exports = {
