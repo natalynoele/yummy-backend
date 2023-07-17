@@ -13,6 +13,9 @@ const shoppingListSchema = new Schema(
     measure: {
       type: String,
     },
+    name: {
+      type: String,
+    },
     img: {
       type: String,
     },
