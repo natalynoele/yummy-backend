@@ -6,8 +6,8 @@ const favoriteRecipesController = require("../../../controllers/favorite");
 
 const { authenticate } = require("../../../middlewares");
 
-favoriteRouter.post(
-  "/:recipeId",
+favoriteRouter.patch(
+  "/add/:recipeId",
   authenticate,
   favoriteRecipesController.addRecipeToFavorite
 );
@@ -19,7 +19,7 @@ favoriteRouter.get(
 );
 
 favoriteRouter.patch(
-  "/:recipeId",
+  "/delete/:recipeId",
   authenticate,
   favoriteRecipesController.deleteRecipeFromFavorite
 );

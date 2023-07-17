@@ -6,17 +6,17 @@ class FavoriteService {
     const { _id } = req.user;
     const { recipeId } = req.params;
 
-    const recipe = await Recipe.find({ _id: recipeId });
+    const recipe = await Recipe.find({ _id: { $eq: recipeId } });
 
     if (!recipe) {
       throw HttpError(
         404,
-        "Sorry, but it appears that there is no recipe with ID you provided"
+        "Sorry, but there doesn't appear to be such a recipe."
       );
     }
 
-    const user = await User.updateOne(
-      { _id },
+    const user = await User.findByIdAndUpdate(
+      _id,
       {
         $push: {
           favorite: {
@@ -25,18 +25,14 @@ class FavoriteService {
           },
         },
       },
-
       { new: true }
     );
 
     if (!user) {
-      throw HttpError(
-        404,
-        "Sorry, but it appears that there is no user with ID you provided"
-      );
+      throw HttpError(401, "Sorry, but it appears you are not authorized");
     }
 
-    return recipe;
+    return recipe[0];
   }
 
   async deleteRecipe(req) {
