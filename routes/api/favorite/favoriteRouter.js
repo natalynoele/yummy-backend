@@ -2,7 +2,7 @@ const express = require("express");
 
 const favoriteRouter = express.Router();
 
-const favoriteRecipesController = require("../../../controllers/favorite");
+const favoriteRecipesController = require("../../../controllers");
 
 const { authenticate } = require("../../../middlewares");
 
