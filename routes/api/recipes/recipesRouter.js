@@ -4,7 +4,7 @@ const {
   ownRecipesController,
 } = require("../../../controllers");
 const { validateBody } = require("../../../decorators");
-const { authenticate } = require("../../../middlewares");
+const { authenticate, upload } = require("../../../middlewares");
 const { recipeSchema } = require("../../../schemas/recipe");
 const recipesRouter = express.Router();
 
@@ -31,6 +31,7 @@ recipesRouter.get("/:id", recipesController.getById);
 recipesRouter.post(
   "/own-recipes",
   authenticate,
+  upload.single("photo"),
   validateBody(recipeSchema),
   ownRecipesController.addRecipes
 );

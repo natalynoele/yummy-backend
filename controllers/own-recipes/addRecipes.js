@@ -1,13 +1,13 @@
-const {OwnRecipeService} = require("../../services")
+const { OwnRecipeService } = require("../../services");
 
 const addRecipes = async (req, res) => {
   const { _id: owner } = req.user;
-  console.log(req.user);
 
   let recipePreview;
-      
+
   if (req.file) {
     recipePreview = req.file.path;
+    console.log(recipePreview);
   } else {
     recipePreview =
       "https://res.cloudinary.com/dvmiapyqk/image/upload/v1688894039/1_jyhhh3.png";
