@@ -9,5 +9,5 @@ module.exports = {
   IngredientsService,
   RecipeService,
   OwnRecipeService,
-   FavoriteService,
+  FavoriteService,
 };
