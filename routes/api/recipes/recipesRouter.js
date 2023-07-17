@@ -16,15 +16,15 @@ recipesRouter.get("/search", recipesController.searchByTitle);
 
 recipesRouter.get("/ingredients", recipesController.searchByIngredients);
 
-// recipesRouter.get("/ingredients", recipesController.searchByIngredients);
-
 recipesRouter.get("/category-list", recipesController.getCategoryList);
 
 recipesRouter.get("/main-page", recipesController.mainPage);
 
-
-
-recipesRouter.get("/own-recipes/:id", ownRecipesController.getRecipeByUserId);
+recipesRouter.get(
+  "/own-recipes/:id",
+  authenticate,
+  ownRecipesController.getRecipeByUserId
+);
 
 recipesRouter.get("/:id", recipesController.getById);
 
@@ -35,9 +35,10 @@ recipesRouter.post(
   ownRecipesController.addRecipes
 );
 
-
-recipesRouter.delete("/own-recipes/:id", ownRecipesController.deleteRecipe);
-
-
+recipesRouter.delete(
+  "/own-recipes/:id",
+  authenticate,
+  ownRecipesController.deleteRecipe
+);
 
 module.exports = recipesRouter;
