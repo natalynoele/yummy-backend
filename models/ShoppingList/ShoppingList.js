@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const shoppingListSchema = new Schema(
   {
-    items: [{ type: String }],
+    items: [{}],
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
