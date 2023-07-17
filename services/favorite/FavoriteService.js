@@ -6,7 +6,9 @@ class FavoriteService {
     const { _id } = req.user;
     const { recipeId } = req.params;
 
-    const recipe = await Recipe.find({ _id: { $eq: recipeId } });
+    const recipe = await Recipe.findByIdAndUpdate(recipeId, {
+      $addToSet: { favorites: _id },
+    });
 
     if (!recipe) {
       throw HttpError(
@@ -20,7 +22,7 @@ class FavoriteService {
       {
         $push: {
           favorite: {
-            $each: recipe,
+            $each: [recipe],
             $position: 0,
           },
         },
@@ -32,7 +34,7 @@ class FavoriteService {
       throw HttpError(401, "Sorry, but it appears you are not authorized");
     }
 
-    return recipe[0];
+    return recipe;
   }
 
   async deleteRecipe(req) {

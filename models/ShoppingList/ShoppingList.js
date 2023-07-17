@@ -2,10 +2,19 @@ const { Schema, model } = require("mongoose");
 
 const shoppingListSchema = new Schema(
   {
-    items: [{}],
-    user: {
+    ingredientId: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "ingredients",
+    },
+    recipeId: {
+      type: Schema.Types.ObjectId,
+      ref: "recipes",
+    },
+    measure: {
+      type: String,
+    },
+    img: {
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }

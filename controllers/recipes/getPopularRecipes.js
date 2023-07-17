@@ -11,8 +11,8 @@ const getPopularRecipes = async (req, res) => {
         preview: 1,
         numberOfFavorite: {
           $cond: {
-            if: { $isArray: "$favorite" },
-            then: { $size: "$favorite" },
+            if: { $isArray: "$favorites" },
+            then: { $size: "$favorites" },
             else: "NA",
           },
         },
