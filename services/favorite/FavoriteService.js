@@ -38,6 +38,10 @@ class FavoriteService {
   async deleteRecipe(req) {
     const { _id } = req.user;
 
+    if (!_id) {
+      throw HttpError(401);
+    }
+
     const { recipeId } = req.params;
 
     const user = await User.updateOne(

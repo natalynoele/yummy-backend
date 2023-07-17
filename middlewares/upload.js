@@ -13,6 +13,7 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
+
     cloudinary: cloudinary,
     params: async (req, file) => {
         console.log(file.originalname, "upload");
@@ -26,6 +27,7 @@ const storage = new CloudinaryStorage({
             folder = "misc";
         }
         const filename = path.parse(file.originalname).name;
+
 
         return {
             folder: folder,

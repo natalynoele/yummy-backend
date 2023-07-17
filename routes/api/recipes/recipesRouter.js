@@ -6,6 +6,7 @@ const {
 const { validateBody } = require("../../../decorators");
 const { authenticate, upload } = require("../../../middlewares");
 const { addRecipeSchema } = require("../../../schemas/recipe");
+
 const recipesRouter = express.Router();
 
 recipesRouter.get(
@@ -21,19 +22,22 @@ recipesRouter.get("/category-list", recipesController.getCategoryList);
 recipesRouter.get("/main-page", recipesController.mainPage);
 
 recipesRouter.get(
-    "/own-recipes/:id",
-    authenticate,
-    ownRecipesController.getRecipeByUserId
+  "/own-recipes/",
+  authenticate,
+  ownRecipesController.getRecipeByUserId
+
 );
 
 recipesRouter.get("/:id", recipesController.getById);
 
 recipesRouter.post(
+
     "/own-recipes",
     authenticate,
     upload.single("thumb"),
     validateBody(addRecipeSchema),
     ownRecipesController.addRecipes
+
 );
 
 recipesRouter.delete(
