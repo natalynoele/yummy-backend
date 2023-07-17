@@ -21,7 +21,7 @@ recipesRouter.get("/category-list", recipesController.getCategoryList);
 recipesRouter.get("/main-page", recipesController.mainPage);
 
 recipesRouter.get(
-  "/own-recipes/:id",
+  "/own-recipes/",
   authenticate,
   ownRecipesController.getRecipeByUserId
 );
