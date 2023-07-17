@@ -1768,6 +1768,19 @@
           "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
         }
       },
+      "AddToFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "message": { "type": "string" },
+          "recipeId": { "type": "string" }
+        },
+        "example": {
+          "code": 200,
+          "message": "The recipe was added to favorite",
+          "recipeId": "6462a8f74c3d0ddd28897fbd"
+        }
+      },
       "GetFavoriteResponse": {
         "type": "array",
         "items": {
