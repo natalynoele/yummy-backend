@@ -10,6 +10,8 @@ require("dotenv").config({ path: configPath });
 
 const usersRouter = require("./routes/api/users");
 
+const shoppingListRouter = require("./routes/api/shoppingListRouter");
+
 const subscribeRouter = require("./routes/api/subscribe");
 
 const {
@@ -31,6 +33,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/subscribe", subscribeRouter);
+
+app.use("/shopping-list", shoppingListRouter);
 
 app.use("/recipes", recipesRouter);
 

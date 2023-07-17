@@ -34,22 +34,8 @@ const usersSchema = new Schema(
     favorite: [{ type: SchemaTypes.ObjectId, ref: "recipes" }],
 
     shoppingList: {
-      type: Array,
-      of: {
-        ingredientId: {
-          // type: mongoose.Types.ObjectId,
-          // ref: 'Ingredient',
-        },
-        measure: {
-          type: String,
-        },
-        recipeId: {
-          type: String,
-          default: "",
-        },
-      },
-      require: [true, "Add at least one ingredient"],
-      default: [],
+      type: Schema.Types.ObjectId,
+      ref: "ShoppingList",
     },
     token: {
       type: String,
@@ -58,6 +44,14 @@ const usersSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
+usersSchema.post("save", function (error, doc, next) {
+  if (error.name === "MongoError" && error.code === 11000) {
+    next(new Error("Email already exists"));
+  } else {
+    next(error);
+  }
+});
 
 const User = model("users", usersSchema);
 
