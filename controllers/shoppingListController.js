@@ -42,6 +42,7 @@ const addItemToShoppingList = async (req, res) => {
 
   res.status(200).json({
     message: "Item added to shopping list",
+    item: shoppingItem._id,
   });
 };
 
