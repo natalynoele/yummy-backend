@@ -3,7 +3,6 @@ const { HttpError, ctrlWrapper } = require("../helpers");
 const { Recipe } = require("../models");
 
 const getPopularRecipes = async (req, res) => {
-  console.log("test popul");
   const popularRecipes = await Recipe.aggregate([
     {
       $project: {
@@ -34,7 +33,6 @@ const getPopularRecipes = async (req, res) => {
     },
   ]);
 
-  console.log(popularRecipes, "popular recipes");
   if (!popularRecipes) {
     throw HttpError(404);
   }

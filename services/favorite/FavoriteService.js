@@ -6,9 +6,13 @@ class FavoriteService {
     const { _id: userId } = req.user;
     const { recipeId } = req.params;
 
-    const recipe = await Recipe.findByIdAndUpdate(recipeId, {
-      $addToSet: { favorites: userId },
-    });
+    const recipe = await Recipe.findByIdAndUpdate(
+      recipeId,
+      {
+        $addToSet: { favorites: userId },
+      },
+      { new: true }
+    );
 
     if (!recipe) {
       throw HttpError(
@@ -16,13 +20,15 @@ class FavoriteService {
         "Sorry, but there doesn't appear to be such a recipe."
       );
     }
+    const { _id: id } = recipe;
 
     const user = await User.findByIdAndUpdate(
       userId,
       {
+        favorite: { $ne: id },
         $push: {
           favorite: {
-            $each: [recipe._id],
+            $each: [id],
             $position: 0,
           },
         },
@@ -46,6 +52,14 @@ class FavoriteService {
     }
 
     const { recipeId } = req.params;
+
+    await Recipe.updateOne(
+      { _id: recipeId },
+      {
+        $pull: { favorites: _id },
+      },
+      { new: true }
+    );
 
     const user = await User.updateOne(
       { _id },
