@@ -1,4 +1,4 @@
-const { Recipe, Category } = require("../../models");
+const { Recipe, Category, Ingredients } = require("../../models");
 const { HttpError } = require("../../helpers");
 
 class RecipeService {
@@ -48,11 +48,14 @@ class RecipeService {
     return { breakfast, miscellaneous, chicken, dessert };
   }
 
-  async searchByIngredients(id) {
+  async searchByIngredients(ingredients) {
+    const ingredient = await Ingredients.findOne({ name: ingredients });
+    const ingredientId = ingredient._id.toString();
+
     const result = await Recipe.find({
       ingredients: {
         $elemMatch: {
-          id: id,
+          id: ingredientId,
         },
       },
     });
