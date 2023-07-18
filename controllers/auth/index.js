@@ -4,23 +4,23 @@ const register = require("./register");
 
 const login = require("./login");
 
-const {logout} = require("./logout");
+const { logout } = require("./logout");
 
 const { getCurrent } = require("./getCurrent");
 
 const updateUser = require("./updateUser");
 
-const {getVerity} = require("./getVerity");
+const { getVerity } = require("./getVerity");
 
-const {userUpdateSubscription} = require("./userUpdateSubscription");
+const { userUpdateSubscription } = require("./userUpdateSubscription");
 
 const emailController = require("./emailControllers");
 
 module.exports = {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
-  logout,
-  getCurrent,
+  logout: ctrlWrapper(logout),
+  getCurrent: ctrlWrapper(getCurrent),
   userUpdateSubscription,
   updateUser: ctrlWrapper(updateUser),
   getVerity,

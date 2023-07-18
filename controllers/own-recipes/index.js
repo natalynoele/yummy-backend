@@ -1,8 +1,10 @@
-const addRecipes = require("./addRecipes")
-const deleteRecipe = require("./deleteRecipe")
-const getRecipeByUserId = require("./getRecipeByUserId")
+const { ctrlWrapper } = require("../../helpers");
+const addRecipes = require("./addRecipes");
+const deleteRecipe = require("./deleteRecipe");
+const getRecipeByUserId = require("./getRecipeByUserId");
+
 module.exports = {
-    addRecipes,
-    deleteRecipe,
-    getRecipeByUserId,
-}
+  addRecipes: ctrlWrapper(addRecipes),
+  deleteRecipe: ctrlWrapper(deleteRecipe),
+  getRecipeByUserId: ctrlWrapper(getRecipeByUserId),
+};
