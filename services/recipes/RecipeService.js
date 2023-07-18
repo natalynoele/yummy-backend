@@ -51,15 +51,16 @@ class RecipeService {
   async searchByIngredients(ingredients) {
     const ingredient = await Ingredients.findOne({ name: ingredients });
 
-    const { _id } = ingredient;
-
+    // console.log(ingredient._id, 'service');
     const result = await Recipe.find({
       ingredients: {
         $elemMatch: {
-          id: _id.toString(),
+          id: ingredient._id.toString(),
         },
       },
     });
+
+    // console.log(result, "service");
 
     return result;
   }
