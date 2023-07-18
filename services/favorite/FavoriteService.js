@@ -20,19 +20,14 @@ class FavoriteService {
         "Sorry, but there doesn't appear to be such a recipe."
       );
     }
-    const { _id: id } = recipe;
 
     const user = await User.findByIdAndUpdate(
       userId,
       {
-        $push: {
-          favorite: {
-            $each: [id],
-            $position: 0,
-          },
+        $addToSet: {
+          favorite: recipe._id,
         },
       },
-
       { new: true }
     );
 
@@ -52,8 +47,8 @@ class FavoriteService {
 
     const { recipeId } = req.params;
 
-    await Recipe.updateOne(
-      { _id: recipeId },
+    await Recipe.findByIdAndUpdate(
+      recipeId,
       {
         $pull: { favorites: _id },
       },
