@@ -1,5 +1,5 @@
 const { Recipe, Category, Ingredients } = require("../../models");
-const { HttpError } = require("../../helpers");
+const { HttpError, capitalizeFirstLetter } = require("../../helpers");
 
 class RecipeService {
   async getByIdRecipe(req) {
@@ -49,9 +49,16 @@ class RecipeService {
   }
 
   async searchByIngredients(ingredients) {
-    const ingredient = await Ingredients.findOne({ name: ingredients });
+    const ingradientsCamelCase = capitalizeFirstLetter(ingredients);
 
-    // console.log(ingredient._id, 'service');
+    const ingredient = await Ingredients.findOne({
+      name: { $in: [ingredients, ingradientsCamelCase] },
+    });
+
+    if (!ingredient) {
+      throw HttpError(404);
+    }
+
     const result = await Recipe.find({
       ingredients: {
         $elemMatch: {
@@ -59,8 +66,6 @@ class RecipeService {
         },
       },
     });
-
-    // console.log(result, "service");
 
     return result;
   }
