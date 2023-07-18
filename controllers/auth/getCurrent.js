@@ -1,5 +1,3 @@
-const { ctrlWrapper } = require("../../helpers");
-
 const { AuthService } = require("../../services");
 
 const getCurrent = async (req, res) => {
@@ -16,4 +14,4 @@ const getCurrent = async (req, res) => {
     user,
   });
 };
-module.exports = { getCurrent: ctrlWrapper(getCurrent) };
+module.exports = getCurrent;

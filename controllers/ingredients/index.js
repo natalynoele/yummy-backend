@@ -1,3 +1,4 @@
-const getAllIngredients = require("./getAll")
+const { ctrlWrapper } = require("../../helpers");
+const getAllIngredients = require("./getAll");
 
-module.exports = {getAllIngredients};
+module.exports = { getAllIngredients: ctrlWrapper(getAllIngredients) };

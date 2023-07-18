@@ -2,8 +2,6 @@ const ShoppingList = require("../models/ShoppingList");
 const { User } = require("../models/users");
 const { ctrlWrapper, HttpError } = require("../helpers");
 
-// const shoppingList = await ShoppingList.find().populate('ingredientId');
-
 // Отримати список покупок користувача
 const getShoppingList = async (req, res) => {
   const userId = req.user._id;
