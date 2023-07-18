@@ -1,4 +1,4 @@
-const { HttpError } = require("../../helpers");
+const { HttpError, getDaysOnSite } = require("../../helpers");
 const { User } = require("../../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -108,6 +108,9 @@ class AuthService {
   async getCurrent(req) {
     const { name, email, avatarUrl, favorite, shoppingList, createdAt } =
       req.user;
+
+    const days = getDaysOnSite(createdAt);
+
     const user = {
       name,
       email,
@@ -115,6 +118,7 @@ class AuthService {
       favorite,
       shoppingList,
       createdAt,
+      days,
     };
     return user;
   }
@@ -128,6 +132,12 @@ class AuthService {
     };
     await User.findByIdAndUpdate(user._id, newData);
   }
+
+  // getDaysOnSite(startDate) {
+  //   const registerDate = new Date(startDate);
+  //   const today = Date.now();
+  //   return Math.round((today - registerDate) / (1000 * 60 * 60 * 24));
+  // }
 }
 
 module.exports = new AuthService();
