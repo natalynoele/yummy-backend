@@ -921,688 +921,1068 @@
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "RegistrationRequest": {
-          "type": "object",
-          "required": ["email", "password"],
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "User's email",
-              "example": "Kevin K"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "password": {
-              "type": "string",
-              "description": "User's password",
-              "example": "qwerty"
-            }
-          }
-        },
-        "RegistrationResponse": {
-          "type": "object",
-          "required": ["name", "email", "password"],
-          "properties": {
-            "code": {
-              "type": "number",
-              "description": "Code",
-              "example": "201"
-            },
-            "message": {
-              "type": "string",
-              "description": "Message",
-              "example": "success"
-            },
-            "user": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "User's id"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "User's name"
-                },
-                "email": {
-                  "type": "string",
-                  "description": "User's email",
-                  "format": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "description": "User's password"
-                },
-                "subscription": {
-                  "type": "boolean",
-                  "description": "User's subscription status",
-                  "example": false
-                },
-                "avatarUrl": {
-                  "type": "string",
-                  "description": "User's avatar"
-                },
-                "favorite": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "recipeId": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "shoppingList": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "recipeId": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's email",
+            "example": "Kevin K"
           },
-          "example": {
-            "code": "201",
-            "message": "success",
-            "user": {
-              "id": "64ad646ba17ba61a08fd0931",
-              "name": "Nato",
-              "email": "nato@test.com",
-              "subscription": false,
-              "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa"
-            }
-          }
-        },
-        "LoginRequest": {
-          "type": "object",
-          "required": ["email", "password"],
-          "properties": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "password": {
-              "type": "string",
-              "description": "User's password",
-              "example": "qwerty"
-            }
-          }
-        },
-        "LoginResponse": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "number",
-              "description": "Code",
-              "example": 200
-            },
-            "message": {
-              "type": "string",
-              "description": "Message",
-              "example": "success"
-            },
-            "user": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "User's id"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "User's name"
-                },
-                "email": {
-                  "type": "string",
-                  "description": "User's email",
-                  "format": "email"
-                },
-                "password": {
-                  "type": "string",
-                  "description": "User's password"
-                },
-                "subscription": {
-                  "type": "boolean",
-                  "description": "User's subscription status",
-                  "example": false
-                },
-                "avatarUrl": {
-                  "type": "string",
-                  "description": "User's avatar"
-                },
-                "token": {
-                  "type": "string",
-                  "description": "User's token"
-                }
-              }
-            }
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
           },
-          "example": {
-            "code": "200",
-            "message": "success",
-            "user": {
-              "id": "64ad646ba17ba61a08fd0931",
-              "name": "Nato",
-              "email": "nato@test.com",
-              "subscription": false,
-              "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
-              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
-            }
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "Qwerty123"
           }
-        },
-        "UpdateRequest": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "Rose"
-            },
-            "avatar": {
-              "type": "file",
-              "description": "User's avatar",
-              "format": "binary"
-            }
-          }
-        },
-        "UpdateResponse": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "number",
-              "description": "Code",
-              "example": 200
-            },
-            "message": {
-              "type": "string",
-              "description": "Message",
-              "example": "User's profile updated successfully"
-            },
-            "user": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User's name"
-                },
-                "avatarUrl": {
-                  "type": "string",
-                  "description": "User's avatar"
-                }
-              },
-              "example": {
-                "code": 200,
-                "message": "User profile updated successfully",
-                "user": {
-                  "name": "",
-                  "avatarUrl": "https://res.cloudinary.com/dmapxbtxc/image/upload/v1689326346/avatars/Iconarchive-Incognito-Animals-Meerkat-Avatar.96.png.png"
-                }
-              }
-            }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": "201"
           },
-          "example": {
-            "code": "200",
-            "message": "success",
-            "user": {
-              "id": "64ad646ba17ba61a08fd0931",
-              "name": "Nato",
-              "email": "nato@test.com",
-              "subscription": false,
-              "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
-              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
-            }
-          }
-        },
-        "CategoryListResponse": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "success"
           },
-          "example": [
-            "Beef",
-            "Breakfast",
-            "Chicken",
-            "Dessert",
-            "Goat",
-            "Lamb",
-            "Miscellaneous",
-            "Pasta",
-            "Pork",
-            "Seafood",
-            "Side",
-            "Soup",
-            "Starter",
-            "Vegan",
-            "Vegetarian"
-          ]
-        },
-        "CategoryRecipesResponse": {
-          "type": "array",
-          "items": {
+          "user": {
             "type": "object",
             "properties": {
-              "_id": {
+              "id": {
                 "type": "string",
-                "description": "A recipe's id"
+                "description": "User's id"
               },
-              "title": {
+              "name": {
                 "type": "string",
-                "description": "A title of the recipe",
-                "example": "Battenberg Cake"
+                "description": "User's name"
               },
-              "category": {
+              "email": {
                 "type": "string",
-                "description": "Category title",
-                "example": "Dessert"
+                "description": "User's email",
+                "format": "email"
               },
-              "area": {
+              "password": {
                 "type": "string",
-                "description": "A country or a region",
-                "example": "British"
+                "description": "User's password"
               },
-              "instructions": {
+              "subscription": {
+                "type": "boolean",
+                "description": "User's subscription status",
+                "example": false
+              },
+              "avatarUrl": {
                 "type": "string",
-                "description": "Instruction for cooking"
+                "description": "User's avatar"
               },
-              "description": {
-                "type": "string",
-                "description": "A description for a meal",
-                "example": "A classic British cake..."
-              },
-              "thumb": {
-                "type": "string",
-                "description": "Thumb's link"
-              },
-              "preview": {
-                "type": "string",
-                "description": "Preview image link"
-              },
-              "time": {
-                "type": "string",
-                "description": "Time for cooking",
-                "example": "60"
-              },
-              "youtube": {
-                "type": "string",
-                "description": "Youtube link"
-              },
-              "tags": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "example": ["Cake", "Sweet"]
-              },
-              "ingredients": {
+              "favorite": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Ingredient's id"
-                    },
-                    "measure": {
-                      "type": "string",
-                      "description": "Ingedient measure",
-                      "example": "175g"
+                    "recipeId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "shoppingList": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "recipeId": {
+                      "type": "string"
                     }
                   }
                 }
               }
-            },
-            "example": [
-              {
-                "_id": "6462a8f74c3d0ddd28897fcd",
-                "title": "Battenberg Cake",
-                "category": "Dessert",
-                "area": "British",
-                "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
-                "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
-                "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
-                "time": "60",
-                "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
-                "tags": ["Cake", "Sweet"],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e367e",
-                    "measure": "175g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3687",
-                    "measure": "175g"
-                  }
-                ]
-              },
-              {
-                "_id": "6462a8f74c3d0ddd28897fcc",
-                "title": "Blackberry Fool",
-                "category": "Dessert",
-                "area": "British",
-                "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
-                "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
-                "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
-                "time": "60",
-                "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
-                "tags": ["Desert", "Summer", "Fruity", "Dairy"],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e380c",
-                    "measure": "50g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e367e",
-                    "measure": "125g"
-                  }
-                ]
-              }
-            ]
+            }
           }
         },
-        "MainPageResponse": {
-          "type": "object",
-          "properties": {
+        "example": {
+          "code": "201",
+          "message": "success",
+          "user": {
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "success"
+          },
+          "user": {
             "type": "object",
             "properties": {
+              "id": {
+                "type": "string",
+                "description": "User's id"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "password": {
+                "type": "string",
+                "description": "User's password"
+              },
+              "subscription": {
+                "type": "boolean",
+                "description": "User's subscription status",
+                "example": false
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              },
+              "token": {
+                "type": "string",
+                "description": "User's token"
+              }
+            }
+          }
+        },
+        "example": {
+          "code": "200",
+          "message": "success",
+          "user": {
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
+          }
+        }
+      },
+      "UpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Rose"
+          },
+          "avatar": {
+            "type": "file",
+            "description": "User's avatar",
+            "format": "binary"
+          }
+        }
+      },
+      "UpdateResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "User's profile updated successfully"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              }
+            },
+            "example": {
+              "code": 200,
+              "message": "User profile updated successfully",
+              "user": {
+                "name": "",
+                "avatarUrl": "https://res.cloudinary.com/dmapxbtxc/image/upload/v1689326346/avatars/Iconarchive-Incognito-Animals-Meerkat-Avatar.96.png.png"
+              }
+            }
+          }
+        },
+        "example": {
+          "code": "200",
+          "message": "success",
+          "user": {
+            "id": "64ad646ba17ba61a08fd0931",
+            "name": "Nato",
+            "email": "nato@test.com",
+            "subscription": false,
+            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
+          }
+        }
+      },
+      "CategoryListResponse": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "example": [
+          "Beef",
+          "Breakfast",
+          "Chicken",
+          "Dessert",
+          "Goat",
+          "Lamb",
+          "Miscellaneous",
+          "Pasta",
+          "Pork",
+          "Seafood",
+          "Side",
+          "Soup",
+          "Starter",
+          "Vegan",
+          "Vegetarian"
+        ]
+      },
+      "CategoryRecipesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "A recipe's id"
+            },
+            "title": {
+              "type": "string",
+              "description": "A title of the recipe",
+              "example": "Battenberg Cake"
+            },
+            "category": {
+              "type": "string",
+              "description": "Category title",
+              "example": "Dessert"
+            },
+            "area": {
+              "type": "string",
+              "description": "A country or a region",
+              "example": "British"
+            },
+            "instructions": {
+              "type": "string",
+              "description": "Instruction for cooking"
+            },
+            "description": {
+              "type": "string",
+              "description": "A description for a meal",
+              "example": "A classic British cake..."
+            },
+            "thumb": {
+              "type": "string",
+              "description": "Thumb's link"
+            },
+            "preview": {
+              "type": "string",
+              "description": "Preview image link"
+            },
+            "time": {
+              "type": "string",
+              "description": "Time for cooking",
+              "example": "60"
+            },
+            "youtube": {
+              "type": "string",
+              "description": "Youtube link"
+            },
+            "tags": {
               "type": "array",
               "items": {
+                "type": "string"
+              },
+              "example": ["Cake", "Sweet"]
+            },
+            "ingredients": {
+              "type": "array",
+              "items": {
+                "type": "object",
                 "properties": {
-                  "_id": {
+                  "id": {
                     "type": "string",
-                    "description": "A recipe's id"
+                    "description": "Ingredient's id"
                   },
-                  "title": {
+                  "measure": {
                     "type": "string",
-                    "description": "A title of the recipe",
-                    "example": "Battenberg Cake"
+                    "description": "Ingedient measure",
+                    "example": "175g"
+                  }
+                }
+              }
+            }
+          },
+          "example": [
+            {
+              "_id": "6462a8f74c3d0ddd28897fcd",
+              "title": "Battenberg Cake",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+              "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+              "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+              "tags": ["Cake", "Sweet"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "175g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3687",
+                  "measure": "175g"
+                }
+              ]
+            },
+            {
+              "_id": "6462a8f74c3d0ddd28897fcc",
+              "title": "Blackberry Fool",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
+              "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
+              "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
+              "tags": ["Desert", "Summer", "Fruity", "Dairy"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e380c",
+                  "measure": "50g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "125g"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "MainPageResponse": {
+        "type": "object",
+        "properties": {
+          "type": "object",
+          "properties": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "A recipe's id"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "A title of the recipe",
+                  "example": "Battenberg Cake"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Category title",
+                  "example": "Dessert"
+                },
+                "area": {
+                  "type": "string",
+                  "description": "A country or a region",
+                  "example": "British"
+                },
+                "instructions": {
+                  "type": "string",
+                  "description": "Instruction for cooking"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A description for a meal",
+                  "example": "A classic British cake..."
+                },
+                "thumb": {
+                  "type": "string",
+                  "description": "Thumb's link"
+                },
+                "preview": {
+                  "type": "string",
+                  "description": "Preview image link"
+                },
+                "time": {
+                  "type": "string",
+                  "description": "Time for cooking",
+                  "example": "60"
+                },
+                "youtube": {
+                  "type": "string",
+                  "description": "Youtube link"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
                   },
-                  "category": {
-                    "type": "string",
-                    "description": "Category title",
-                    "example": "Dessert"
-                  },
-                  "area": {
-                    "type": "string",
-                    "description": "A country or a region",
-                    "example": "British"
-                  },
-                  "instructions": {
-                    "type": "string",
-                    "description": "Instruction for cooking"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "A description for a meal",
-                    "example": "A classic British cake..."
-                  },
-                  "thumb": {
-                    "type": "string",
-                    "description": "Thumb's link"
-                  },
-                  "preview": {
-                    "type": "string",
-                    "description": "Preview image link"
-                  },
-                  "time": {
-                    "type": "string",
-                    "description": "Time for cooking",
-                    "example": "60"
-                  },
-                  "youtube": {
-                    "type": "string",
-                    "description": "Youtube link"
-                  },
-                  "tags": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "example": ["Cake", "Sweet"]
-                  },
-                  "ingredients": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "Ingredient's id"
-                        },
-                        "measure": {
-                          "type": "string",
-                          "description": "Ingedient measure",
-                          "example": "175g"
-                        }
+                  "example": ["Cake", "Sweet"]
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Ingredient's id"
+                      },
+                      "measure": {
+                        "type": "string",
+                        "description": "Ingedient measure",
+                        "example": "175g"
                       }
                     }
                   }
                 }
               }
             }
-          },
-          "example": {
-            "breakfast": [
-              {
-                "_id": "6462a8f74c3d0ddd28897fe3",
-                "title": "Full English Breakfast",
-                "category": "Breakfast",
-                "area": "British",
-                "instructions": "Heat the flat grill plate over a low heat, on top of 2 rings/flames if it fits, and brush sparingly with light olive oil.\r\nCook the sausages first. Add the sausages to the hot grill plate/the coolest part if there is one and allow to cook slowly for about 15-20 minutes, turning occasionally, until golden. After the first 10 minutes, increase the heat to medium before beginning to cook the other ingredients. If you are struggling for space, completely cook the sausages and keep hot on a plate in the oven.\r\nSnip a few small cuts into the fatty edge of the bacon. Place the bacon straight on to the grill plate and fry for 2-4 minutes each side or until your preferred crispiness is reached. Like the sausages, the cooked bacon can be kept hot on a plate in the oven.\r\nFor the mushrooms, brush away any dirt using a pastry brush and trim the stalk level with the mushroom top. Season with salt and pepper and drizzle over a little olive oil. Place stalk-side up on the grill plate and cook for 1-2 minutes before turning and cooking for a further 3-4 minutes. Avoid moving the mushrooms too much while cooking, as this releases the natural juices, making them soggy.\r\nFor the tomatoes, cut the tomatoes across the centre/or in half lengthways if using plum tomatoes , and with a small, sharp knife remove the green 'eye'. Season with salt and pepper and drizzle with a little olive oil. Place cut-side down on the grill plate and cook without moving for 2 minutes. Gently turn over and season again. Cook for a further 2-3 minutes until tender but still holding their shape.\r\nFor the black pudding, cut the black pudding into 3-4 slices and remove the skin. Place on the grill plate and cook for 1½-2 minutes each side until slightly crispy.\r\nFor 'proper' fried bread it's best to cook it in a separate pan. Ideally, use bread that is a couple of days old. Heat a frying pan to a medium heat and cover the base with oil. Add the bread and cook for 2-3 minutes each side until crispy and golden. If the pan becomes too dry, add a little more oil. For a richer flavour, add a knob of butter after you turn the slice.\r\nFor the fried eggs, break the egg straight into the pan with the fried bread and leave for 30 seconds. Add a good knob of butter and lightly splash/baste the egg with the butter when melted. Cook to your preferred stage, season and gently remove with a fish slice.\r\nOnce all the ingredients are cooked, serve on warm plates and enjoy straight away with a good squeeze of tomato ketchup or brown sauce.",
-                "description": "Similar to the English Breakfast, but with additional items like black pudding, fried mushrooms, and hash browns. It is a more substantial breakfast meal.",
-                "thumb": "https://www.themealdb.com/images/media/meals/sqrtwu1511721265.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/nlnuavjlvlaivbr7hxsu.jpg",
-                "time": "51",
-                "youtube": "https://www.youtube.com/watch?v=FXjYU2Ensck",
-                "tags": [
-                  "Greasy",
-                  "UnHealthy",
-                  "HangoverFood",
-                  "Calorific",
-                  "Breakfast",
-                  "BBQ"
-                ],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e3760",
-                    "measure": "4"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3664",
-                    "measure": "4"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3726",
-                    "measure": "4"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e377f",
-                    "measure": "3"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3815",
-                    "measure": "2 sliced"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e36ca",
-                    "measure": "2"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3678",
-                    "measure": "1 Slice"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3816",
-                    "measure": "100g "
-                  }
-                ]
-              },
-              {
-                "_id": "6462a8f74c3d0ddd28898065",
-                "title": "Fruit and Cream Cheese Breakfast Pastries",
-                "category": "Breakfast",
-                "area": "American",
-                "instructions": "Preheat oven to 400ºF (200ºC), and prepare two cookie sheets with parchment paper. In a bowl, mix cream cheese, sugar, and vanilla until fully combined. Lightly flour the surface and roll out puff pastry on top to flatten. Cut each sheet of puff pastry into 9 equal squares. On the top right and bottom left of the pastry, cut an L shape approximately ½ inch (1 cm) from the edge.\r\nNOTE: This L shape should reach all the way down and across the square, however both L shapes should not meet at the ends. Your pastry should look like a picture frame with two corners still intact.\r\nTake the upper right corner and fold down towards the inner bottom corner. You will now have a diamond shape.\r\nPlace 1 to 2 teaspoons of the cream cheese filling in the middle, then place berries on top.\r\nRepeat with the remaining pastry squares and place them onto the parchment covered baking sheet.\r\nBake for 15-20 minutes or until pastry is golden brown and puffed.\r\nEnjoy!\r\n",
-                "description": "A delicious breakfast treat, Fruit and Cream Cheese Breakfast Pastries are flaky, buttery pastries filled with a sweet cream cheese and fruit filling, and then baked until golden brown.",
-                "thumb": "https://www.themealdb.com/images/media/meals/1543774956.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678561436/lj4kfx1zh4l8vejsgdle.jpg",
-                "time": "20",
-                "youtube": "",
-                "tags": ["Breakfast", "Summer"],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e379c",
-                    "measure": "1 1/4 oz "
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3774",
-                    "measure": "1 1/4 cup"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3786",
-                    "measure": "1 teaspoon"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e36d7",
-                    "measure": "To your taste"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3748",
-                    "measure": "2"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3773",
-                    "measure": "To your taste"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e37d5",
-                    "measure": "To your taste"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e380b",
-                    "measure": "To your taste"
-                  }
-                ]
-              }
-            ],
-            "miscellaneous": [
-              {
-                "_id": "6462a8f74c3d0ddd28897fff",
-                "title": "Bean & Sausage Hotpot",
-                "category": "Miscellaneous",
-                "area": "British",
-                "instructions": "In a large casserole, fry the sausages until brown all over – about 10 mins.\r\n\r\nAdd the tomato sauce, stirring well, then stir in the beans, treacle or sugar and mustard. Bring to the simmer, cover and cook for 30 mins. Great served with crusty bread or rice.",
-                "description": "A hearty stew made with sausage, beans, and other ingredients. A satisfying meal for any time of day.",
-                "thumb": "https://www.themealdb.com/images/media/meals/vxuyrx1511302687.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560539/t9gapcrckfmikwipnpi4.jpg",
-                "time": "40",
-                "youtube": "https://www.youtube.com/watch?v=B0YX0yPX4Wo",
-                "tags": [],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e3760",
-                    "measure": "8 large"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e37ce",
-                    "measure": "1 Jar"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e37cc",
-                    "measure": "1200g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3673",
-                    "measure": "1 tbls"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e36cc",
-                    "measure": "1 tsp "
-                  }
-                ]
-              },
-              {
-                "_id": "6462a8f74c3d0ddd28897ff6",
-                "title": "Turkey Meatloaf",
-                "category": "Miscellaneous",
-                "area": "British",
-                "instructions": "Heat oven to 180C/160C fan/gas 4. Heat the oil in a large frying pan and cook the onion for 8-10 mins until softened. Add the garlic, Worcestershire sauce and 2 tsp tomato purée, and stir until combined. Set aside to cool.\r\n\r\nPut the turkey mince, egg, breadcrumbs and cooled onion mix in a large bowl and season well. Mix everything to combine, then shape into a rectangular loaf and place in a large roasting tin. Spread 2 tbsp barbecue sauce over the meatloaf and bake for 30 mins.\r\n\r\nMeanwhile, drain 1 can of beans only, then pour both cans into a large bowl. Add the remaining barbecue sauce and tomato purée. Season and set aside.\r\n\r\nWhen the meatloaf has had its initial cooking time, scatter the beans around the outside and bake for 15 mins more until the meatloaf is cooked through and the beans are piping hot. Scatter over the parsley and serve the meatloaf in slices.",
-                "description": "A healthier twist on the classic meatloaf, made with ground turkey and flavorful spices.",
-                "thumb": "https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560539/qgdrj0bpsq620wguboai.jpg",
-                "time": "75",
-                "youtube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
-                "tags": ["Alcoholic"],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e372c",
-                    "measure": "1 tblsp "
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e37ae",
-                    "measure": "1 large"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e36e3",
-                    "measure": "1 clove peeled crushed"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3798",
-                    "measure": "2 tblsp "
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e377e",
-                    "measure": "3 tsp"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e37c3",
-                    "measure": "500g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e36ca",
-                    "measure": "1 large"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3679",
-                    "measure": "85g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e37c4",
-                    "measure": "2 tblsp "
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3682",
-                    "measure": "800g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3738",
-                    "measure": "2 tblsp "
-                  }
-                ]
-              }
-            ]
           }
         },
-        "RecipeResponse": {
+        "example": {
+          "breakfast": [
+            {
+              "_id": "6462a8f74c3d0ddd28897fe3",
+              "title": "Full English Breakfast",
+              "category": "Breakfast",
+              "area": "British",
+              "instructions": "Heat the flat grill plate over a low heat, on top of 2 rings/flames if it fits, and brush sparingly with light olive oil.\r\nCook the sausages first. Add the sausages to the hot grill plate/the coolest part if there is one and allow to cook slowly for about 15-20 minutes, turning occasionally, until golden. After the first 10 minutes, increase the heat to medium before beginning to cook the other ingredients. If you are struggling for space, completely cook the sausages and keep hot on a plate in the oven.\r\nSnip a few small cuts into the fatty edge of the bacon. Place the bacon straight on to the grill plate and fry for 2-4 minutes each side or until your preferred crispiness is reached. Like the sausages, the cooked bacon can be kept hot on a plate in the oven.\r\nFor the mushrooms, brush away any dirt using a pastry brush and trim the stalk level with the mushroom top. Season with salt and pepper and drizzle over a little olive oil. Place stalk-side up on the grill plate and cook for 1-2 minutes before turning and cooking for a further 3-4 minutes. Avoid moving the mushrooms too much while cooking, as this releases the natural juices, making them soggy.\r\nFor the tomatoes, cut the tomatoes across the centre/or in half lengthways if using plum tomatoes , and with a small, sharp knife remove the green 'eye'. Season with salt and pepper and drizzle with a little olive oil. Place cut-side down on the grill plate and cook without moving for 2 minutes. Gently turn over and season again. Cook for a further 2-3 minutes until tender but still holding their shape.\r\nFor the black pudding, cut the black pudding into 3-4 slices and remove the skin. Place on the grill plate and cook for 1½-2 minutes each side until slightly crispy.\r\nFor 'proper' fried bread it's best to cook it in a separate pan. Ideally, use bread that is a couple of days old. Heat a frying pan to a medium heat and cover the base with oil. Add the bread and cook for 2-3 minutes each side until crispy and golden. If the pan becomes too dry, add a little more oil. For a richer flavour, add a knob of butter after you turn the slice.\r\nFor the fried eggs, break the egg straight into the pan with the fried bread and leave for 30 seconds. Add a good knob of butter and lightly splash/baste the egg with the butter when melted. Cook to your preferred stage, season and gently remove with a fish slice.\r\nOnce all the ingredients are cooked, serve on warm plates and enjoy straight away with a good squeeze of tomato ketchup or brown sauce.",
+              "description": "Similar to the English Breakfast, but with additional items like black pudding, fried mushrooms, and hash browns. It is a more substantial breakfast meal.",
+              "thumb": "https://www.themealdb.com/images/media/meals/sqrtwu1511721265.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/nlnuavjlvlaivbr7hxsu.jpg",
+              "time": "51",
+              "youtube": "https://www.youtube.com/watch?v=FXjYU2Ensck",
+              "tags": [
+                "Greasy",
+                "UnHealthy",
+                "HangoverFood",
+                "Calorific",
+                "Breakfast",
+                "BBQ"
+              ],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e3760",
+                  "measure": "4"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3664",
+                  "measure": "4"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3726",
+                  "measure": "4"
+                },
+                {
+                  "id": "640c2dd963a319ea671e377f",
+                  "measure": "3"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3815",
+                  "measure": "2 sliced"
+                },
+                {
+                  "id": "640c2dd963a319ea671e36ca",
+                  "measure": "2"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3678",
+                  "measure": "1 Slice"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3816",
+                  "measure": "100g "
+                }
+              ]
+            },
+            {
+              "_id": "6462a8f74c3d0ddd28898065",
+              "title": "Fruit and Cream Cheese Breakfast Pastries",
+              "category": "Breakfast",
+              "area": "American",
+              "instructions": "Preheat oven to 400ºF (200ºC), and prepare two cookie sheets with parchment paper. In a bowl, mix cream cheese, sugar, and vanilla until fully combined. Lightly flour the surface and roll out puff pastry on top to flatten. Cut each sheet of puff pastry into 9 equal squares. On the top right and bottom left of the pastry, cut an L shape approximately ½ inch (1 cm) from the edge.\r\nNOTE: This L shape should reach all the way down and across the square, however both L shapes should not meet at the ends. Your pastry should look like a picture frame with two corners still intact.\r\nTake the upper right corner and fold down towards the inner bottom corner. You will now have a diamond shape.\r\nPlace 1 to 2 teaspoons of the cream cheese filling in the middle, then place berries on top.\r\nRepeat with the remaining pastry squares and place them onto the parchment covered baking sheet.\r\nBake for 15-20 minutes or until pastry is golden brown and puffed.\r\nEnjoy!\r\n",
+              "description": "A delicious breakfast treat, Fruit and Cream Cheese Breakfast Pastries are flaky, buttery pastries filled with a sweet cream cheese and fruit filling, and then baked until golden brown.",
+              "thumb": "https://www.themealdb.com/images/media/meals/1543774956.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678561436/lj4kfx1zh4l8vejsgdle.jpg",
+              "time": "20",
+              "youtube": "",
+              "tags": ["Breakfast", "Summer"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e379c",
+                  "measure": "1 1/4 oz "
+                },
+                {
+                  "id": "640c2dd963a319ea671e3774",
+                  "measure": "1 1/4 cup"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3786",
+                  "measure": "1 teaspoon"
+                },
+                {
+                  "id": "640c2dd963a319ea671e36d7",
+                  "measure": "To your taste"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3748",
+                  "measure": "2"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3773",
+                  "measure": "To your taste"
+                },
+                {
+                  "id": "640c2dd963a319ea671e37d5",
+                  "measure": "To your taste"
+                },
+                {
+                  "id": "640c2dd963a319ea671e380b",
+                  "measure": "To your taste"
+                }
+              ]
+            }
+          ],
+          "miscellaneous": [
+            {
+              "_id": "6462a8f74c3d0ddd28897fff",
+              "title": "Bean & Sausage Hotpot",
+              "category": "Miscellaneous",
+              "area": "British",
+              "instructions": "In a large casserole, fry the sausages until brown all over – about 10 mins.\r\n\r\nAdd the tomato sauce, stirring well, then stir in the beans, treacle or sugar and mustard. Bring to the simmer, cover and cook for 30 mins. Great served with crusty bread or rice.",
+              "description": "A hearty stew made with sausage, beans, and other ingredients. A satisfying meal for any time of day.",
+              "thumb": "https://www.themealdb.com/images/media/meals/vxuyrx1511302687.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560539/t9gapcrckfmikwipnpi4.jpg",
+              "time": "40",
+              "youtube": "https://www.youtube.com/watch?v=B0YX0yPX4Wo",
+              "tags": [],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e3760",
+                  "measure": "8 large"
+                },
+                {
+                  "id": "640c2dd963a319ea671e37ce",
+                  "measure": "1 Jar"
+                },
+                {
+                  "id": "640c2dd963a319ea671e37cc",
+                  "measure": "1200g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3673",
+                  "measure": "1 tbls"
+                },
+                {
+                  "id": "640c2dd963a319ea671e36cc",
+                  "measure": "1 tsp "
+                }
+              ]
+            },
+            {
+              "_id": "6462a8f74c3d0ddd28897ff6",
+              "title": "Turkey Meatloaf",
+              "category": "Miscellaneous",
+              "area": "British",
+              "instructions": "Heat oven to 180C/160C fan/gas 4. Heat the oil in a large frying pan and cook the onion for 8-10 mins until softened. Add the garlic, Worcestershire sauce and 2 tsp tomato purée, and stir until combined. Set aside to cool.\r\n\r\nPut the turkey mince, egg, breadcrumbs and cooled onion mix in a large bowl and season well. Mix everything to combine, then shape into a rectangular loaf and place in a large roasting tin. Spread 2 tbsp barbecue sauce over the meatloaf and bake for 30 mins.\r\n\r\nMeanwhile, drain 1 can of beans only, then pour both cans into a large bowl. Add the remaining barbecue sauce and tomato purée. Season and set aside.\r\n\r\nWhen the meatloaf has had its initial cooking time, scatter the beans around the outside and bake for 15 mins more until the meatloaf is cooked through and the beans are piping hot. Scatter over the parsley and serve the meatloaf in slices.",
+              "description": "A healthier twist on the classic meatloaf, made with ground turkey and flavorful spices.",
+              "thumb": "https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560539/qgdrj0bpsq620wguboai.jpg",
+              "time": "75",
+              "youtube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
+              "tags": ["Alcoholic"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e372c",
+                  "measure": "1 tblsp "
+                },
+                {
+                  "id": "640c2dd963a319ea671e37ae",
+                  "measure": "1 large"
+                },
+                {
+                  "id": "640c2dd963a319ea671e36e3",
+                  "measure": "1 clove peeled crushed"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3798",
+                  "measure": "2 tblsp "
+                },
+                {
+                  "id": "640c2dd963a319ea671e377e",
+                  "measure": "3 tsp"
+                },
+                {
+                  "id": "640c2dd963a319ea671e37c3",
+                  "measure": "500g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e36ca",
+                  "measure": "1 large"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3679",
+                  "measure": "85g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e37c4",
+                  "measure": "2 tblsp "
+                },
+                {
+                  "id": "640c2dd963a319ea671e3682",
+                  "measure": "800g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3738",
+                  "measure": "2 tblsp "
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "RecipeResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "A recipe id"
+          },
+          "title": {
+            "type": "string",
+            "description": "A title of the recipe",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category title",
+            "example": "Dessert"
+          },
+          "area": {
+            "type": "string",
+            "description": "A country or a region",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instruction for cooking"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for a meal",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Thumb link"
+          },
+          "preview": {
+            "type": "string",
+            "description": "Preview image link"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time for cooking",
+            "example": "60"
+          },
+          "youtube": {
+            "type": "string",
+            "description": "Youtube link"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Cake", "Sweet"]
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingradient id"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Ingradient measure",
+                  "example": "175g"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "_id": "6462a8f74c3d0ddd28897fcd",
+          "title": "Battenberg Cake",
+          "category": "Dessert",
+          "area": "British",
+          "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+          "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+          "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+          "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+          "time": "60",
+          "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+          "tags": ["Cake", "Sweet"],
+          "ingredients": [
+            {
+              "id": "640c2dd963a319ea671e367e",
+              "measure": "175g"
+            },
+            {
+              "id": "640c2dd963a319ea671e3687",
+              "measure": "175g"
+            }
+          ]
+        }
+      },
+      "NewRecipeRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A title of the recipe",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category title",
+            "example": "Dessert"
+          },
+          "area": {
+            "type": "string",
+            "description": "A country or a region",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instruction for cooking"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for a meal",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Thumb link"
+          },
+          "preview": {
+            "type": "string",
+            "description": "Preview image link"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time for cooking",
+            "example": "60"
+          },
+          "youtube": {
+            "type": "string",
+            "description": "Youtube link"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Cake", "Sweet"]
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingradient id"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Ingradient measure",
+                  "example": "175g"
+                }
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "description": "Recipe owner's id",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          }
+        },
+        "example": {
+          "title": "Battenberg Cake",
+          "category": "Dessert",
+          "area": "British",
+          "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+          "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+          "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+          "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+          "time": "60",
+          "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+          "tags": ["Cake", "Sweet"],
+          "ingredients": [
+            {
+              "id": "640c2dd963a319ea671e367e",
+              "measure": "175g"
+            },
+            {
+              "id": "640c2dd963a319ea671e3687",
+              "measure": "175g"
+            }
+          ],
+          "owner": "6462a8f74c3d0ddd28897fcd"
+        }
+      },
+      "NewRecipeResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "A recipe id"
+          },
+          "title": {
+            "type": "string",
+            "description": "A title of the recipe",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category title",
+            "example": "Dessert"
+          },
+          "area": {
+            "type": "string",
+            "description": "A country or a region",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instruction for cooking"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description for a meal",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "description": "Thumb link"
+          },
+          "preview": {
+            "type": "string",
+            "description": "Preview image link"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time for cooking",
+            "example": "60"
+          },
+          "youtube": {
+            "type": "string",
+            "description": "Youtube link"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["Cake", "Sweet"]
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingradient id"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Ingradient measure",
+                  "example": "175g"
+                }
+              }
+            }
+          },
+          "owner": {
+            "type": "string",
+            "description": "Recipe owner's id",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          }
+        },
+        "example": {
+          "_id": "6462a8f74c3d0ddd28897fcd",
+          "title": "Battenberg Cake",
+          "category": "Dessert",
+          "area": "British",
+          "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+          "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+          "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+          "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+          "time": "60",
+          "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+          "tags": ["Cake", "Sweet"],
+          "ingredients": [
+            {
+              "id": "640c2dd963a319ea671e367e",
+              "measure": "175g"
+            },
+            {
+              "id": "640c2dd963a319ea671e3687",
+              "measure": "175g"
+            }
+          ],
+          "owner": "6462a8f74c3d0ddd28897fcd"
+        }
+      },
+      "IngredientsListResponse": {
+        "type": "array",
+        "items": {
           "type": "object",
           "properties": {
             "_id": {
               "type": "string",
-              "description": "A recipe id"
+              "description": "Ingredient's id"
+            },
+            "name": {
+              "type": "string",
+              "description": "Ingredient's name"
+            },
+            "desc": {
+              "type": "string",
+              "description": "Ingredient's description"
+            },
+            "image": {
+              "type": "string",
+              "description": "Ingredient's image link"
+            }
+          },
+          "example": [
+            {
+              "_id": "640c2dd963a319ea671e366c",
+              "name": "Beef Brisket",
+              "desc": "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times. Beef is a source of high-quality protein and nutrients.\r\n\r\nMost beef skeletal muscle meat can be used as is by merely cutting into certain parts, such as roasts, short ribs or steak (filet mignon, sirloin steak, rump steak, rib steak, rib eye steak, hanger steak, etc.), while other cuts are processed (corned beef or beef jerky). Trimmings, on the other hand, are usually mixed with meat from older, leaner (therefore tougher) cattle, are ground, minced or used in sausages. The blood is used in some varieties called blood sausage. Other parts that are eaten include other muscles and offal, such as the oxtail, liver, tongue, tripe from the reticulum or rumen, glands (particularly the pancreas and thymus, referred to as sweetbread), the heart, the brain (although forbidden where there is a danger of bovine spongiform encephalopathy, BSE, commonly referred to as mad cow disease), the kidneys, and the tender testicles of the bull (known in the United States as calf fries, prairie oysters, or Rocky Mountain oysters). Some intestines are cooked and eaten as is, but are more often cleaned and used as natural sausage casings. The bones are used for making beef stock.",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+            },
+            {
+              "_id": "640c2dd963a319ea671e3667",
+              "name": "Basil",
+              "desc": "Basil, also called great basil, is a culinary herb of the family Lamiaceae (mints).\r\n\r\nBasil is native to tropical regions from central Africa to Southeast Asia. It is a tender plant, and is used in cuisines worldwide. Depending on the species and cultivar, the leaves may taste somewhat like anise, with a strong, pungent, often sweet smell.",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564215/jpmvh7yslyxzie8gihi1.png"
+            }
+          ]
+        }
+      },
+      "AddIngredientToListRequest": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Ingredient's id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Ingredient's name"
+          },
+          "measure": {
+            "type": "string",
+            "description": "Ingredient's name",
+            "example": "160g"
+          },
+          "img": {
+            "type": "string",
+            "description": "Ingredient's image link"
+          }
+        },
+        "example": {
+          "_id": "640c2dd963a319ea671e366c",
+          "name": "Mushroom",
+          "measure": "160g",
+          "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
+        }
+      },
+      "AddToFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "number" },
+          "message": { "type": "string" },
+          "recipeId": { "type": "string" }
+        },
+        "example": {
+          "code": 200,
+          "message": "The recipe was added to favorite",
+          "recipeId": "6462a8f74c3d0ddd28897fbd"
+        }
+      },
+      "GetFavoriteResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "A recipe's id"
             },
             "title": {
               "type": "string",
@@ -1630,7 +2010,7 @@
             },
             "thumb": {
               "type": "string",
-              "description": "Thumb link"
+              "description": "Thumb's link"
             },
             "preview": {
               "type": "string",
@@ -1659,284 +2039,73 @@
                 "properties": {
                   "id": {
                     "type": "string",
-                    "description": "Ingradient id"
+                    "description": "Ingredient's id"
                   },
                   "measure": {
                     "type": "string",
-                    "description": "Ingradient measure",
+                    "description": "Ingedient measure",
                     "example": "175g"
                   }
                 }
               }
             }
           },
-          "example": {
-            "_id": "6462a8f74c3d0ddd28897fcd",
-            "title": "Battenberg Cake",
-            "category": "Dessert",
-            "area": "British",
-            "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
-            "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
-            "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
-            "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
-            "time": "60",
-            "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
-            "tags": ["Cake", "Sweet"],
-            "ingredients": [
-              {
-                "id": "640c2dd963a319ea671e367e",
-                "measure": "175g"
-              },
-              {
-                "id": "640c2dd963a319ea671e3687",
-                "measure": "175g"
-              }
-            ]
-          }
-        },
-        "NewRecipeRequest": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "A title of the recipe",
-              "example": "Battenberg Cake"
-            },
-            "category": {
-              "type": "string",
-              "description": "Category title",
-              "example": "Dessert"
-            },
-            "area": {
-              "type": "string",
-              "description": "A country or a region",
-              "example": "British"
-            },
-            "instructions": {
-              "type": "string",
-              "description": "Instruction for cooking"
-            },
-            "description": {
-              "type": "string",
-              "description": "A description for a meal",
-              "example": "A classic British cake..."
-            },
-            "thumb": {
-              "type": "string",
-              "description": "Thumb link"
-            },
-            "preview": {
-              "type": "string",
-              "description": "Preview image link"
-            },
-            "time": {
-              "type": "string",
-              "description": "Time for cooking",
-              "example": "60"
-            },
-            "youtube": {
-              "type": "string",
-              "description": "Youtube link"
-            },
-            "tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": ["Cake", "Sweet"]
-            },
-            "ingredients": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "Ingradient id"
-                  },
-                  "measure": {
-                    "type": "string",
-                    "description": "Ingradient measure",
-                    "example": "175g"
-                  }
+          "example": [
+            {
+              "_id": "6462a8f74c3d0ddd28897fcd",
+              "title": "Battenberg Cake",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
+              "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
+              "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
+              "tags": ["Cake", "Sweet"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "175g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e3687",
+                  "measure": "175g"
                 }
-              }
+              ]
             },
-            "owner": {
-              "type": "string",
-              "description": "Recipe owner's id",
-              "example": "6462a8f74c3d0ddd28897fcd"
-            }
-          },
-          "example": {
-            "title": "Battenberg Cake",
-            "category": "Dessert",
-            "area": "British",
-            "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
-            "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
-            "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
-            "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
-            "time": "60",
-            "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
-            "tags": ["Cake", "Sweet"],
-            "ingredients": [
-              {
-                "id": "640c2dd963a319ea671e367e",
-                "measure": "175g"
-              },
-              {
-                "id": "640c2dd963a319ea671e3687",
-                "measure": "175g"
-              }
-            ],
-            "owner": "6462a8f74c3d0ddd28897fcd"
-          }
-        },
-        "NewRecipeResponse": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string",
-              "description": "A recipe id"
-            },
-            "title": {
-              "type": "string",
-              "description": "A title of the recipe",
-              "example": "Battenberg Cake"
-            },
-            "category": {
-              "type": "string",
-              "description": "Category title",
-              "example": "Dessert"
-            },
-            "area": {
-              "type": "string",
-              "description": "A country or a region",
-              "example": "British"
-            },
-            "instructions": {
-              "type": "string",
-              "description": "Instruction for cooking"
-            },
-            "description": {
-              "type": "string",
-              "description": "A description for a meal",
-              "example": "A classic British cake..."
-            },
-            "thumb": {
-              "type": "string",
-              "description": "Thumb link"
-            },
-            "preview": {
-              "type": "string",
-              "description": "Preview image link"
-            },
-            "time": {
-              "type": "string",
-              "description": "Time for cooking",
-              "example": "60"
-            },
-            "youtube": {
-              "type": "string",
-              "description": "Youtube link"
-            },
-            "tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": ["Cake", "Sweet"]
-            },
-            "ingredients": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "Ingradient id"
-                  },
-                  "measure": {
-                    "type": "string",
-                    "description": "Ingradient measure",
-                    "example": "175g"
-                  }
+            {
+              "_id": "6462a8f74c3d0ddd28897fcc",
+              "title": "Blackberry Fool",
+              "category": "Dessert",
+              "area": "British",
+              "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
+              "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
+              "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
+              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
+              "time": "60",
+              "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
+              "tags": ["Desert", "Summer", "Fruity", "Dairy"],
+              "ingredients": [
+                {
+                  "id": "640c2dd963a319ea671e380c",
+                  "measure": "50g"
+                },
+                {
+                  "id": "640c2dd963a319ea671e367e",
+                  "measure": "125g"
                 }
-              }
-            },
-            "owner": {
-              "type": "string",
-              "description": "Recipe owner's id",
-              "example": "6462a8f74c3d0ddd28897fcd"
+              ]
             }
-          },
-          "example": {
-            "_id": "6462a8f74c3d0ddd28897fcd",
-            "title": "Battenberg Cake",
-            "category": "Dessert",
-            "area": "British",
-            "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
-            "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
-            "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
-            "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
-            "time": "60",
-            "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
-            "tags": ["Cake", "Sweet"],
-            "ingredients": [
-              {
-                "id": "640c2dd963a319ea671e367e",
-                "measure": "175g"
-              },
-              {
-                "id": "640c2dd963a319ea671e3687",
-                "measure": "175g"
-              }
-            ],
-            "owner": "6462a8f74c3d0ddd28897fcd"
-          }
-        },
-        "IngredientsListResponse": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string",
-                "description": "Ingredient's id"
-              },
-              "name": {
-                "type": "string",
-                "description": "Ingredient's name"
-              },
-              "desc": {
-                "type": "string",
-                "description": "Ingredient's description"
-              },
-              "image": {
-                "type": "string",
-                "description": "Ingredient's image link"
-              }
-            },
-            "example": [
-              {
-                "_id": "640c2dd963a319ea671e366c",
-                "name": "Beef Brisket",
-                "desc": "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times. Beef is a source of high-quality protein and nutrients.\r\n\r\nMost beef skeletal muscle meat can be used as is by merely cutting into certain parts, such as roasts, short ribs or steak (filet mignon, sirloin steak, rump steak, rib steak, rib eye steak, hanger steak, etc.), while other cuts are processed (corned beef or beef jerky). Trimmings, on the other hand, are usually mixed with meat from older, leaner (therefore tougher) cattle, are ground, minced or used in sausages. The blood is used in some varieties called blood sausage. Other parts that are eaten include other muscles and offal, such as the oxtail, liver, tongue, tripe from the reticulum or rumen, glands (particularly the pancreas and thymus, referred to as sweetbread), the heart, the brain (although forbidden where there is a danger of bovine spongiform encephalopathy, BSE, commonly referred to as mad cow disease), the kidneys, and the tender testicles of the bull (known in the United States as calf fries, prairie oysters, or Rocky Mountain oysters). Some intestines are cooked and eaten as is, but are more often cleaned and used as natural sausage casings. The bones are used for making beef stock.",
-                "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
-              },
-              {
-                "_id": "640c2dd963a319ea671e3667",
-                "name": "Basil",
-                "desc": "Basil, also called great basil, is a culinary herb of the family Lamiaceae (mints).\r\n\r\nBasil is native to tropical regions from central Africa to Southeast Asia. It is a tender plant, and is used in cuisines worldwide. Depending on the species and cultivar, the leaves may taste somewhat like anise, with a strong, pungent, often sweet smell.",
-                "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564215/jpmvh7yslyxzie8gihi1.png"
-              }
-            ]
-          }
-        },
-        "AddIngredientToListRequest": {
+          ]
+        }
+      },
+      "GetShoppingListResponse": {
+        "type": "array",
+        "items": {
           "type": "object",
           "properties": {
-            "_id": {
+            "ingredientId": {
               "type": "string",
               "description": "Ingredient's id"
             },
@@ -1952,211 +2121,42 @@
             "img": {
               "type": "string",
               "description": "Ingredient's image link"
+            },
+            "recipeId": {
+              "type": "string",
+              "description": "The recipe's id"
             }
           },
-          "example": {
-            "_id": "640c2dd963a319ea671e366c",
-            "name": "Mushroom",
-            "measure": "160g",
-            "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png"
-          }
-        },
-        "AddToFavoriteResponse": {
-          "type": "object",
-          "properties": {
-            "code": { "type": "number" },
-            "message": { "type": "string" },
-            "recipeId": { "type": "string" }
-          },
-          "example": {
-            "code": 200,
-            "message": "The recipe was added to favorite",
-            "recipeId": "6462a8f74c3d0ddd28897fbd"
-          }
-        },
-        "GetFavoriteResponse": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "_id": {
-                "type": "string",
-                "description": "A recipe's id"
-              },
-              "title": {
-                "type": "string",
-                "description": "A title of the recipe",
-                "example": "Battenberg Cake"
-              },
-              "category": {
-                "type": "string",
-                "description": "Category title",
-                "example": "Dessert"
-              },
-              "area": {
-                "type": "string",
-                "description": "A country or a region",
-                "example": "British"
-              },
-              "instructions": {
-                "type": "string",
-                "description": "Instruction for cooking"
-              },
-              "description": {
-                "type": "string",
-                "description": "A description for a meal",
-                "example": "A classic British cake..."
-              },
-              "thumb": {
-                "type": "string",
-                "description": "Thumb's link"
-              },
-              "preview": {
-                "type": "string",
-                "description": "Preview image link"
-              },
-              "time": {
-                "type": "string",
-                "description": "Time for cooking",
-                "example": "60"
-              },
-              "youtube": {
-                "type": "string",
-                "description": "Youtube link"
-              },
-              "tags": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "example": ["Cake", "Sweet"]
-              },
-              "ingredients": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Ingredient's id"
-                    },
-                    "measure": {
-                      "type": "string",
-                      "description": "Ingedient measure",
-                      "example": "175g"
-                    }
-                  }
-                }
-              }
+          "example": [
+            {
+              "_id": "64b594944c79d3c16129f309",
+              "ingredientId": "640c2dd963a319ea671e366c",
+              "recipeId": "6462a8f74c3d0ddd28897fd4",
+              "name": "Beef Brisket",
+              "measure": "45",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png",
+              "createdAt": "2023-07-17T19:20:52.512Z",
+              "updatedAt": "2023-07-17T19:20:52.512Z"
             },
-            "example": [
-              {
-                "_id": "6462a8f74c3d0ddd28897fcd",
-                "title": "Battenberg Cake",
-                "category": "Dessert",
-                "area": "British",
-                "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
-                "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
-                "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
-                "time": "60",
-                "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
-                "tags": ["Cake", "Sweet"],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e367e",
-                    "measure": "175g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e3687",
-                    "measure": "175g"
-                  }
-                ]
-              },
-              {
-                "_id": "6462a8f74c3d0ddd28897fcc",
-                "title": "Blackberry Fool",
-                "category": "Dessert",
-                "area": "British",
-                "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
-                "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
-                "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
-                "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
-                "time": "60",
-                "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
-                "tags": ["Desert", "Summer", "Fruity", "Dairy"],
-                "ingredients": [
-                  {
-                    "id": "640c2dd963a319ea671e380c",
-                    "measure": "50g"
-                  },
-                  {
-                    "id": "640c2dd963a319ea671e367e",
-                    "measure": "125g"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        "GetShoppingListResponse": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "ingredientId": {
-                "type": "string",
-                "description": "Ingredient's id"
-              },
-              "name": {
-                "type": "string",
-                "description": "Ingredient's name"
-              },
-              "measure": {
-                "type": "string",
-                "description": "Ingredient's name",
-                "example": "160g"
-              },
-              "img": {
-                "type": "string",
-                "description": "Ingredient's image link"
-              },
-              "recipeId": {
-                "type": "string",
-                "description": "The recipe's id"
-              }
-            },
-            "example": [
-              {
-                "_id": "64b594944c79d3c16129f309",
-                "ingredientId": "640c2dd963a319ea671e366c",
-                "recipeId": "6462a8f74c3d0ddd28897fd4",
-                "name": "Beef Brisket",
-                "measure": "45",
-                "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png",
-                "createdAt": "2023-07-17T19:20:52.512Z",
-                "updatedAt": "2023-07-17T19:20:52.512Z"
-              },
-              {
-                "_id": "64b596394c79d3c16129f315",
-                "ingredientId": "640c2dd963a319ea671e365c",
-                "recipeId": "6462a8f74c3d0ddd28897fc4",
-                "name": "Greek Yogurt",
-                "measure": "300ml",
-                "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564798/gsylxkyqnzucbsq7jwag.png",
-                "createdAt": "2023-07-17T19:27:53.565Z",
-                "updatedAt": "2023-07-17T19:27:53.565Z"
-              }
-            ]
-          }
+            {
+              "_id": "64b596394c79d3c16129f315",
+              "ingredientId": "640c2dd963a319ea671e365c",
+              "recipeId": "6462a8f74c3d0ddd28897fc4",
+              "name": "Greek Yogurt",
+              "measure": "300ml",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564798/gsylxkyqnzucbsq7jwag.png",
+              "createdAt": "2023-07-17T19:27:53.565Z",
+              "updatedAt": "2023-07-17T19:27:53.565Z"
+            }
+          ]
         }
-      },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
