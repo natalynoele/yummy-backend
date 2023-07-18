@@ -43,6 +43,4 @@ recipesRouter.delete(
   ownRecipesController.deleteRecipe
 );
 
-recipesRouter.get("/popular", recipesController.getPopularRecipes);
-
 module.exports = recipesRouter;

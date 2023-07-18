@@ -12,12 +12,15 @@ const usersRouter = require("./routes/api/users");
 
 const shoppingListRouter = require("./routes/api/shoppingListRouter");
 
+// const popularRecipesRouter = require("./routes/api/recipes/popularRecipesRouter");
+
 const subscribeRouter = require("./routes/api/subscribe");
 
 const {
   recipesRouter,
   ingredientsRouter,
   favoriteRouter,
+  popularRecipesRouter,
 } = require("./routes");
 
 const app = express();
@@ -43,6 +46,8 @@ app.use("/ingredients", ingredientsRouter);
 app.use("/users", usersRouter);
 
 app.use("/favorite", favoriteRouter);
+
+app.use("/popular", popularRecipesRouter);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

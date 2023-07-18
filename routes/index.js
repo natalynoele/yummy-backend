@@ -1,5 +1,6 @@
 const {
   recipesRouter,
+  popularRecipesRouter,
   ingredientsRouter,
   favoriteRouter,
   usersRouter,
@@ -10,4 +11,5 @@ module.exports = {
   ingredientsRouter,
   favoriteRouter,
   usersRouter,
+  popularRecipesRouter,
 };
