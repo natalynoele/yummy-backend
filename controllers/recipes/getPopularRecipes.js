@@ -13,7 +13,7 @@ const getPopularRecipes = async (req, res) => {
           $cond: {
             if: { $isArray: "$favorites" },
             then: { $size: "$favorites" },
-            else: "NA",
+            else: 0,
           },
         },
       },
