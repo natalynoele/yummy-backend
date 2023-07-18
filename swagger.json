@@ -816,21 +816,7 @@
       "get": {
         "tags": ["Search"],
         "summary": "Get a recipe by title",
-        "requestBody": {
-          "description": "Recipe's title",
-          "required": true,
-          "content": {
-            "application/json": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                }
-              },
-              "example": "Battenberg Cake"
-            }
-          }
-        },
+        "parameters": [{ "in": "query", "name": "title" }],
         "responses": {
           "200": {
             "description": "Success operation",
@@ -866,22 +852,8 @@
     "/recipes/ingredients": {
       "get": {
         "tags": ["Search"],
-        "summary": "Get a recipe by title",
-        "requestBody": {
-          "description": "Ingredients's id",
-          "required": true,
-          "content": {
-            "application/json": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                }
-              },
-              "example": "640c2dd963a319ea671e3701"
-            }
-          }
-        },
+        "summary": "Get a recipe by ingredient",
+        "parameters": [{ "in": "query", "name": "ingredients" }],
         "responses": {
           "200": {
             "description": "Success operation",
