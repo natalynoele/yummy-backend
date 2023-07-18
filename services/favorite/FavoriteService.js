@@ -25,7 +25,6 @@ class FavoriteService {
     const user = await User.findByIdAndUpdate(
       userId,
       {
-        favorite: { $ne: id },
         $push: {
           favorite: {
             $each: [id],
