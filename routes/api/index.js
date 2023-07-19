@@ -1,8 +1,9 @@
-const { recipesRouter } = require("./recipes");
+const { recipesRouter, popularRecipesRouter } = require("./recipes");
 const { ingredientsRouter } = require("./ingredients");
 const { usersRouter } = require("./users");
 const { favoriteRouter } = require("./favorite");
-const popularRecipesRouter = require("./recipes/popularRecipesRouter");
+const shoppingListRouter = require("./shoppingListRouter");
+const { subscribeRouter } = require("./subscribe");
 
 module.exports = {
   recipesRouter,
@@ -10,4 +11,6 @@ module.exports = {
   usersRouter,
   favoriteRouter,
   popularRecipesRouter,
+  shoppingListRouter,
+  subscribeRouter,
 };

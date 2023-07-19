@@ -1,7 +1,5 @@
 const express = require("express");
 
-const router = express.Router();
-
 const authController = require("../../../controllers/auth");
 
 const { authenticate, upload } = require("../../../middlewares");
@@ -15,21 +13,27 @@ const {
   updateSchema,
 } = require("../../../schemas");
 
-router.post("/register", validateBody(registerSchema), authController.register);
+const usersRouter = express.Router();
 
-router.post("/login", validateBody(loginSchema), authController.login);
+usersRouter.post(
+  "/register",
+  validateBody(registerSchema),
+  authController.register
+);
 
-router.get("/current", authenticate, authController.getCurrent);
+usersRouter.post("/login", validateBody(loginSchema), authController.login);
 
-router.post("/logout", authenticate, authController.logout);
+usersRouter.get("/current", authenticate, authController.getCurrent);
 
-router.patch(
+usersRouter.post("/logout", authenticate, authController.logout);
+
+usersRouter.patch(
   "/subscribe",
   authenticate,
   validateBody(userUpdateSubscription),
   authController.userUpdateSubscription
 );
-router.put(
+usersRouter.put(
   "/update",
   authenticate,
   validateBody(updateSchema),
@@ -37,6 +41,6 @@ router.put(
   authController.updateUser
 );
 
-router.get("/verity/:verificationToken", authController.getVerity);
+usersRouter.get("/verity/:verificationToken", authController.getVerity);
 
-module.exports = router;
+module.exports = usersRouter;

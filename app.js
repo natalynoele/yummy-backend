@@ -8,26 +8,13 @@ const path = require("path");
 const configPath = path.join(__dirname, "config", ".env");
 require("dotenv").config({ path: configPath });
 
-const usersRouter = require("./routes/api/users");
-
-const shoppingListRouter = require("./routes/api/shoppingListRouter");
-
-// const popularRecipesRouter = require("./routes/api/recipes/popularRecipesRouter");
-
-const subscribeRouter = require("./routes/api/subscribe");
-
-const {
-  recipesRouter,
-  ingredientsRouter,
-  favoriteRouter,
-  popularRecipesRouter,
-} = require("./routes");
+const { api } = require("./routes");
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
+app.use(express.urlencoded({ extended: false }));
 
 app.use(logger(formatsLogger));
 
@@ -35,19 +22,19 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/subscribe", subscribeRouter);
+app.use("/subscribe", api.subscribeRouter);
 
-app.use("/shopping-list", shoppingListRouter);
+app.use("/shopping-list", api.shoppingListRouter);
 
-app.use("/recipes", recipesRouter);
+app.use("/recipes", api.recipesRouter);
 
-app.use("/ingredients", ingredientsRouter);
+app.use("/ingredients", api.ingredientsRouter);
 
-app.use("/users", usersRouter);
+app.use("/users", api.usersRouter);
 
-app.use("/favorite", favoriteRouter);
+app.use("/favorite", api.favoriteRouter);
 
-app.use("/popular", popularRecipesRouter);
+app.use("/popular", api.popularRecipesRouter);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

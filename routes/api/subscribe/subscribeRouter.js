@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const {
   resendSubscribe,
   subscribe,
@@ -8,13 +7,15 @@ const schemas = require("../../../schemas/auth");
 const { validateBody } = require("../../../decorators");
 const { authenticate } = require("../../../middlewares");
 
-router.post(
+const subscribeRouter = express.Router();
+
+subscribeRouter.post(
   "/",
   authenticate,
   validateBody(schemas.verifySchema),
   resendSubscribe
 );
 
-router.get("/:subscriptionToken", subscribe);
+subscribeRouter.get("/:subscriptionToken", subscribe);
 
-module.exports = router;
+module.exports = subscribeRouter;
