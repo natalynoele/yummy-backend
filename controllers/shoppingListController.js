@@ -2,7 +2,6 @@ const ShoppingList = require("../models/ShoppingList");
 const { User } = require("../models/users");
 const { ctrlWrapper, HttpError } = require("../helpers");
 
-// Отримати список покупок користувача
 const getShoppingList = async (req, res) => {
   const userId = req.user._id;
 
@@ -20,7 +19,6 @@ const getShoppingList = async (req, res) => {
   res.json(user.shoppingList);
 };
 
-// Додати товар до списку покупок користувача
 const addItemToShoppingList = async (req, res) => {
   const userId = req.user._id;
 
@@ -30,21 +28,18 @@ const addItemToShoppingList = async (req, res) => {
     $push: {
       shoppingList: shoppingItem,
     },
-  });
+  }).populate("shoppingList");
 
   if (!user) {
-    throw HttpError(404);
+    throw HttpError(404, "User not found");
   }
-
-  console.log(user.shoppingList.shoppingItem, "shopping");
 
   res.status(200).json({
     message: "Item added to shopping list",
-    item: shoppingItem._id,
+    item: shoppingItem,
   });
 };
 
-// Видалити товар зі списку покупок користувача
 const deleteItemFromShoppingList = async (req, res) => {
   const userId = req.user._id;
   const { id } = req.params;
