@@ -24,14 +24,12 @@ class AuthService {
 
     const avatarUrl = gravatar.url(email);
 
-    // const verificationToken = nanoid();
     const subscriptionToken = nanoid();
 
     const newUser = await User.create({
       ...req.body,
       password: hashPassword,
-      avatarUrl,
-      // verificationToken,
+      avatarUrl,      
       subscriptionToken,
     });
 
@@ -98,7 +96,7 @@ class AuthService {
 
   async logout(req) {
     const { _id } = req.user;
-    const user = await User.findByIdAndUpdate(_id, { $unset: { token: 1 } });
+    const user = await User.findByIdAndUpdate(_id, { $unset: { token: " " } });
 
     user.token = null;
     await user.save();
