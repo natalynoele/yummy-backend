@@ -16,6 +16,6 @@ subscribeRouter.post(
   resendSubscribe
 );
 
-subscribeRouter.get("/:subscriptionToken", subscribe);
+subscribeRouter.get("/:subscriptionToken", authenticate, subscribe);
 
 module.exports = subscribeRouter;

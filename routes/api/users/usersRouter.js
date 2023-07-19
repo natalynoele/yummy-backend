@@ -41,6 +41,10 @@ usersRouter.put(
   authController.updateUser
 );
 
-usersRouter.get("/verity/:verificationToken", authController.getVerity);
+usersRouter.get(
+  "/verity/:verificationToken",
+  authenticate,
+  authController.getVerity
+);
 
 module.exports = usersRouter;
