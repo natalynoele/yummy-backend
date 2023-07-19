@@ -107,7 +107,7 @@
         "tags": ["Auth"],
         "summary": "User login",
         "requestBody": {
-          "description": "Registration's object",
+          "description": "Login's object",
           "required": true,
           "content": {
             "application/json": {
@@ -2150,13 +2150,13 @@
             }
           ]
         }
-      }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
       }
     }
   }

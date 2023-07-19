@@ -1,6 +1,6 @@
 const { User } = require("./users");
 
-const ShoppingList = require("./ShoppingList")
+const ShoppingList = require("./ShoppingList");
 const { Recipe } = require("./recipes");
 const { Category } = require("./category");
 const Ingredients = require("./ingredients");
