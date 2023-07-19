@@ -1,3 +1,3 @@
-const router = require("./subscribeRouter");
+const subscribeRouter = require("./subscribeRouter");
 
-module.exports = router;
+module.exports = { subscribeRouter };

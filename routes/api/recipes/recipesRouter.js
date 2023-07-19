@@ -11,15 +11,24 @@ const recipesRouter = express.Router();
 
 recipesRouter.get(
   "/categories/:category",
+  authenticate,
   recipesController.getRecipesByCategory
 );
-recipesRouter.get("/search", recipesController.searchByTitle);
+recipesRouter.get("/search", authenticate, recipesController.searchByTitle);
 
-recipesRouter.get("/ingredients", recipesController.searchByIngredients);
+recipesRouter.get(
+  "/ingredients",
+  authenticate,
+  recipesController.searchByIngredients
+);
 
-recipesRouter.get("/category-list", recipesController.getCategoryList);
+recipesRouter.get(
+  "/category-list",
+  authenticate,
+  recipesController.getCategoryList
+);
 
-recipesRouter.get("/main-page", recipesController.mainPage);
+recipesRouter.get("/main-page", authenticate, recipesController.mainPage);
 
 recipesRouter.get(
   "/own-recipes/",
@@ -27,7 +36,7 @@ recipesRouter.get(
   ownRecipesController.getRecipeByUserId
 );
 
-recipesRouter.get("/:id", recipesController.getById);
+recipesRouter.get("/:id", authenticate, recipesController.getById);
 
 recipesRouter.post(
   "/own-recipes",
