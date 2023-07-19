@@ -230,6 +230,7 @@
       "put": {
         "tags": ["Auth"],
         "summary": "User update profile",
+        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Update object",
           "required": true,
@@ -286,6 +287,7 @@
       "get": {
         "tags": ["Favorite"],
         "summary": "User's favorite recipes",
+        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
             "description": "Success",
@@ -331,6 +333,7 @@
       "patch": {
         "tags": ["Favorite"],
         "summary": "Add a recipe to favorite",
+        "security": [{ "Bearer": [] }],
         "parameters": [{ "in": "path", "name": "recipeId" }],
         "responses": {
           "200": {
@@ -386,6 +389,7 @@
       "patch": {
         "tags": ["Favorite"],
         "summary": "Remove recipe from favorite",
+        "security": [{ "Bearer": [] }],
         "parameters": [{ "in": "path", "name": "recipeId" }],
         "responses": {
           "204": {
@@ -816,6 +820,7 @@
       "get": {
         "tags": ["Search"],
         "summary": "Get a recipe by title",
+        "security": [{ "Bearer": [] }],
         "parameters": [{ "in": "query", "name": "title" }],
         "responses": {
           "200": {
@@ -853,6 +858,7 @@
       "get": {
         "tags": ["Search"],
         "summary": "Get a recipe by ingredient",
+        "security": [{ "Bearer": [] }],
         "parameters": [{ "in": "query", "name": "ingredients" }],
         "responses": {
           "200": {
@@ -890,6 +896,7 @@
       "get": {
         "tags": ["Recipes"],
         "summary": "Get popular recipes",
+        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
             "description": "Success operation",
@@ -2150,13 +2157,13 @@
             }
           ]
         }
-      },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
