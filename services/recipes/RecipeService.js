@@ -51,12 +51,12 @@ class RecipeService {
   async searchByIngredients(ingredients) {
     const ingradientsCamelCase = capitalizeFirstLetter(ingredients);
 
-    const ingredient = await Ingredients.findOne({
+    const ingredient = await Ingredients.find({
       name: { $in: [ingredients, ingradientsCamelCase] },
     });
 
     if (!ingredient) {
-      throw HttpError(404);
+      return [];
     }
 
     const result = await Recipe.find({
@@ -67,6 +67,10 @@ class RecipeService {
       },
     });
 
+    if (!result) {
+      return [];
+    }
+
     return result;
   }
 
@@ -75,8 +79,8 @@ class RecipeService {
 
     const searchRecipe = await Recipe.find(regex);
 
-    if (searchRecipe.length === 0) {
-      throw HttpError(404, "recipe not found");
+    if (!searchRecipe || searchRecipe.length === 0) {
+      return [];
     }
     return searchRecipe;
   }
