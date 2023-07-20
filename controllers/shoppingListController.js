@@ -61,7 +61,7 @@ const deleteItemFromShoppingList = async (req, res) => {
     return res.status(404).json({ error: "User not found" });
   }
 
-  if (user.shoppingList.length === 0) {
+  if (!user.shoppingList) {
     return res
       .status(404)
       .json({ error: "You don't have a shopping list yet" });
