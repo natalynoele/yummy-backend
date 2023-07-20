@@ -3,22 +3,26 @@ const { User } = require("../models/users");
 const { ctrlWrapper, HttpError } = require("../helpers");
 
 const getShoppingList = async (req, res) => {
+  if (!req.user) {
+    throw HttpError(401, "Sorry, you have to autorize");
+  }
+
   const userId = req.user._id;
 
   const user = await User.findById(userId).populate("shoppingList");
 
   if (!user) {
-    return res.status(404).json({ error: "User not found" });
-  }
-
-  if (user.shoppingList.length === 0) {
-    return res.status(404).json({ error: "Shopping list not found" });
+    throw HttpError(401, "Sorry, you have to autorize");
   }
 
   res.json(user.shoppingList);
 };
 
 const addItemToShoppingList = async (req, res) => {
+  if (!req.user) {
+    throw HttpError(401, "Sorry, you have to autorize");
+  }
+
   const userId = req.user._id;
 
   const shoppingItem = await ShoppingList.create({ ...req.body });
@@ -44,6 +48,10 @@ const addItemToShoppingList = async (req, res) => {
 };
 
 const deleteItemFromShoppingList = async (req, res) => {
+  if (!req.user) {
+    throw HttpError(401, "Sorry, you have to autorize");
+  }
+
   const userId = req.user._id;
   const { id } = req.params;
 
@@ -60,13 +68,9 @@ const deleteItemFromShoppingList = async (req, res) => {
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }
-
-  if (!user.shoppingList) {
-    return res
-      .status(404)
-      .json({ error: "You don't have a shopping list yet" });
+  if (user.shoppingList.length === 0) {
+    res.json({ shoppingList: [] });
   }
-
   res
     .status(200)
     .json({ message: "The ingredient  was deleted from the list" });
