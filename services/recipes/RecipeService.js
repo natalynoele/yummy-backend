@@ -51,7 +51,7 @@ class RecipeService {
   async searchByIngredients(ingredients) {
     const ingradientsCamelCase = capitalizeFirstLetter(ingredients);
 
-    const ingredient = await Ingredients.find({
+    const ingredient = await Ingredients.findOne({
       name: { $in: [ingredients, ingradientsCamelCase] },
     });
 
