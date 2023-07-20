@@ -294,7 +294,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetFavoriteResponse"
+                  "$ref": "#/components/schemas/RecipesArray"
                 }
               }
             }
@@ -466,7 +466,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryRecipesResponse"
+                  "$ref": "#/components/schemas/RecipesArray"
                 }
               }
             }
@@ -495,7 +495,7 @@
     "/recipes/{id}": {
       "get": {
         "tags": ["Recipes"],
-        "summary": "Get a recipes by id",
+        "summary": "Get a recipe by id",
         "security": [{ "Bearer": [] }],
         "parameters": [{ "in": "path", "name": "id" }],
         "responses": {
@@ -560,7 +560,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryRecipesResponse"
+                  "$ref": "#/components/schemas/RecipesArray"
                 }
               }
             }
@@ -857,7 +857,7 @@
     "/recipes/ingredients": {
       "get": {
         "tags": ["Search"],
-        "summary": "Get a recipe by ingredient",
+        "summary": "Get recipes by ingredient",
         "security": [{ "Bearer": [] }],
         "parameters": [{ "in": "query", "name": "ingredients" }],
         "responses": {
@@ -866,7 +866,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryRecipesResponse"
+                  "$ref": "#/components/schemas/RecipesArray"
                 }
               }
             }
@@ -903,7 +903,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryRecipesResponse"
+                  "$ref": "#/components/schemas/RecipesArray"
                 }
               }
             }
@@ -967,13 +967,13 @@
             "description": "Message",
             "example": "success"
           },
+          "token": {
+            "type": "string",
+            "description": "User's token after registration"
+          },
           "user": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "string",
-                "description": "User's id"
-              },
               "name": {
                 "type": "string",
                 "description": "User's name"
@@ -998,6 +998,7 @@
               },
               "favorite": {
                 "type": "array",
+                "description": "User's favorite recipes",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -1009,6 +1010,7 @@
               },
               "shoppingList": {
                 "type": "array",
+                "description": "User's shopping list",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -1017,19 +1019,25 @@
                     }
                   }
                 }
+              },
+              "registeredAt": {
+                "type": "string",
+                "description": "User's date of registration"
               }
             }
           }
         },
         "example": {
-          "code": "201",
+          "code": 201,
           "message": "success",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjhmNmE0NDE3MDUzNGFmODQ4Yzg3ZiIsImlhdCI6MTY4OTg0MzM2NCwiZXhwIjoxNjg5OTI2MTY0fQ.WFcxci58G0Fsx1qZg6Mm8n71qoG0sn4AUa37qcW10Xg",
           "user": {
-            "id": "64ad646ba17ba61a08fd0931",
-            "name": "Nato",
-            "email": "nato@test.com",
-            "subscription": false,
-            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa"
+            "name": "Cora",
+            "email": "cora@test.com",
+            "avatarUrl": "//www.gravatar.com/avatar/b8be8db6ba2bd68b75715cd34abc5dd2",
+            "favorite": [],
+            "shoppingList": [],
+            "registeredAt": "2023-07-20T08:56:04.380Z"
           }
         }
       },
@@ -1062,13 +1070,13 @@
             "description": "Message",
             "example": "success"
           },
+          "token": {
+            "type": "string",
+            "description": "User's token after login"
+          },
           "user": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "string",
-                "description": "User's id"
-              },
               "name": {
                 "type": "string",
                 "description": "User's name"
@@ -1078,36 +1086,98 @@
                 "description": "User's email",
                 "format": "email"
               },
-              "password": {
-                "type": "string",
-                "description": "User's password"
-              },
-              "subscription": {
-                "type": "boolean",
-                "description": "User's subscription status",
-                "example": false
-              },
               "avatarUrl": {
                 "type": "string",
                 "description": "User's avatar"
               },
-              "token": {
-                "type": "string",
-                "description": "User's token"
+              "favorite": {
+                "type": "array",
+                "description": "User's favorite recipes"
+              },
+              "shoppingList": {
+                "type": "array",
+                "description": "User's shopping list",
+                "registeredAt": {
+                  "type": "string",
+                  "description": "User's date of registration"
+                }
               }
             }
           }
         },
         "example": {
-          "code": "200",
-          "message": "success",
+          "code": 200,
+          "message": "Success login",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjU4YzkzZDllNWZhYTJiMDA1MWEwYSIsImlhdCI6MTY4OTg0MzkyNSwiZXhwIjoxNjg5OTI2NzI1fQ.7pSiYQFsdn-El0tXPH9uK8KzUb_fnurfliBFieZMwjI",
           "user": {
-            "id": "64ad646ba17ba61a08fd0931",
-            "name": "Nato",
-            "email": "nato@test.com",
-            "subscription": false,
-            "avatarUrl": "//www.gravatar.com/avatar/8dc60c9240259bffc7e943a49247a6fa",
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWQ2NDZiYTE3YmE2MWEwOGZkMDkzMSIsImlhdCI6MTY4OTA4NzI0MSwiZXhwIjoxNjg5MTcwMDQxfQ.ZkZJOEKCqAU-rSkQpgETjvF7xNIDQGyLQ1VnLVy7WQo"
+            "name": "Cora",
+            "email": "cora@test.com",
+            "avatarUrl": "//www.gravatar.com/avatar/1aab94044d7f7037cbc9714b830c40b4",
+            "favorite": ["6462a8f74c3d0ddd28898028"],
+            "shoppingList": ["64b7ddee25610bc5efd5f76c"],
+            "registeredAt": "2023-07-17T18:46:43.474Z"
+          }
+        }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Code",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "example": "success"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "User's avatar"
+              },
+              "favorite": {
+                "type": "array",
+                "description": "User's favorite recipes"
+              },
+              "shoppingList": {
+                "type": "array",
+                "description": "User's shopping list"
+              },
+              "registeredAt": {
+                "type": "string",
+                "description": "User's date of registration"
+              },
+              "days": {
+                "type": "number",
+                "description": "User's amount of days on the site"
+              }
+            }
+          }
+        },
+        "example": {
+          "code": 200,
+          "message": "Success",
+          "user": {
+            "name": "Cora",
+            "email": "cora@test.com",
+            "avatarUrl": "//www.gravatar.com/avatar/1aab94044d7f7037cbc9714b830c40b4",
+            "favorite": ["6462a8f74c3d0ddd28898028"],
+            "shoppingList": ["64b7ddee25610bc5efd5f76c"],
+            "createdAt": "2023-07-17T18:46:43.474Z",
+            "days": 3
           }
         }
       },
@@ -1155,8 +1225,8 @@
               "code": 200,
               "message": "User profile updated successfully",
               "user": {
-                "name": "",
-                "avatarUrl": "https://res.cloudinary.com/dmapxbtxc/image/upload/v1689326346/avatars/Iconarchive-Incognito-Animals-Meerkat-Avatar.96.png.png"
+                "name": "Coralina",
+                "avatarUrl": "//www.gravatar.com/avatar/1aab94044d7f7037cbc9714b830c40b4"
               }
             }
           }
@@ -1196,131 +1266,6 @@
           "Vegan",
           "Vegetarian"
         ]
-      },
-      "CategoryRecipesResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string",
-              "description": "A recipe's id"
-            },
-            "title": {
-              "type": "string",
-              "description": "A title of the recipe",
-              "example": "Battenberg Cake"
-            },
-            "category": {
-              "type": "string",
-              "description": "Category title",
-              "example": "Dessert"
-            },
-            "area": {
-              "type": "string",
-              "description": "A country or a region",
-              "example": "British"
-            },
-            "instructions": {
-              "type": "string",
-              "description": "Instruction for cooking"
-            },
-            "description": {
-              "type": "string",
-              "description": "A description for a meal",
-              "example": "A classic British cake..."
-            },
-            "thumb": {
-              "type": "string",
-              "description": "Thumb's link"
-            },
-            "preview": {
-              "type": "string",
-              "description": "Preview image link"
-            },
-            "time": {
-              "type": "string",
-              "description": "Time for cooking",
-              "example": "60"
-            },
-            "youtube": {
-              "type": "string",
-              "description": "Youtube link"
-            },
-            "tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": ["Cake", "Sweet"]
-            },
-            "ingredients": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "Ingredient's id"
-                  },
-                  "measure": {
-                    "type": "string",
-                    "description": "Ingedient measure",
-                    "example": "175g"
-                  }
-                }
-              }
-            }
-          },
-          "example": [
-            {
-              "_id": "6462a8f74c3d0ddd28897fcd",
-              "title": "Battenberg Cake",
-              "category": "Dessert",
-              "area": "British",
-              "instructions": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment (the easiest way is to cross 2 x 20cm-long strips over the base). To make the almond sponge, put the butter, sugar, flour, ground almonds, baking powder, eggs, vanilla and almond extract in a large bowl. Beat with an electric whisk until the mix comes together smoothly. Scrape into the tin, spreading to the corners, and bake for 25-30 mins – when you poke in a skewer, it should come out clean. Cool in the tin for 10 mins, then transfer to a wire rack to finish cooling while you make the second sponge",
-              "description": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.",
-              "thumb": "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg",
-              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560624/fxkadubcfpgqtacvvgbl.jpg",
-              "time": "60",
-              "youtube": "https://www.youtube.com/watch?v=aB41Q7kDZQ0",
-              "tags": ["Cake", "Sweet"],
-              "ingredients": [
-                {
-                  "id": "640c2dd963a319ea671e367e",
-                  "measure": "175g"
-                },
-                {
-                  "id": "640c2dd963a319ea671e3687",
-                  "measure": "175g"
-                }
-              ]
-            },
-            {
-              "_id": "6462a8f74c3d0ddd28897fcc",
-              "title": "Blackberry Fool",
-              "category": "Dessert",
-              "area": "British",
-              "instructions": "For the biscuits, preheat the oven to 200C/180C (fan)/Gas 6 and line two large baking trays with baking parchment. Scatter the nuts over a baking tray and roast in the oven for 6-8 minutes, or until golden-brown. Watch them carefully so that they don’t have a chance to burn.",
-              "description": "A light and creamy dessert made with whipped cream and blackberries, perfect for summer.",
-              "thumb": "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
-              "preview": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560630/udf2g6mv8gm0eqvqylha.jpg",
-              "time": "60",
-              "youtube": "https://www.youtube.com/watch?v=kniRGjDLFrQ",
-              "tags": ["Desert", "Summer", "Fruity", "Dairy"],
-              "ingredients": [
-                {
-                  "id": "640c2dd963a319ea671e380c",
-                  "measure": "50g"
-                },
-                {
-                  "id": "640c2dd963a319ea671e367e",
-                  "measure": "125g"
-                }
-              ]
-            }
-          ]
-        }
       },
       "MainPageResponse": {
         "type": "object",
@@ -1982,7 +1927,58 @@
           "recipeId": "6462a8f74c3d0ddd28897fbd"
         }
       },
-      "GetFavoriteResponse": {
+      "GetShoppingListResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ingredientId": {
+              "type": "string",
+              "description": "Ingredient's id"
+            },
+            "name": {
+              "type": "string",
+              "description": "Ingredient's name"
+            },
+            "measure": {
+              "type": "string",
+              "description": "Ingredient's name",
+              "example": "160g"
+            },
+            "img": {
+              "type": "string",
+              "description": "Ingredient's image link"
+            },
+            "recipeId": {
+              "type": "string",
+              "description": "The recipe's id"
+            }
+          },
+          "example": [
+            {
+              "_id": "64b594944c79d3c16129f309",
+              "ingredientId": "640c2dd963a319ea671e366c",
+              "recipeId": "6462a8f74c3d0ddd28897fd4",
+              "name": "Beef Brisket",
+              "measure": "45",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png",
+              "createdAt": "2023-07-17T19:20:52.512Z",
+              "updatedAt": "2023-07-17T19:20:52.512Z"
+            },
+            {
+              "_id": "64b596394c79d3c16129f315",
+              "ingredientId": "640c2dd963a319ea671e365c",
+              "recipeId": "6462a8f74c3d0ddd28897fc4",
+              "name": "Greek Yogurt",
+              "measure": "300ml",
+              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564798/gsylxkyqnzucbsq7jwag.png",
+              "createdAt": "2023-07-17T19:27:53.565Z",
+              "updatedAt": "2023-07-17T19:27:53.565Z"
+            }
+          ]
+        }
+      },
+      "RecipesArray": {
         "type": "array",
         "items": {
           "type": "object",
@@ -2103,57 +2099,6 @@
                   "measure": "125g"
                 }
               ]
-            }
-          ]
-        }
-      },
-      "GetShoppingListResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "ingredientId": {
-              "type": "string",
-              "description": "Ingredient's id"
-            },
-            "name": {
-              "type": "string",
-              "description": "Ingredient's name"
-            },
-            "measure": {
-              "type": "string",
-              "description": "Ingredient's name",
-              "example": "160g"
-            },
-            "img": {
-              "type": "string",
-              "description": "Ingredient's image link"
-            },
-            "recipeId": {
-              "type": "string",
-              "description": "The recipe's id"
-            }
-          },
-          "example": [
-            {
-              "_id": "64b594944c79d3c16129f309",
-              "ingredientId": "640c2dd963a319ea671e366c",
-              "recipeId": "6462a8f74c3d0ddd28897fd4",
-              "name": "Beef Brisket",
-              "measure": "45",
-              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564216/piozjulqxuluu25jrlws.png",
-              "createdAt": "2023-07-17T19:20:52.512Z",
-              "updatedAt": "2023-07-17T19:20:52.512Z"
-            },
-            {
-              "_id": "64b596394c79d3c16129f315",
-              "ingredientId": "640c2dd963a319ea671e365c",
-              "recipeId": "6462a8f74c3d0ddd28897fc4",
-              "name": "Greek Yogurt",
-              "measure": "300ml",
-              "img": "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678564798/gsylxkyqnzucbsq7jwag.png",
-              "createdAt": "2023-07-17T19:27:53.565Z",
-              "updatedAt": "2023-07-17T19:27:53.565Z"
             }
           ]
         }
