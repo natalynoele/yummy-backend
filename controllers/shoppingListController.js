@@ -69,7 +69,7 @@ const deleteItemFromShoppingList = async (req, res) => {
 
   res
     .status(200)
-    .json({ message: "The ingredient  was deleted from the list", user });
+    .json({ message: "The ingredient  was deleted from the list" });
 };
 
 module.exports = {
