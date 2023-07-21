@@ -20,9 +20,8 @@ const usersSchema = new Schema(
       required: true,
     },
     subscription: {
-      type: Boolean,
-      required: false,
-      default: false,
+      type: String,
+      default: "",
     },
     verify: {
       type: Boolean,
